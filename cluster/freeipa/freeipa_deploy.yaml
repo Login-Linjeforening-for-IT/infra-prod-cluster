@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: freeipa-server
+  namespace: freeipa
 spec:
   serviceName: freeipa
   replicas: 1
@@ -14,7 +15,8 @@ spec:
       labels:
         app: freeipa-server
     spec:
-      hostname: ipa1.login.no
+      hostname: ipa1
+      subdomain: login.no
       containers:
         - name: freeipa-server
           image: freeipa/freeipa-server:rocky-9
