@@ -11,10 +11,10 @@ spec:
   ingressClassName: nginx-external
   tls:
     - hosts:
-        - ipa1.login.no
+        - test.ipa1.login.no
       secretName: ipa-certificate
   rules:
-    - host: ipa1.login.no
+    - host: test.ipa1.login.no
       http:
         paths:
           - path: /
