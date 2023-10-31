@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: freeipa-server
+spec:
+  serviceName: freeipa
+  replicas: 1
+  selector:
+    matchLabels:
+      app: freeipa-server
+  template:
+    metadata:
+      labels:
+        app: freeipa-server
+    spec:
+      hostname: ipa1-logntnu-no
+      containers:
+        - name: freeipa-server
+          image: freeipa/freeipa-server:rocky-9
+          ports:
+            - containerPort: 53
+              protocol: UDP
+            - containerPort: 53
+            - containerPort: 80
+            - containerPort: 443
+            - containerPort: 389
+            - containerPort: 636
+            - containerPort: 88
+            - containerPort: 464
+            - containerPort: 88
+              protocol: UDP
+            - containerPort: 464
+              protocol: UDP
+            - containerPort: 123
+              protocol: UDP
+          volumeMounts:
+            - name: ipa-data
+              mountPath: /data
+      volumes:
+        - name: ipa-data
+          persistentVolumeClaim:
+            claimName: ipa-data-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ipa-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: do-block-storage
