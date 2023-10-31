@@ -1,0 +1,10 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ns.yaml
+  - helm_repo.yaml
+  - secret_kustomization.yaml
+  - custom-headers.yaml
+  - nginx_ingress_deploy.yaml
+  - ingress_config_map.yaml

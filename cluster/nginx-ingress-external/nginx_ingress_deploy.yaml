@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nginx-ingress-external
+  namespace: nginx-ingress-external
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: ingress-nginx
+      version: "4.8.1"
+      sourceRef:
+        kind: HelmRepository
+        name: nginx-stable
+        namespace: nginx-ingress-external
+      interval: 1m
+  values:
+    replicaCount: 1
+    controller:
+      kind: DaemonSet
+      allowSnippetAnnotations: true
+      networkPolicy:
+        enabled: false
+      admissionWebhooks:
+        certManager:
+          enabled: true
+      service:
+        externalTrafficPolicy: "Local"
+        annotations:
+          service.beta.kubernetes.io/do-loadbalancer-name: "external-nginx-ingress-lb"
+          service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+
+          # Health checks
+          service.beta.kubernetes.io/do-loadbalancer-healthcheck-protocol: "http"
+          service.beta.kubernetes.io/do-loadbalancer-healthcheck-path: "/healthz"
+          service.beta.kubernetes.io/do-loadbalancer-healthcheck-port: "80"
+          service.beta.kubernetes.io/do-loadbalancer-healthcheck-check-interval-seconds: "3"
+          service.beta.kubernetes.io/do-loadbalancer-healthcheck-response-timeout-seconds: "5"
+          service.beta.kubernetes.io/do-loadbalancer-healthcheck-unhealthy-threshold: "3"
+          service.beta.kubernetes.io/do-loadbalancer-healthcheck-healthy-threshold: "5"
+
+          # Block traffic and allow only from NTNU
+          service.beta.kubernetes.io/do-loadbalancer-allow-rules: "cidr:129.241.0.0/16,cidr:78.91.0.0/18,cidr:78.91.64.0/20,cidr:78.91.80.0/22,cidr:128.39.0.0/16,cidr:158.38.0.0/16"
+      ingressClassResource:
+        name: nginx-external
+        enabled: true
+        default: false
+        controllerValue: "k8s.io/external-ingress-nginx"

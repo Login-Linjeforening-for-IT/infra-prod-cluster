@@ -1,0 +1,49 @@
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "policy-connect"
+  namespace: 1pwd
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/component: connect
+      name: onepassword-connect
+  egress:
+    - toFQDNs:
+        - matchPattern: "*.1password.com"
+        - matchPattern: "*.1passwordservices.com"
+        - matchPattern: "*.1passwordusercontent.com"
+    - toEndpoints:
+        - matchLabels:
+            "io.kubernetes.pod.namespace": kube-system
+    - toEndpoints:
+        - matchLabels:
+            "app.kubernetes.io/component": operator
+            name: onepassword-operator
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            "app.kubernetes.io/component": operator
+            name: onepassword-operator
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "policy-operator"
+  namespace: 1pwd
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/component: operator
+      name: onepassword-operator
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            "app.kubernetes.io/component": connect
+            name: onepassword-connect
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            "app.kubernetes.io/component": connect
+            name: onepassword-connect

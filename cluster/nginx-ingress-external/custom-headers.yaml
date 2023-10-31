@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-headers
+  namespace: nginx-ingress-external
+data:
+  Strict-Transport-Security: "max-age=15552000; includeSubDomains"
+  X-Frame-Options: "SAMEORIGIN"
+  X-Content-Type-Options: "nosniff"
+  X-XSS-Protection: "1; mode=block"
+  X-Robots-Tag: "noindex, nofollow"
+  Referrer-Policy: "no-referrer"
