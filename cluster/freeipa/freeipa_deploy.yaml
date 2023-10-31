@@ -67,6 +67,8 @@ spec:
           volumeMounts:
             - name: ipa-data
               mountPath: /data
+            - name: cache-volume
+              mountPath: /dev/shm
       volumes:
         - name: ipa-data
           persistentVolumeClaim:
@@ -84,3 +86,7 @@ spec:
           emptyDir:
             medium: Memory
         - name: data
+        - name: cache-volume
+          emptyDir:
+            medium: Memory
+            sizeLimit: 256Mi
