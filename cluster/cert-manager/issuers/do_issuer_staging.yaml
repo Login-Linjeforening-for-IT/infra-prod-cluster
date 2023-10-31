@@ -9,7 +9,7 @@ spec:
     email: tekkom@login.no
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: do-issuer-account-key-staging
+      name: do-issuer-account-key
     solvers:
       - dns01:
           digitalocean:
