@@ -14,7 +14,7 @@ spec:
       labels:
         app: freeipa-server
     spec:
-      hostname: ipa1-logntnu-no
+      hostname: ipa1.login.no
       containers:
         - name: freeipa-server
           image: freeipa/freeipa-server:rocky-9
@@ -41,15 +41,3 @@ spec:
         - name: ipa-data
           persistentVolumeClaim:
             claimName: ipa-data-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ipa-data-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 30Gi
-  storageClassName: do-block-storage
