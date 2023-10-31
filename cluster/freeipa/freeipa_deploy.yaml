@@ -41,6 +41,14 @@ spec:
               value: "Europe/Oslo"
             - name: IPA_SERVER_HOSTNAME
               value: "test.ipa1.login.no"
+          securityContext:
+            seccompProfile:
+              type: Unconfined
+            capabilities:
+              add:
+                - SYS_TIME
+          stdin: true
+          tty: true
           ports:
             - containerPort: 53
               protocol: UDP
@@ -64,3 +72,16 @@ spec:
         - name: ipa-data
           persistentVolumeClaim:
             claimName: ipa-data-pvc
+        - name: cgroups
+          hostPath:
+            path: /sys/fs/cgroup
+        - name: run
+          emptyDir:
+            medium: Memory
+        - name: run-systemd
+          emptyDir:
+            medium: Memory
+        - name: tmp
+          emptyDir:
+            medium: Memory
+        - name: data
