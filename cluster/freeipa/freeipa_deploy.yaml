@@ -15,11 +15,15 @@ spec:
       labels:
         app: freeipa-server
     spec:
-      hostname: ipa1
-      subdomain: login.no
+      hostname: ipa1.login.no
       containers:
         - name: freeipa-server
           image: freeipa/freeipa-server:rocky-9
+          env:
+            - name: TZ
+              value: "Europe/Oslo"
+            - name: IPA_SERVER_HOSTNAME
+              value: "ipa1.login.no"
           ports:
             - containerPort: 53
               protocol: UDP
