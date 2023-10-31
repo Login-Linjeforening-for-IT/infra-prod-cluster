@@ -42,11 +42,10 @@ spec:
             - name: IPA_SERVER_HOSTNAME
               value: "test.ipa1.login.no"
           securityContext:
-            seccompProfile:
-              type: Unconfined
+            privileged: true
             capabilities:
               add:
-                - SYS_TIME
+                - SYS_ADMIN
           stdin: true
           tty: true
           ports:
