@@ -89,4 +89,4 @@ spec:
         - name: cache-volume
           emptyDir:
             medium: Memory
-            sizeLimit: 256Mi
+            sizeLimit: 1024Mi
