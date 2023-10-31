@@ -23,7 +23,7 @@ spec:
         enabled: false
       admissionWebhooks:
         certManager:
-          enabled: false
+          enabled: true
       service:
         externalTrafficPolicy: "Local"
         annotations:
