@@ -1,5 +1,16 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "kubernetes": {
+    "fileMatch": [
+      "\\.yaml$"
+    ]
+  },
+  "flux": {
+    "fileMatch": [
+      "\\.yaml$"
+    ]
+  },
+
   "extends": [
       "local>tekkom/infrastructure/mend-renovate/default-config"
     ]
