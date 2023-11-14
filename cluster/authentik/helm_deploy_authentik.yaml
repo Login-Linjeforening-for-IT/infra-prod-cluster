@@ -32,6 +32,11 @@ spec:
         minReplicas: 2
     ingress:
       ingressClassName: nginx-ntnu
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+        nginx.ingress.kubernetes.io/upgrade-proxy: "true"
+        nginx.ingress.kubernetes.io/enable-websockets: "true"
       enabled: true
       tls:
         - hosts:
@@ -46,3 +51,4 @@ spec:
       postgresqlPassword: "ThisIsNotASecurePassword"
     redis:
       enabled: true
+
