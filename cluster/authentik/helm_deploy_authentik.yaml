@@ -31,7 +31,7 @@ spec:
         enabled: true
         minReplicas: 2
     ingress:
-      ingressClassName: nginx
+      ingressClassName: nginx-ntnu
       enabled: true
       tls:
         - hosts:
