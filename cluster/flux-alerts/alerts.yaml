@@ -3,7 +3,7 @@ apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
   name: all-alerts
-  namespace: flux-system
+  namespace: flux-alerts
 spec:
   providerRef:
     name: discord
