@@ -24,3 +24,5 @@ spec:
         secretName: gitlab-tls-sec
         configureCertmanager: false
         class: nginx-ntnu
+    certmanager:
+      install: false
