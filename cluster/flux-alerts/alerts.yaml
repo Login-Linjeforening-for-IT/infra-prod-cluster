@@ -10,7 +10,7 @@ spec:
   eventSeverity: info
   eventMetadata:
     env: "production"
-    cluster: "infra-prod"
+    cluster: "external-prod"
     region: "ams3"
   eventSources:
     - kind: Bucket
@@ -31,3 +31,5 @@ spec:
       name: "*"
     - kind: ImageUpdateAutomation
       name: "*"
+  exclusionList:
+    - "^Dependencies do not meet ready condition.*"
