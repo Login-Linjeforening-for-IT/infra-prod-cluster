@@ -48,5 +48,10 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
         storageClass: "do-block-storage-retain"
+      toolbox:
+        backups:
+          objectStorage:
+            config:
+              secret: "test"
     certmanager:
       install: false
