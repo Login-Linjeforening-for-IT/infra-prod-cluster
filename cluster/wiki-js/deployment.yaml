@@ -24,7 +24,7 @@ spec:
             - name: DB_HOST
               value: private-db-login-prod-do-user-6724543-0.db.ondigitalocean.com 
             - name: DB_PORT
-              value: 25060
+              value: "25060"
             - name: DB_USER
               value: wikijs
             - name: DB_PASS
@@ -33,14 +33,14 @@ spec:
                   name: db
                   key: password
             - name: DB_SSL
-              value: 1
+              value: "1"
             - name: DB_SSL_CA
               valueFrom:
                 secretKeyRef:
                   name: db
                   key: ssl-sertifikat
             - name: HA_ACTIVE
-              value: 0
+              value: "0"
           image: ghcr.io/requarks/wiki:2.5.300
           imagePullPolicy: Always
           name: wiki-js
