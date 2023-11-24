@@ -1,0 +1,79 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wiki-js
+  name: wiki-js
+  namespace: wiki
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: wiki-js
+  template:
+    metadata:
+      labels:
+        app: wiki-js
+    spec:
+      containers:
+        - env:
+            - name: DB_TYPE
+              value: postgres
+            - name: DB_HOST
+              value: private-db-login-prod-do-user-6724543-0.db.ondigitalocean.com 
+            - name: DB_PORT
+              value: 25060
+            - name: DB_USER
+              value: wikijs
+            - name: DB_PASS
+              valueFrom: 
+                secretKeyRef:
+                  name: db
+                  key: password
+            - name: DB_SSL
+              value: 1
+            - name: DB_SSL_CA
+              valueFrom:
+                secretKeyRef:
+                  name: db
+                  key: ssl-sertifikat
+            - name: HA_ACTIVE
+              value: 0
+          image: ghcr.io/requarks/wiki:2.5.300
+          imagePullPolicy: Always
+          name: wiki-js
+          ports:
+            - containerPort: 8383
+              name: 8383tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8383
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8383
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - wiki-js
+              topologyKey: kubernetes.io/hostname
