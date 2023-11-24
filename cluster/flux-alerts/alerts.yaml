@@ -10,7 +10,7 @@ spec:
   eventSeverity: info
   eventMetadata:
     env: "production"
-    cluster: "external-prod"
+    cluster: "infra-prod"
     region: "ams3"
   eventSources:
     - kind: Bucket
