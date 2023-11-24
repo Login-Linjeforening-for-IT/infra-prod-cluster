@@ -48,6 +48,7 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
         storageClass: "do-block-storage-retain"
+    gitlab:
       toolbox:
         backups:
           objectStorage:
