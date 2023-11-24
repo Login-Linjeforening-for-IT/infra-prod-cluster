@@ -18,11 +18,35 @@ spec:
   values:
     global:
       hosts:
-        domain: test.git.login.no
+        domain: login.no
+        https: true
+        gitlab:
+          name: git.login.no
+          https: true
+        registry:
+          name: registry.login.no
+          https: true
+        pages:
+          name: pages.login.no
+          https: true
       edition: ce
       ingress:
-        secretName: gitlab-tls-sec
         configureCertmanager: false
-        class: nginx-ntnu
+        class: nginx-external
+      minio:
+        enabled: false
+      gitaly:
+        enabled: true
+        persistence:
+          storageClass: "do-block-storage-retain"
+          size: 50Gi
+      postgressql:
+        persistence:
+          storageClass: "do-block-storage-retain"
+        storageClass: "do-block-storage-retain"
+      redis:
+        persistence:
+          storageClass: "do-block-storage-retain"
+        storageClass: "do-block-storage-retain"
     certmanager:
       install: false
