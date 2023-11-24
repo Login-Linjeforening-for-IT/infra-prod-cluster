@@ -2,15 +2,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: 1pwdsecrets
-  namespace: flux-alerts
+  name: discord-alerts
+  namespace: flux-system
 spec:
-  interval: 1m
-  path: "cluster/flux-alerts/secrets"
+  interval: 10m
+  path: "cluster/flux-alerts/discord_alerts/"
   dependsOn:
     - name: 1password-connect
       namespace: 1pwd
   prune: true
+  timeout: 1m
   sourceRef:
     kind: GitRepository
     name: flux-system
