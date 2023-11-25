@@ -48,6 +48,11 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
         storageClass: "do-block-storage-retain"
+      appConfig:
+        object_store:
+          enabled: true
+          connection:
+            secret: "test"
     gitlab:
       toolbox:
         backups:
