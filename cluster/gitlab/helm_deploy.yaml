@@ -57,8 +57,7 @@ spec:
       install: false
     nginx-ingress:
       enabled: false
-    gitlab:
-      gitlab-runner:
-        enabled: false
+    gitlab-runner:
+      install: false
     postgresql:
       install: false
