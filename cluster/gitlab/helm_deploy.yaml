@@ -34,6 +34,8 @@ spec:
       ingress:
         configureCertmanager: false
         class: nginx-external
+        tls:
+          secretName: login-no-cert
       minio:
         enabled: true
       gitaly:
