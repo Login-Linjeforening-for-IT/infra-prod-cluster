@@ -65,6 +65,5 @@ spec:
     gitlab:
       gitlab-runner:
         enabled: false
-    postgres:
+    postgresql:
       install: false
-      enabled: false
