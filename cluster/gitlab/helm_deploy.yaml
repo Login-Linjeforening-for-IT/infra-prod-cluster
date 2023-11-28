@@ -35,7 +35,7 @@ spec:
         configureCertmanager: false
         class: nginx-external
       minio:
-        enabled: false
+        enabled: true
       gitaly:
         enabled: true
         persistence:
@@ -49,16 +49,5 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
         storageClass: "do-block-storage-retain"
-      appConfig:
-        object_store:
-          enabled: true
-          connection:
-            secret: "test"
-    gitlab:
-      toolbox:
-        backups:
-          objectStorage:
-            config:
-              secret: "test"
     certmanager:
       install: false
