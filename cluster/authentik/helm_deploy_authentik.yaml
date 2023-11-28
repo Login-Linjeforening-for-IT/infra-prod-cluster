@@ -26,10 +26,10 @@ spec:
     autoscaling:
       server:
         enabled: true
-        minReplicas: 2
+        minReplicas: 1
       worker:
         enabled: true
-        minReplicas: 2
+        minReplicas: 1
     ingress:
       ingressClassName: nginx-ntnu
       annotations:
