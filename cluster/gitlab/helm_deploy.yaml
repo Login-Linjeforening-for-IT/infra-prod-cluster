@@ -22,7 +22,7 @@ spec:
         domain: login.no
         https: true
         gitlab:
-          name: git.login.no
+          name: gittest.login.no
           https: true
         registry:
           name: registry.login.no
