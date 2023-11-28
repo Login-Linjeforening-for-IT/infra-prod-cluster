@@ -43,7 +43,7 @@ spec:
           size: 50Gi
       psql:
         host: private-db-postgresql-gitlab-test-do-user-6724543-0.c.db.ondigitalocean.com
-        username: gitlab
+        username: doadmin
         database: gitlab
         password:
           secret: gitlab-postgres-user
