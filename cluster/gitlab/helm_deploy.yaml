@@ -49,9 +49,6 @@ spec:
           secret: gitlab-postgres-user
           key: password
         port: 25060
-        ssl:
-          secret: gitlab-postgres-ssl
-          serverCA: ca
       redis:
         persistence:
           storageClass: "do-block-storage-retain"
