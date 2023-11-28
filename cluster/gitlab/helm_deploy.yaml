@@ -44,7 +44,7 @@ spec:
         enabled: true
         persistence:
           storageClass: "do-block-storage-retain"
-          size: 50Gi
+          size: 20Gi
       psql:
         host: private-db-postgresql-gitlab-test-do-user-6724543-0.c.db.ondigitalocean.com
         username: doadmin
