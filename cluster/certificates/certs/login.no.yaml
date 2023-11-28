@@ -1,0 +1,20 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: login-no
+  namespace: certificates
+spec:
+  secretName: login-no-cert
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: nginx-ingress-external,nginx-ingress-ntnu
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+  issuerRef:
+    kind: Issuer
+    name: do-issuer-prod
+  commonName: "*.login.no"
+  dnsNames:
+    - "*.login.no"
+    - "login.no"
