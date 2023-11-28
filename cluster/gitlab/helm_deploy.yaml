@@ -51,3 +51,5 @@ spec:
         storageClass: "do-block-storage-retain"
     certmanager:
       install: false
+    nginx-ingress:
+      enabled: false
