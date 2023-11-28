@@ -98,5 +98,5 @@ spec:
               key: connection
     registry:
       storage:
-        secret: do-spaces-connection
+        secret: do-spaces-connection-reg
         key: connection
