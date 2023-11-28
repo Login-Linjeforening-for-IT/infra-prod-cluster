@@ -41,10 +41,19 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
           size: 50Gi
-      postgressql:
-        persistence:
-          storageClass: "do-block-storage-retain"
-        storageClass: "do-block-storage-retain"
+      psql:
+        host: private-db-postgresql-gitlab-test-do-user-6724543-0.c.db.ondigitalocean.com
+        username: gitlab
+        database: gitlab
+        password:
+          secret: gitlab-postgres-user
+          key: password
+        port: 25060
+        ssl:
+          secret: gitlab-postgres-ssl
+          serverCA: ca
+          clientCertificate: crt
+          clientKey: key
       redis:
         persistence:
           storageClass: "do-block-storage-retain"
@@ -56,3 +65,5 @@ spec:
     gitlab:
       gitlab-runner:
         enabled: false
+    postgres:
+      install: false
