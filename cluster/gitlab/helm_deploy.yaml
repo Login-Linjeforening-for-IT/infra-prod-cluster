@@ -53,3 +53,6 @@ spec:
       install: false
     nginx-ingress:
       enabled: false
+    gitlab:
+      gitlab-runner:
+        enabled: false
