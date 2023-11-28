@@ -52,8 +52,6 @@ spec:
         ssl:
           secret: gitlab-postgres-ssl
           serverCA: ca
-          clientCertificate: crt
-          clientKey: key
       redis:
         persistence:
           storageClass: "do-block-storage-retain"
