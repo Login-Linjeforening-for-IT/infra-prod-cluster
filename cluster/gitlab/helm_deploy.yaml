@@ -36,8 +36,10 @@ spec:
         class: nginx-external
         tls:
           secretName: login-no-cert
+      registry:
+        bucket: gitlab-registry-storage
       minio:
-        enabled: true
+        enabled: false
       gitaly:
         enabled: true
         persistence:
@@ -55,6 +57,30 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
         storageClass: "do-block-storage-retain"
+      appConfig:
+        lfs:
+          bucket: gitlab-lfs-storage
+          connection:
+            secret: do-spaces-connection
+            key: connection
+        artifacts:
+          bucket: gitlab-artifacts-storage
+          connection:
+            secret: do-spaces-connection
+            key: connection
+        uploads:
+          bucket: gitlab-uploads-storage
+          connection:
+            secret: do-spaces-connection
+            key: connection
+        packages:
+          bucket: gitlab-packages-storage
+          connection:
+            secret: do-spaces-connection
+            key: connection
+        backups:
+          bucket: gitlab-backup-storage
+          tmpBucket: gitlab-tmp-storage
     certmanager:
       install: false
     nginx-ingress:
@@ -63,3 +89,14 @@ spec:
       install: false
     postgresql:
       install: false
+    gitlab:
+      toolbox:
+        backups:
+          objectStorage:
+            config:
+              secret: do-spaces-connection
+              key: connection
+    registry:
+      storage:
+        secret: do-spaces-connection
+        key: connection
