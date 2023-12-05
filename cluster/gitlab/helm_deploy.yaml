@@ -44,14 +44,14 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
           size: 20Gi
-      psql:
-        host: private-db-postgresql-gitlab-test-do-user-6724543-0.c.db.ondigitalocean.com
-        username: doadmin
-        database: gitlab
-        password:
-          secret: gitlab-postgres-user
-          key: password
-        port: 25060
+      #       psql:
+      #         host: private-db-postgresql-gitlab-test-do-user-6724543-0.c.db.ondigitalocean.com
+      #           username: doadmin
+      #         database: gitlab
+      #         password:
+      #           secret: gitlab-postgres-user
+      #           key: password
+      #         port: 25060
       redis:
         persistence:
           storageClass: "do-block-storage-retain"
@@ -87,7 +87,7 @@ spec:
     gitlab-runner:
       install: false
     postgresql:
-      install: false
+      install: true
     gitlab:
       toolbox:
         backups:
