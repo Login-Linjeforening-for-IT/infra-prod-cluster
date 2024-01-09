@@ -86,6 +86,8 @@ spec:
       enabled: false
     gitlab-runner:
       install: true
+      runners:
+        gitlabUrl: https://gitlab-prod-webservice-default:8181
     postgresql:
       install: true
     gitlab:
