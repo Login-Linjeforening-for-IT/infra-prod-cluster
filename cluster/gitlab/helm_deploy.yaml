@@ -37,10 +37,10 @@ spec:
           nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
           nginx.ingress.kubernetes.io/upgrade-proxy: "true"
           nginx.ingress.kubernetes.io/enable-websockets: "true"
-          configureCertmanager: false
-          class: nginx-external
-          tls:
-            secretName: login-no-cert
+        configureCertmanager: false
+        class: nginx-external
+        tls:
+          secretName: login-no-cert
       registry:
         bucket: gitlab-registry-storage
       minio:
