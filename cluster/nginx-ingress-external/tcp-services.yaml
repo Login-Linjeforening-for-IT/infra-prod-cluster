@@ -5,4 +5,4 @@ metadata:
   name: tcp-services
   namespace: nginx-ingress-external
 data:
-  22: "gitlab/gitlab-prod-gitlab-shell:22"
+  "22": "gitlab/gitlab-prod-gitlab-shell:22"
