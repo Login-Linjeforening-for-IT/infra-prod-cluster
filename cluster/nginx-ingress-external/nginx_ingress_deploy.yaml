@@ -54,4 +54,4 @@ spec:
         default: false
         controllerValue: "k8s.io/external-ingress-nginx"
     tcp:
-      "22": "gitlab/gitlab-prod-gitlab-shell:22"
+      22: "gitlab/gitlab-prod-gitlab-shell:22"
