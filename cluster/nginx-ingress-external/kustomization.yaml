@@ -8,3 +8,4 @@ resources:
   - custom-headers.yaml
   - nginx_ingress_deploy.yaml
   - ingress_config_map.yaml
+  - tcp-services.yaml
