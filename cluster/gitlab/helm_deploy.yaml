@@ -94,6 +94,9 @@ spec:
         gitlabUrl: https://gitlab-prod-webservice-default:8181
     postgresql:
       install: true
+    gitlab-shell:
+      config:
+        proxyProtocol: true
     gitlab:
       toolbox:
         backups:
