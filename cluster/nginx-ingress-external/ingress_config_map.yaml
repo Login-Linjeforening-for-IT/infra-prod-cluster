@@ -18,7 +18,7 @@ data:
   ssl-redirect: "true"
   ssl-protocols: "TLSv1.2 TLSv1.3"
   ssl-prefer-server-ciphers: "true"
-  #ssl-dh-param: "nginx-ingress-external/lb-dhparam"
+  ssl-dh-param: "nginx-ingress-external/lb-dhparam"
   ssl-ecdh-curve: "secp384r1"
   ssl-ciphers: "HIGH:!EXP:!NULL:!ADH:!LOW:!SSLv2:!SSLv3:!MD5:!RC4"
   enable-ocsp: "true"
