@@ -29,7 +29,6 @@ spec:
         pages:
           name: pages.login.no
           https: true
-      edition: ce
       ingress:
         annotations:
           nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
@@ -42,7 +41,7 @@ spec:
       registry:
         bucket: gitlab-registry-storage
       minio:
-        enabled: false
+        enabled: true
       gitaly:
         enabled: true
         persistence:
