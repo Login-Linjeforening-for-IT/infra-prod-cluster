@@ -31,7 +31,6 @@ spec:
           enabled: true
       extraArgs:
         default-ssl-certificate: nginx-ingress-external/login-no-cert
-        # tcp-services-configmap: nginx-ingress-external/tcp-services
       service:
         externalTrafficPolicy: "Local"
         annotations:
