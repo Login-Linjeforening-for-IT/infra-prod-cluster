@@ -52,6 +52,6 @@ spec:
         name: nginx-external
         enabled: true
         default: false
-        controllerValue: "k8s.io/external-ingress-nginx"
+        controllerValue: k8s.io/external-ingress-nginx
     tcp:
-      "22": "gitlab/gitlab-prod-gitlab-shell:22:PROXY:PROXY"
+      "22": gitlab/gitlab-prod-gitlab-shell:22:PROXY:PROXY
