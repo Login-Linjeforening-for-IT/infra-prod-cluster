@@ -34,9 +34,6 @@ spec:
         # tcp-services-configmap: nginx-ingress-external/tcp-services
       service:
         externalTrafficPolicy: "Local"
-        ports:
-          tcp:
-            "22": "gitlab/gitlab-prod-gitlab-shell:22"
         annotations:
           service.beta.kubernetes.io/do-loadbalancer-name: "external-nginx-ingress-infra-lb"
           service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
@@ -57,3 +54,5 @@ spec:
         enabled: true
         default: false
         controllerValue: "k8s.io/external-ingress-nginx"
+    tcp:
+      "22": "gitlab/gitlab-prod-gitlab-shell:22"
