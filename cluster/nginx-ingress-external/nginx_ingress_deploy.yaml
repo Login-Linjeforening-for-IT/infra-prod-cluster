@@ -20,6 +20,10 @@ spec:
     controller:
       kind: DaemonSet
       allowSnippetAnnotations: true
+      containerPort:
+        http: 80
+        https: 443
+        ssh: 22
       networkPolicy:
         enabled: false
       admissionWebhooks:
@@ -27,6 +31,7 @@ spec:
           enabled: true
       extraArgs:
         default-ssl-certificate: nginx-ingress-external/login-no-cert
+        tcp-services-configmap: nginx-ingress-external/tcp-services
       service:
         externalTrafficPolicy: "Local"
         annotations:
@@ -49,3 +54,5 @@ spec:
         enabled: true
         default: false
         controllerValue: "k8s.io/external-ingress-nginx"
+      tcp:
+        ssh: 22
