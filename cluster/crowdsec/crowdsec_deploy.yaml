@@ -1,0 +1,144 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: crowdsec-external-prod
+  namespace: crowdsec
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: crowdsec
+      version: "0.9.11"
+      sourceRef:
+        kind: HelmRepository
+        name: crowdsec-repo
+        namespace: crowdsec
+      interval: 1m
+  values:
+    container_runtime: json-nginx
+    tls:
+      enabled: true
+      bouncer:
+        reflector:
+          namespaces: ["nginx-ingress-external"]
+    agent:
+      persistentVolume:
+        config:
+          enabled: false
+      acquisition:
+        - namespace: nginx-ingress-external
+          podName: nginx-ingress-external-ingress-nginx-controller-*
+          program: json-nginx
+      env:
+        - name: DISABLE_ONLINE_API
+          value: "true"
+        - name: COLLECTIONS
+          value: "crowdsecurity/nginx crowdsecurity/nginx crowdsecurity/http-cve crowdsecurity/base-http-scenarios crowdsecurity/http-dos"
+        - name: PARSERS
+          value: "crowdsecurity/geoip-enrich crowdsecurity/geoip-enrich crowdsecurity/nginx-logs"
+        - name: TZ
+          value: "Europe/Oslo"
+    lapi:
+      resources:
+        limits:
+          memory: 250Mi
+        requests:
+          cpu: 150m
+          memory: 250Mi
+      strategy:
+        type: Recreate
+      dashboard:
+        enable: false
+        ingress:
+          annotations:
+            nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+            cert-manager.io/cluster-issuer: do-issuer-staging
+          enabled: true
+          host: crowdsec-01.login.no
+          tls:
+            - hosts:
+                - crowdsec-01.login.no
+              secretName: crowdsec-01-tls
+          ingressClassName: "nginx-external"
+      persistentVolume:
+        config:
+          accessModes: ["ReadWriteOnce"]
+          enabled: true
+          existingClaim: ""
+          size: "100Mi"
+          storageClassName: "do-block-storage-retain"
+        data:
+          accessModes: ["ReadWriteOnce"]
+          enabled: true
+          existingClaim: ""
+          size: "1Gi"
+          storageClassName: "do-block-storage-retain"
+      env:
+        - name: ENROLL_INSTANCE_NAME
+          value: external-prod-k8s
+        - name: ENROLL_TAGS
+          value: k8s do external prod
+        - name: ENROLL_KEY
+          valueFrom:
+            secretKeyRef:
+              name: capi-token
+              key: token
+    config:
+      parsers:
+        s00-raw:
+          nginx-json.yaml: |
+            filter: "evt.Line.Labels.type == 'json-nginx'"
+            onsuccess: next_stage
+            debug: true
+            name: login/nginx-logs
+            description: "Parse nginx access logs in json"
+            pattern_syntax:
+              MYCAP: "{.*}"
+            grok:
+              pattern: ^.*%{MYCAP:extracted_value}
+              apply_on: Line.Raw
+            statics:
+              - target: evt.StrTime
+                expression: JsonExtract(evt.Parsed.extracted_value, "nginx_timestamp")
+              - meta: source_ip
+                expression: JsonExtract(evt.Parsed.extracted_value, "remote_addr")
+              - meta: http_status
+                expression: JsonExtract(evt.Parsed.extracted_value, "response_status")
+              - meta: http_path
+                expression: JsonExtract(evt.Parsed.extracted_value, "request")
+              - meta: log_type
+                value: http_access-log
+              - meta: service
+                value: http
+              - parsed: "logsource"
+                value: "json-nginx"
+              - parsed: remote_addr
+                expression: JsonExtract(evt.Parsed.extracted_value, "remote_addr")
+              - parsed: remote_user
+                expression: JsonExtract(evt.Parsed.extracted_value, "remote_user")
+              - parsed: http_user_agent
+                expression: JsonExtract(evt.Parsed.extracted_value, "http_user_agent")
+              - parsed: http_referer
+                expression: JsonExtract(evt.Parsed.extracted_value, "http_referrer")
+              - parsed: target_fqdn
+                expression: JsonExtract(evt.Parsed.extracted_value, "host")
+              - parsed: method
+                expression: JsonExtract(evt.Parsed.extracted_value, "request_method")
+              - parsed: body_bytes_sent
+                expression: JsonExtract(evt.Parsed.extracted_value, "body_bytes_sent")
+              - parsed: http_version
+                expression: JsonExtract(evt.Parsed.extracted_value, "http_version")
+              - parsed: status
+                expression: JsonExtract(evt.Parsed.extracted_value, "response_status")
+              - parsed: full_request
+                expression: JsonExtract(evt.Parsed.extracted_value, "request")
+        s01-parse:
+          nginx-json-logs.yaml: |
+            filter: "evt.Meta.service == 'http' && evt.Meta.log_type in ['http_access-log', 'http_error-log']"
+            onsuccess: next_stage
+            name: local/json-nginx
+            nodes:
+              - grok:
+                  pattern: '%{WORD:method} %{URIPATHPARAM:request} HTTP/%{NUMBER:http_version}'
+                  apply_on: full_request

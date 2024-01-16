@@ -48,6 +48,57 @@ spec:
 
           # Block traffic and allow only from NTNU
         service.beta.kubernetes.io/do-loadbalancer-allow-rules: "cidr:129.241.0.0/16,cidr:78.91.0.0/18,cidr:78.91.64.0/20,cidr:78.91.80.0/22,cidr:128.39.0.0/16,cidr:158.38.0.0/16,cidr:10.0.0.0/8"
+      extraVolumes:
+        - name: crowdsec-bouncer-plugin
+          emptyDir: {}
+        - name: crowdsec-external-prod-bouncer-tls
+          secret:
+            secretName: crowdsec-external-prod-bouncer-tls
+      extraInitContainers:
+        - name: init-clone-crowdsec-bouncer
+          image: crowdsecurity/lua-bouncer-plugin
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: API_URL
+              value: "https://crowdsec-external-prod-service.crowdsec.svc.cluster.local:8080"
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: crowdsec-bouncer
+                  key: token
+            - name: BOUNCER_CONFIG
+              value: "/crowdsec/crowdsec-bouncer.conf"
+            - name: BAN_TEMPLATE_PATH
+              value: /etc/nginx/lua/plugins/crowdsec/templates/ban.html
+            - name: CAPTCHA_TEMPLATE_PATH
+              value: /etc/nginx/lua/plugins/crowdsec/templates/captcha.html
+            - name: MODE
+              value: stream
+            - name: UPDATE_FREQUENCY
+              value: "10"
+          command:
+            [
+              "sh",
+              "-c",
+              "sh /docker_start.sh; mkdir -p /lua_plugins/crowdsec/; cp -R /crowdsec/* /lua_plugins/crowdsec/",
+            ]
+          volumeMounts:
+            - name: crowdsec-bouncer-plugin
+              mountPath: /lua_plugins
+      extraVolumeMounts:
+        - name: crowdsec-bouncer-plugin
+          mountPath: /etc/nginx/lua/plugins/crowdsec
+          subPath: crowdsec
+        - name: crowdsec-external-prod-bouncer-tls
+          mountPath: /etc/nginx/crowdsec-certs/
+          type: secret
+          readOnly: true
+      config:
+        plugins: "crowdsec"
+        lua-shared-dicts: "crowdsec_cache: 50m"
+        server-snippet: |
+          lua_ssl_trusted_certificate /etc/nginx/crowdsec-certs/ca.crt;
+          lua_ssl_verify_depth 2;
       ingressClassResource:
         name: nginx-external
         enabled: true
