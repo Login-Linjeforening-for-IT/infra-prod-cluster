@@ -76,9 +76,9 @@ spec:
           storageClassName: "do-block-storage-retain"
       env:
         - name: ENROLL_INSTANCE_NAME
-          value: external-prod-k8s
+          value: infra-prod-k8s
         - name: ENROLL_TAGS
-          value: k8s do external prod
+          value: k8s do infra prod
         - name: ENROLL_KEY
           valueFrom:
             secretKeyRef:
