@@ -96,7 +96,7 @@ spec:
       install: true
     gitlab-shell:
       config:
-        proxyProtocol: true
+        proxyProtocol: false
     gitlab:
       toolbox:
         backups:
