@@ -23,6 +23,8 @@ spec:
         send_pii: false
       postgresql:
         password: "ThisIsNotASecurePassword"
+    blueprints: 
+      - authentik-blueprints
     autoscaling:
       server:
         enabled: true
