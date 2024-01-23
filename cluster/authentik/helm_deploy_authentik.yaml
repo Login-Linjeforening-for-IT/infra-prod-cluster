@@ -17,12 +17,12 @@ spec:
       interval: 1m
   values:
     authentik:
-      secret_key: "xDHh39FEFfrkFFfbWzREKe%&DwAez1"
+      secret_key: "PleaseGenerateA50CharKey"
       error_reporting:
         enabled: false
         send_pii: false
       postgresql:
-        password: "AqNJ6H83e&Bn9zeQecE82F9SgXZAe&"
+        password: "ThisIsNotASecurePassword"
     worker:
       volumes: 
         - name: blueprints
@@ -62,6 +62,6 @@ spec:
               pathType: Prefix
     postgresql:
       enabled: true
-      postgresqlPassword: "AqNJ6H83e&Bn9zeQecE82F9SgXZAe&"
+      postgresqlPassword: "ThisIsNotASecurePassword"
     redis:
       enabled: true
