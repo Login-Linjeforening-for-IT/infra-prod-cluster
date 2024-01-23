@@ -35,7 +35,7 @@ spec:
                 - key: tls.crt
                   path: authentik_cert.pem
                 - key: tls.key
-                  path: authentik_private_key.pem
+                  path: authentik_cert.key
     volumeMounts:
       - name: authentik-certificate
         mountPath: "/certs"
