@@ -23,15 +23,8 @@ spec:
         send_pii: false
       postgresql:
         password: "ThisIsNotASecurePassword"
-    worker:
-      volumes: 
-        - name: blueprints
-          configMap:
-            name: authentik-blueprints
-      volumeMounts:
-        - name: blueprints
-          mountPath: /blueprints
-          readOnly: true
+    blueprints: 
+      - authentik-blueprints
     autoscaling:
       server:
         enabled: true
