@@ -25,6 +25,19 @@ spec:
         password: "ThisIsNotASecurePassword"
     blueprints: 
       - authentik-blueprints
+    volumes:
+      - name: authentik-certificate
+        projected:
+          sources:
+          - secret:
+              name: authentik-certificate
+              items:
+                - key: tls.crt
+                  path: authentik_cert.pem
+    volumeMounts:
+      - name: authentik-cert
+        mountPath: "/certs"
+        readOnly: true
     autoscaling:
       server:
         enabled: true
