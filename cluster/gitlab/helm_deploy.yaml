@@ -34,7 +34,6 @@ spec:
           nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
           nginx.ingress.kubernetes.io/upgrade-proxy: "true"
           nginx.ingress.kubernetes.io/enable-websockets: "true"
-          nginx.ingress.kubernetes.io/client-body-buffer-size: 1m
         configureCertmanager: false
         class: nginx-external
         tls:
