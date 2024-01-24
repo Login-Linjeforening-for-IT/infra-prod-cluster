@@ -31,8 +31,6 @@ spec:
         secretAccessKey:
           name: gitlab-pg-backup
           key: secret
-    wal:
-      compression: gzip
 
 ---
 apiVersion: postgresql.cnpg.io/v1
