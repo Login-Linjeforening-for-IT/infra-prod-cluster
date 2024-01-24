@@ -23,6 +23,28 @@ spec:
         gitlab:
           name: gittest.login.no
           https: true
+          omniauth:
+            enabled: true
+            allow_single_sign_on: ['saml']
+            sync_email_from_provider: 'saml'
+            sync_profile_from_provider: ['saml']
+            sync_profile_attributes: ['email']
+            auto_sign_in_with_provider: 'saml'
+            block_auto_created_users: false
+            auto_link_saml_user: true
+            providers:
+              - name: 'saml'
+                label: 'authentik'
+                args:
+                  assertion_consumer_service_url: 'https://gittest.login.no/users/auth/saml/callback'
+                  idp_cert_fingerprint: 25:79:61:b4:65:2d:6c:12:1c:b2:bc:b5:1e:5b:fa:4e:e0:07:67:22
+                  idp_sso_target_url: 'https://authentik.login.no/application/saml/gitlab-application/sso/binding/redirect/'
+                  issuer: 'https://gittest.login.no'
+                  name_identifier_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent'
+                  attribute_statements:
+                    email: ['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']
+                    first_name: ['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+                    nickname: ['http://schemas.goauthentik.io/2021/02/saml/username']
         registry:
           name: registry.login.no
           https: true
