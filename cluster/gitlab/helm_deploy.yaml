@@ -46,7 +46,7 @@ spec:
           storageClass: "do-block-storage-retain"
           size: 20Gi
         psql:
-          host: private-db-postgresql-gitlab-test-do-user-6724543-0.c.db.ondigitalocean.com
+          host: gitlab-psql-rw.gitlab.svc.cluster.local
           username: gitlab
           database: gitlab
           password:
