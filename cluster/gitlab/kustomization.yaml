@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - ns.yaml
   - secrets_kustomization.yaml
-    #- db_kust.yaml
+  - db_kust.yaml
   - helm_repo.yaml
   - helm_deploy.yaml
