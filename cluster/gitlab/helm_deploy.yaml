@@ -39,7 +39,7 @@ spec:
       registry:
         bucket: gitlab-registry-storage
       minio:
-        enabled: true
+        enabled: false
       gitaly:
         enabled: true
         persistence:
