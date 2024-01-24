@@ -2,8 +2,8 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: 1pwdsecrets
-  namespace: wiki
+  name: db
+  namespace: gitlab
 spec:
   interval: 1m
   path: "cluster/gitlab/db"
