@@ -9,3 +9,12 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     size: 8Gi
+  postgresql:
+    parameters:
+      timezone: "Europe/Oslo"
+  bootstrap:
+    initdb:
+      database: gitlab
+      owner: gitlab
+      secret:
+        name: gitlab-db-credentials
