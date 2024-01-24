@@ -34,6 +34,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
           nginx.ingress.kubernetes.io/upgrade-proxy: "true"
           nginx.ingress.kubernetes.io/enable-websockets: "true"
+          nginx.ingress.kubernetes.io/client-body-buffer-size: 1m
         configureCertmanager: false
         class: nginx-external
         tls:
@@ -85,7 +86,7 @@ spec:
           tmpBucket: gitlab-tmp-storage
         omniauth:
           enabled: true
-          allow_single_sign_on: ['saml']
+          allow_single_sign_on: ["saml"]
           block_auto_created_users: false
           auto_link_saml_user: true
           providers:
