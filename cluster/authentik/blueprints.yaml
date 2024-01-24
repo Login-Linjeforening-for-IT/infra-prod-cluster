@@ -21,7 +21,7 @@ data:
 
         attrs:
           name: gitlab-provider
-          issuer: https://authentik.login.no
+          issuer: https://gittest.login.no
           audience: https://gittest.login.no
           acs_url: https://gittest.login.no/users/auth/saml/callback
           assertion_valid_not_before: minutes=-5
