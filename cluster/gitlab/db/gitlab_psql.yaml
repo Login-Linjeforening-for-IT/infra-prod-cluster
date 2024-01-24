@@ -5,6 +5,7 @@ metadata:
   name: gitlab-psql
   namespace: gitlab
 spec:
+  description: Postgres for GitLab
   instances: 3
   primaryUpdateStrategy: unsupervised
   storage:
@@ -18,3 +19,28 @@ spec:
       owner: gitlab
       secret:
         name: gitlab-db-credentials
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://psql-backups/infra/gitlab
+      endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
+      s3Credentials:
+        accessKeyId:
+          name: gitlab-pg-backup
+          key: access
+        secretAccessKey:
+          name: gitlab-pg-backup
+          key: secret
+    wal:
+      compression: gzip
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: gitlab-psql-backup
+spec:
+  immediate: true
+  schedule: "0 0 0 * * *"
+  cluster:
+    name: gitlab-psql
