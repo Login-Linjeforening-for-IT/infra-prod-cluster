@@ -52,7 +52,7 @@ spec:
           password:
             secret: gitlab-db
             key: password
-          port: 25060
+          port: 5432
       redis:
         persistence:
           storageClass: "do-block-storage-retain"
