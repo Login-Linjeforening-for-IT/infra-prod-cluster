@@ -46,7 +46,7 @@ spec:
           storageClass: "do-block-storage-retain"
           size: 20Gi
       psql:
-        serviceName: gitlab-psql-rw
+        host: gitlab-psql-rw.gitlab.svc.cluster.local
         username: gitlab
         database: gitlab
         password:
