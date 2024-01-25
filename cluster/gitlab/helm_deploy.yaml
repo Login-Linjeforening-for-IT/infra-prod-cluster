@@ -50,7 +50,7 @@ spec:
           username: gitlab
           database: gitlab
           password:
-            secret: gitlab-db
+            secret: gitlab-db-credentials
             key: password
           port: 5432
       redis:
