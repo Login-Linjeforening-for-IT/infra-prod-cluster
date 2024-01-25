@@ -45,14 +45,14 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
           size: 20Gi
-        psql:
-          serviceName: gitlab-psql-rw
-          username: gitlab
-          database: gitlab
-          password:
-            secret: gitlab-db-credentials
-            key: password
-          port: 5432
+      psql:
+        serviceName: gitlab-psql-rw
+        username: gitlab
+        database: gitlab
+        password:
+          secret: gitlab-db-credentials
+          key: password
+        port: 5432
       redis:
         persistence:
           storageClass: "do-block-storage-retain"
