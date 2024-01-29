@@ -14,6 +14,6 @@ spec:
         kind: HelmRepository
         name: cloudnative-pg-repo
         namespace: psql-operator
-      interval: 1m
+      interval: 5m
   values:
     replicaCount: 1
