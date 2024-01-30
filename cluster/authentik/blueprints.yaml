@@ -12,6 +12,18 @@ data:
       name: gitlab
 
     entries: 
+      - model: authentik_core.user
+        state: present
+        identifiers:
+          username: break-glass
+        attrs:
+          name: break-glass
+          password: IMADEATERRIBLEMISTAKEUPINTHISBITCHREEEEE
+          is_active: true
+          groups: 
+            - !Find [authentik_core.group, [name, 'authentik Admins']]
+          email: break@glass.com
+
       - model: authentik_providers_saml.samlprovider
         state: present
         conditions: []
