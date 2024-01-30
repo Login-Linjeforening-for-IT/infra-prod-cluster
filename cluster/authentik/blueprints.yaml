@@ -56,7 +56,7 @@ data:
         state: present
         conditions: []
         identifiers:
-          pk: 1
+          pk: 2
         id: wiki-provider
         attrs:
           name: wiki-provider
@@ -89,5 +89,5 @@ data:
         attrs:
           name: wiki-application
           policy_engine_mode: all
-          provider: 1
+          provider: 2
           slug: wiki-application
