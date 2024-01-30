@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: gitlab
-      version: "7.7.0"
+      version: "7.8.1"
       sourceRef:
         kind: HelmRepository
         name: gitlab-repo
@@ -45,14 +45,14 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
           size: 20Gi
-        psql:
-          host: gitlab-psql-rw.gitlab.svc.cluster.local
-          username: gitlab
-          database: gitlab
-          password:
-            secret: gitlab-db
-            key: password
-          port: 25060
+      psql:
+        host: gitlab-psql-rw.gitlab.svc.cluster.local
+        username: gitlab
+        database: gitlab
+        password:
+          secret: gitlab-db-credentials
+          key: password
+        port: 5432
       redis:
         persistence:
           storageClass: "do-block-storage-retain"

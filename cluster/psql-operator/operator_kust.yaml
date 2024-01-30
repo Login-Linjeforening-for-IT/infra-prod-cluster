@@ -5,7 +5,7 @@ metadata:
   name: psql
   namespace: psql-operator
 spec:
-  interval: 1m
+  interval: 5m
   path: "cluster/psql-operator/operator"
   prune: true
   sourceRef:
