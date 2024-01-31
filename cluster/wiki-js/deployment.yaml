@@ -42,7 +42,7 @@ spec:
                   key: ssl-sertifikat
             - name: HA_ACTIVE
               value: "0"
-          image: ghcr.io/requarks/wiki:2.5.300
+          image: ghcr.io/requarks/wiki:2.5.301
           imagePullPolicy: Always
           name: wiki-js
           ports:
