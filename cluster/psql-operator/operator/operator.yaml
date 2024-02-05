@@ -5,15 +5,16 @@ metadata:
   name: psql-operator
   namespace: psql-operator
 spec:
-  interval: 5m
   chart:
     spec:
       chart: cloudnative-pg
-      version: "0.20.0"
+      interval: 5m
+      reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         name: cloudnative-pg-repo
         namespace: psql-operator
-      interval: 5m
+      version: 0.20.0
+  interval: 5m
   values:
     replicaCount: 1
