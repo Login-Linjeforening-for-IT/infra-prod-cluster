@@ -15,3 +15,20 @@ spec:
         name: helm-repo
         namespace: zammad
       interval: 5m
+  values:
+    ingress:
+      enabled: true
+      ingressClassName: nginx-ntnu
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+        nginx.ingress.kubernetes.io/upgrade-proxy: "true"
+        nginx.ingress.kubernetes.io/enable-websockets: "true"
+      tls:
+        - hosts:
+            - zammad-test.login.no
+      hosts:
+        - host: zammad-test.login.no
+          paths:
+            - path: "/"
+              pathType: Prefix
