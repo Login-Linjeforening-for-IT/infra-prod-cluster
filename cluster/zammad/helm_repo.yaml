@@ -5,5 +5,5 @@ metadata:
   name: helm-repo
   namespace: zammad
 spec:
-  interval: 1m
+  interval: 10m
   url: https://zammad.github.io/zammad-helm
