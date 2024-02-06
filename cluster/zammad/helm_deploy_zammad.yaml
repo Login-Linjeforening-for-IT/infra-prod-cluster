@@ -1,5 +1,6 @@
+## https://github.com/zammad/zammad-helm/blob/main/zammad/values.yaml
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: zammad-prod
@@ -32,3 +33,38 @@ spec:
           paths:
             - path: "/"
               pathType: Prefix
+
+    postgresql:
+      auth:
+        username: "zammad"
+        replicationUsername: repl_user
+        database: "zammad_production"
+        # Passwords
+        postgresPassword: "zammad"
+        password: "zammad"
+        replicationPassword: "zammad"
+
+    redis:
+      auth:
+        password: zammad
+
+    zammadConfig:
+      postgresql:
+        # enable/disable postgresql chart dependency
+        enabled: true
+        # needs to be the same as the postgresql.auth.database
+        db: zammad_production
+        # host env var is only used when postgresql.enabled is false
+        host: zammad-postgresql
+        # needs to be the same as the postgresql.auth.password
+        pass: "zammad"
+        port: 5432
+        # needs to be the same as the postgresql.auth.username
+        user: zammad
+      redis:
+        # enable/disable redis chart dependency
+        enabled: true
+        host: "zammad-redis-master"
+        # needs to be the same as the redis.auth.password
+        pass: zammad
+        port: 6379
