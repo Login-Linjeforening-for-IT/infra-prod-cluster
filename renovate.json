@@ -10,9 +10,6 @@
       "\\.yaml$"
     ]
   },
-  "ignorePaths": [
-    "**/gotk-components.yaml"
-  ],
   "extends": [
     "local>tekkom/infrastructure/mend-renovate/default-config"
   ]
