@@ -9,12 +9,12 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: "2023.10.3"
+      version: "2023.10.7"
       sourceRef:
         kind: HelmRepository
         name: authentik-repo
         namespace: authentik
-      interval: 1m
+      interval: 10m
   values:
     authentik:
       secret_key: file:///secret-key/password
@@ -59,10 +59,10 @@ spec:
     autoscaling:
       server:
         enabled: true
-        minReplicas: 1
+        minReplicas: 3
       worker:
         enabled: true
-        minReplicas: 1
+        minReplicas: 3
     ingress:
       ingressClassName: nginx-ntnu
       annotations:
