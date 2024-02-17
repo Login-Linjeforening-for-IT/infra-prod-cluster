@@ -18,7 +18,7 @@ data:
   ssl-redirect: "true"
   ssl-protocols: "TLSv1.2 TLSv1.3"
   ssl-prefer-server-ciphers: "true"
-  #ssl-dh-param: "nginx-ingress-ntnu/lb-dhparam"
+  ssl-dh-param: "nginx-ingress-ntnu/lb-dhparam"
   ssl-ecdh-curve: "secp384r1"
   ssl-ciphers: "HIGH:!EXP:!NULL:!ADH:!LOW:!SSLv2:!SSLv3:!MD5:!RC4"
   enable-ocsp: "true"
@@ -31,7 +31,7 @@ data:
   # DO proxy settings
   use-proxy-protocol: "true"
   enable-real-ip: "true"
-  proxy-real-ip-cidr: "10.133.0.0/16"
+  proxy-real-ip-cidr: "192.168.2.0/28"
 
   # Timeouts
   proxy-connect-timeout: "10"
