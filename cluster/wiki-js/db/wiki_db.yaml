@@ -1,0 +1,45 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: wiki-psql
+  namespace: wiki
+spec:
+  description: Postgres for Wiki-js
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 8Gi
+  postgresql:
+    parameters:
+      timezone: "Europe/Oslo"
+  bootstrap:
+    initdb:
+      database: wiki
+      owner: wiki
+      secret:
+        name: wiki-db-credentials
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://psql-backups/infra/wiki
+      endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
+      s3Credentials:
+        accessKeyId:
+          name: wiki-pg-backup
+          key: access
+        secretAccessKey:
+          name: wiki-pg-backup
+          key: secret
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: wiki-psql-backup
+  namespace: wiki
+spec:
+  immediate: true
+  schedule: "0 0 0 * * *"
+  cluster:
+    name: wiki-psql

@@ -4,14 +4,11 @@ kind: Ingress
 metadata:
   name: wiki-js-ingress
   namespace: wiki
-  annotations:
-    cert-manager.io/cluster-issuer: do-issuer-staging
 spec:
   ingressClassName: nginx-ntnu
   tls:
     - hosts:
         - wiki.test.login.no
-      secretName: test-wiki-tls
   rules:
     - host: wiki.test.login.no
       http:

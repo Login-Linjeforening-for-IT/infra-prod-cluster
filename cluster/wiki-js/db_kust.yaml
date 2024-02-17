@@ -2,17 +2,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: wiki-js
-  namespace: wiki
+  name: db
+  namespace: gitlab
 spec:
   interval: 1m
-  path: "cluster/wiki-js/ingress"
+  path: "cluster/gitlab/db"
   dependsOn:
-    - name: cert-manager
-      namespace: cert-manager
+    - name: psql
+      namespace: psql-operator
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-
