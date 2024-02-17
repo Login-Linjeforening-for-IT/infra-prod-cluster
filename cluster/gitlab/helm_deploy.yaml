@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: gitlab-repo
         namespace: gitlab
-      interval: 1m
+      interval: 10m
   values:
     global:
       hosts:
@@ -93,7 +93,7 @@ spec:
     nginx-ingress:
       enabled: false
     gitlab-runner:
-      install: true
+      install: false
       runners:
         gitlabUrl: https://gitlab-prod-webservice-default:8181
     postgresql:
