@@ -12,5 +12,5 @@ spec:
     app: wiki-js
   ports:
     - protocol: TCP
-      port: 8383
-      targetPort: 8383
+      port: 3000
+      targetPort: 3000
