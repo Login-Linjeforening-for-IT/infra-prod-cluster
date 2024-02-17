@@ -22,7 +22,15 @@ spec:
         enabled: false
         send_pii: false
       postgresql:
-        password: "ThisIsNotASecurePassword"
+        host: authentik-psql-rw.authentik.svc.cluster.local
+        name: authentik
+        user: authentik
+        port: 5432
+        password:
+          valueFrom:
+            secretKeyRef:
+              name: authentik-db-credentials
+              key: password
     blueprints:
       - authentik-blueprints
     volumes:
@@ -68,7 +76,6 @@ spec:
             - path: "/"
               pathType: Prefix
     postgresql:
-      enabled: true
-      postgresqlPassword: "ThisIsNotASecurePassword"
+      enabled: false
     redis:
       enabled: true
