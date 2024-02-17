@@ -8,9 +8,9 @@ spec:
   ingressClassName: nginx-ntnu
   tls:
     - hosts:
-        - wiki.test.login.no
+        - wikitest.login.no
   rules:
-    - host: wiki.test.login.no
+    - host: wikitest.login.no
       http:
         paths:
           - pathType: Prefix
