@@ -6,4 +6,3 @@ resources:
   - helm_repo.yaml
   - secret_kustomization.yaml
   - deploy_kustomization.yaml
-  - issuer_kustomization.yaml

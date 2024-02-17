@@ -5,7 +5,7 @@ metadata:
   name: cert-manager
   namespace: cert-manager
 spec:
-  interval: 1m
+  interval: 10m
   path: "cluster/cert-manager/deploy"
   prune: true
   sourceRef:
