@@ -42,7 +42,7 @@ spec:
                     path: authentik_cert.key
       - name: postgres-creds
         secret:
-          secretName: authentik-postgres-credentials
+          secretName: authentik-db-credentials
     volumeMounts:
       - name: authentik-certificate
         mountPath: "/certs"
