@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: nginx-stable
         namespace: nginx-ingress-ntnu
-      interval: 1m
+      interval: 10m
   values:
     replicaCount: 1
     controller:
@@ -24,9 +24,9 @@ spec:
         enabled: false
       admissionWebhooks:
         certManager:
-          enabled: false
+          enabled: true
       extraArgs:
-        default-ssl-certificate: nginx-ingress-external/login-no-cert
+        default-ssl-certificate: nginx-ingress-ntnu/login-no-cert
       service:
         externalTrafficPolicy: "Local"
         annotations:

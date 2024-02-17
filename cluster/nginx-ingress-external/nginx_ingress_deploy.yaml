@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: nginx-stable
         namespace: nginx-ingress-external
-      interval: 1m
+      interval: 10m
   values:
     replicaCount: 1
     controller:
