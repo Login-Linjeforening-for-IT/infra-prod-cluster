@@ -33,6 +33,8 @@ spec:
                 secretKeyRef:
                   name: wiki-db-credentials
                   key: password
+            - name: DB_NAME
+              value: wiki
             - name: HA_ACTIVE
               value: "1"
           image: ghcr.io/requarks/wiki:2.5.301
