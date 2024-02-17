@@ -3,10 +3,10 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: db
-  namespace: gitlab
+  namespace: wiki
 spec:
-  interval: 1m
-  path: "cluster/gitlab/db"
+  interval: 10m
+  path: "cluster/wiki-js/db"
   dependsOn:
     - name: psql
       namespace: psql-operator
