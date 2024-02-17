@@ -58,23 +58,64 @@ spec:
           storageClass: "do-block-storage-retain"
         storageClass: "do-block-storage-retain"
       appConfig:
+        object_store:
+          enabled: false
+          proxy_download: true
+          storage_options: {}
+          connection:
+            secret: do-spaces-connection
         lfs:
-          bucket: gitlab-lfs-storage
+          enabled: true
+          proxy_download: true
+          bucket: gitlab-lfs
           connection:
             secret: do-spaces-connection
             key: connection
         artifacts:
-          bucket: gitlab-artifacts-storage
+          enabled: true
+          proxy_download: true
+          bucket: gitlab-artifacts
           connection:
             secret: do-spaces-connection
             key: connection
         uploads:
-          bucket: gitlab-uploads-storage
+          enabled: true
+          proxy_download: true
+          bucket: gitlab-uploads
           connection:
             secret: do-spaces-connection
             key: connection
         packages:
-          bucket: gitlab-packages-storage
+          enabled: true
+          proxy_download: true
+          bucket: gitlab-packages
+          connection:
+            secret: do-spaces-connection
+            key: connection
+        externalDiffs:
+          enabled: true
+          when:
+          proxy_download: true
+          bucket: gitlab-mr-diffs
+          connection:
+            secret: do-spaces-connection
+            key: connection
+        terraformState:
+          enabled: true
+          bucket: gitlab-terraform-state
+          connection:
+            secret: do-spaces-connection
+            key: connection
+        ciSecureFiles:
+          enabled: true
+          bucket: gitlab-ci-secure-files
+          connection:
+            secret: do-spaces-connection
+            key: connection
+        dependencyProxy:
+          enabled: true
+          proxy_download: true
+          bucket: gitlab-dependency-proxy
           connection:
             secret: do-spaces-connection
             key: connection
