@@ -134,7 +134,7 @@ spec:
     nginx-ingress:
       enabled: false
     gitlab-runner:
-      install: false
+      install: true
       runners:
         gitlabUrl: https://gitlab-prod-webservice-default:8181
     postgresql:
