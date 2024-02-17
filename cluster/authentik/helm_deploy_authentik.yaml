@@ -17,7 +17,7 @@ spec:
       interval: 1m
   values:
     authentik:
-      secret_key: "PleaseGenerateA50CharKey"
+      secret_key: file:///secret-key/password
       error_reporting:
         enabled: false
         send_pii: false
@@ -43,12 +43,18 @@ spec:
       - name: postgres-creds
         secret:
           secretName: authentik-db-credentials
+      - name: secret-key
+        secret:
+          secretName: authentik-secret-key
     volumeMounts:
       - name: authentik-certificate
         mountPath: "/certs"
         readOnly: true
       - name: postgres-creds
         mountPath: /postgres-creds
+        readOnly: true
+      - name: secret-key
+        mountPath: /secret-key
         readOnly: true
     autoscaling:
       server:
@@ -82,3 +88,6 @@ spec:
         - name: postgres-creds
           secret:
             secretName: authentik-db-credentials
+        - name: secret-key
+          secret:
+            secretName: authentik-secret-key
