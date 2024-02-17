@@ -19,4 +19,4 @@ spec:
               service:
                 name: wiki-js-svc
                 port:
-                  number: 8383
+                  number: 3000
