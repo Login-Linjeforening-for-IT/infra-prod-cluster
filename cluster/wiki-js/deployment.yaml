@@ -63,8 +63,8 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "500m"
-          command: ["/bin/sh", "-c"]
-          args: ["npm install @node-saml/passport-saml"]
+          # command: ["/bin/sh", "-c"]
+          # args: ["npm install @node-saml/passport-saml"]
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
