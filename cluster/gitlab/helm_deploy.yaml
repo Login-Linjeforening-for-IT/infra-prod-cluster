@@ -64,61 +64,38 @@ spec:
           storage_options: {}
           connection:
             secret: do-spaces-connection
+            key: connection
         lfs:
           enabled: true
           proxy_download: true
           bucket: gitlab-lfs
-          connection:
-            secret: do-spaces-connection
-            key: connection
         artifacts:
           enabled: true
           proxy_download: true
           bucket: gitlab-artifacts
-          connection:
-            secret: do-spaces-connection
-            key: connection
         uploads:
           enabled: true
           proxy_download: true
           bucket: gitlab-uploads
-          connection:
-            secret: do-spaces-connection
-            key: connection
         packages:
           enabled: true
           proxy_download: true
           bucket: gitlab-packages
-          connection:
-            secret: do-spaces-connection
-            key: connection
         externalDiffs:
           enabled: true
           when:
           proxy_download: true
           bucket: gitlab-mr-diffs
-          connection:
-            secret: do-spaces-connection
-            key: connection
         terraformState:
           enabled: true
           bucket: gitlab-terraform-state
-          connection:
-            secret: do-spaces-connection
-            key: connection
         ciSecureFiles:
           enabled: true
           bucket: gitlab-ci-secure-files
-          connection:
-            secret: do-spaces-connection
-            key: connection
         dependencyProxy:
           enabled: true
           proxy_download: true
           bucket: gitlab-dependency-proxy
-          connection:
-            secret: do-spaces-connection
-            key: connection
         backups:
           bucket: gitlab-backup-storage
           tmpBucket: gitlab-tmp-storage
