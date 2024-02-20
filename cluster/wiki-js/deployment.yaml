@@ -58,11 +58,11 @@ spec:
             periodSeconds: 5
           resources:
             requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "256Mi"
+              memory: "128Mi"
               cpu: "500m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
           # command: ["/bin/sh", "-c"]
           # args: ["npm install --legacy-peer-deps @node-saml/passport-saml"] # added to fix npm install error
       affinity:
