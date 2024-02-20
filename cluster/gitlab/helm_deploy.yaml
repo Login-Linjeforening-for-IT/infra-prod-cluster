@@ -72,7 +72,7 @@ spec:
         lfs:
           enabled: true
           proxy_download: true
-          bucket: gitlab-lfs
+          bucket: gitlab-lfs-storage
         artifacts:
           enabled: true
           proxy_download: true
