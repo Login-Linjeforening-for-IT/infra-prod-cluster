@@ -59,7 +59,7 @@ spec:
         storageClass: "do-block-storage-retain"
       appConfig:
         object_store:
-          enabled: false
+          enabled: true
           proxy_download: true
           storage_options: {}
           connection:
