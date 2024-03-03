@@ -113,8 +113,6 @@ spec:
       enabled: false
     gitlab-runner:
       install: false
-      runners:
-        gitlabUrl: https://gitlab-prod-webservice-default:8181
     postgresql:
       install: false
     gitlab-shell:
@@ -125,8 +123,8 @@ spec:
         backups:
           objectStorage:
             config:
-              secret: do-spaces-connection
-              key: connection
+              secret: storage-config
+              key: config
     registry:
       storage:
         secret: do-spaces-connection-reg
