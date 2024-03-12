@@ -8,6 +8,7 @@ spec:
   description: Postgres for GitLab
   instances: 3
   primaryUpdateStrategy: unsupervised
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.6
   storage:
     size: 8Gi
   postgresql:
