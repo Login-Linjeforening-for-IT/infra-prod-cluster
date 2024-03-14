@@ -47,7 +47,7 @@ spec:
           service.beta.kubernetes.io/do-loadbalancer-healthcheck-healthy-threshold: "5"
 
           # Block traffic and allow only from NTNU
-        service.beta.kubernetes.io/do-loadbalancer-allow-rules: "cidr:129.241.0.0/16,cidr:78.91.0.0/18,cidr:78.91.64.0/20,cidr:78.91.80.0/22,cidr:128.39.0.0/16,cidr:158.38.0.0/16,cidr:10.0.0.0/8"
+          service.beta.kubernetes.io/do-loadbalancer-allow-rules: "cidr:129.241.0.0/16,cidr:78.91.0.0/18,cidr:78.91.64.0/20,cidr:78.91.80.0/22,cidr:128.39.0.0/16,cidr:158.38.0.0/16,cidr:10.0.0.0/8"
       extraVolumes:
         - name: crowdsec-bouncer-plugin
           emptyDir: {}
