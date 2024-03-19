@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: cloudnative-pg-repo
         namespace: psql-operator
-      version: 0.20.1
+      version: 0.20.2
   interval: 10m
   timeout: 5m
   install:
