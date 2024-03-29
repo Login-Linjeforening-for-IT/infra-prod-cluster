@@ -60,7 +60,30 @@ spec:
         persistence:
           storageClass: "do-block-storage-retain"
         storageClass: "do-block-storage-retain"
+      serviceAccount:
+        enabled: true
+        create: true
+      email:
+        display_name: "GitLab - Login"
+        from: "gitlab@example.com"
+        reply_to: "noreply@example.com"
+      smtp:
+        enabled: true
+        address: "smtp.example.com"
+        tls: true
+        authentication: "plain"
+        user_name: "example"
+        password:
+          secret: "smtp-password"
+          key: "password"
       appConfig:
+        contentSecurityPolicy:
+          enabled: true
+          reportOnly: false
+        enableUsagePing: false
+        usernameChangingEnabled: false
+        sentry:
+          enabled: false
         object_store:
           enabled: true
           proxy_download: true
@@ -101,6 +124,7 @@ spec:
           tmpBucket: gitlab-tmp-storage
         omniauth:
           enabled: true
+          autoSignInWithProvider: saml
           allow_single_sign_on: ["saml"]
           block_auto_created_users: false
           auto_link_saml_user: true
