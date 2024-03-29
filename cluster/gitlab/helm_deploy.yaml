@@ -74,7 +74,7 @@ spec:
         authentication: "plain"
         user_name: "example"
         password:
-          secret: "smtp-password"
+          secret: "gitlab-email"
           key: "password"
       appConfig:
         contentSecurityPolicy:
