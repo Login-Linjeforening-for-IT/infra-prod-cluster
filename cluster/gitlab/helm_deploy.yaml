@@ -124,7 +124,7 @@ spec:
           tmpBucket: login-gitlab-tmp-storage
         omniauth:
           enabled: true
-          autoSignInWithProvider: saml
+          #autoSignInWithProvider: saml
           allow_single_sign_on: ["saml"]
           block_auto_created_users: false
           auto_link_saml_user: true
