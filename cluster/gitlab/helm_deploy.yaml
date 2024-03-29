@@ -40,7 +40,7 @@ spec:
           enabled: true
           secretName: login-no
       registry:
-        bucket: gitlab-registry-storage
+        bucket: login-gitlab-registry-storage
       minio:
         enabled: false
       gitaly:
@@ -89,39 +89,39 @@ spec:
           proxy_download: true
           storage_options: {}
           connection:
-            secret: do-spaces-connection
-            key: connection
+            secret: gitlab-object-storage
+            key: regular
         lfs:
           enabled: true
           proxy_download: true
-          bucket: gitlab-lfs-storage
+          bucket: login-gitlab-lfs-storage
         artifacts:
           enabled: true
           proxy_download: true
-          bucket: gitlab-artifacts
+          bucket: login-gitlab-artifacts
         uploads:
           enabled: true
           proxy_download: true
-          bucket: gitlab-uploads
+          bucket: login-gitlab-uploads
         packages:
           enabled: true
           proxy_download: true
-          bucket: gitlab-packages
+          bucket: login-gitlab-packages
         externalDiffs:
           enabled: true
           when:
           proxy_download: true
-          bucket: gitlab-mr-diffs
+          bucket: login-gitlab-mr-diffs
         terraformState:
           enabled: true
-          bucket: gitlab-terraform-state
+          bucket: login-gitlab-terraform-state
         dependencyProxy:
           enabled: true
           proxy_download: true
-          bucket: gitlab-dependency-proxy
+          bucket: login-gitlab-dependency-proxy
         backups:
-          bucket: gitlab-backup-storage
-          tmpBucket: gitlab-tmp-storage
+          bucket: login-gitlab-backup-storage
+          tmpBucket: login-gitlab-tmp-storage
         omniauth:
           enabled: true
           autoSignInWithProvider: saml
@@ -146,9 +146,9 @@ spec:
         backups:
           objectStorage:
             config:
-              secret: storage-config
-              key: config
+              secret: gitlab-object-storage
+              key: storage.config
     registry:
       storage:
-        secret: do-spaces-connection-reg
-        key: connection
+        secret: gitlab-object-storage
+        key: registry
