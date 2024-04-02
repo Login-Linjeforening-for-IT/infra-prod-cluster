@@ -5,28 +5,6 @@ metadata:
   name: authentik
   namespace: authentik
 spec:
-  global:
-    env:
-      - name: AUTHENTIK_STORAGE__MEDIA__BACKEND
-        value: s3
-      - name: AUTHENTIK_STORAGE__MEDIA__S3__USE_SSL
-        value: true
-      - name: AUTHENTIK_STORAGE__MEDIA__S3__ENDPOINT
-        value: https://login-authentik-media.ams3.digitaloceanspaces.com
-      - name: AUTHENTIK_STORAGE__MEDIA__S3__ACCESS_KEY
-        valueFrom:
-          secretKeyRef:
-            name: do-spaces
-            key: accesstoken
-      - name: AUTHENTIK_STORAGE__MEDIA__S3__SECRET_KEY
-        valueFrom:
-          secretKeyRef:
-            name: do-spaces
-            key: secretkey
-      - name: AUTHENTIK_STORAGE__MEDIA__S3__BUCKET_NAME
-        value: login-authentik-media
-      - name: AUTHENTIK_STORAGE__MEDIA__S3__CUSTOM_DOMAIN
-        value: login-authentik-media.ams3.cdn.digitaloceanspaces.com/authentik-media
   interval: 5m
   chart:
     spec:
@@ -38,6 +16,28 @@ spec:
         namespace: authentik
       interval: 10m
   values:
+    global:
+      env:
+        - name: AUTHENTIK_STORAGE__MEDIA__BACKEND
+          value: s3
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__USE_SSL
+          value: true
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__ENDPOINT
+          value: https://login-authentik-media.ams3.digitaloceanspaces.com
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: do-spaces
+              key: accesstoken
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: do-spaces
+              key: secretkey
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__BUCKET_NAME
+          value: login-authentik-media
+        - name: AUTHENTIK_STORAGE__MEDIA__S3__CUSTOM_DOMAIN
+          value: login-authentik-media.ams3.cdn.digitaloceanspaces.com/authentik-media
     authentik:
       secret_key: file:///secret-key/password
       error_reporting:
