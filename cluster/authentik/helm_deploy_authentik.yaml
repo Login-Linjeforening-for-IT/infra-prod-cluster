@@ -14,9 +14,15 @@ spec:
       - name: AUTHENTIK_STORAGE__MEDIA__S3__ENDPOINT
         value: https://login-authentik-media.ams3.digitaloceanspaces.com
       - name: AUTHENTIK_STORAGE__MEDIA__S3__ACCESS_KEY
-        value: "" # Please insert here
+        valueFrom:
+          secretKeyRef:
+            name: do-spaces
+            key: accesstoken
       - name: AUTHENTIK_STORAGE__MEDIA__S3__SECRET_KEY
-        value: "" # Please insert here
+        valueFrom:
+          secretKeyRef:
+            name: do-spaces
+            key: secretkey
       - name: AUTHENTIK_STORAGE__MEDIA__S3__BUCKET_NAME
         value: login-authentik-media
       - name: AUTHENTIK_STORAGE__MEDIA__S3__CUSTOM_DOMAIN
