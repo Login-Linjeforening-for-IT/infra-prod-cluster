@@ -50,7 +50,8 @@ spec:
         user: file:///postgres-creds/username
         password: file:///postgres-creds/password
     blueprints:
-      - authentik-blueprints
+      configMaps:
+        - authentik-blueprints
     volumes:
       - name: authentik-certificate
         projected:
