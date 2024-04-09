@@ -40,7 +40,7 @@ spec:
           enabled: true
           secretName: login-no
       registry:
-        bucket: login-gitlab-registry-storage
+        bucket: gitlab-login-registry-storage
       minio:
         enabled: false
       gitaly:
@@ -94,34 +94,34 @@ spec:
         lfs:
           enabled: true
           proxy_download: true
-          bucket: login-gitlab-lfs-storage
+          bucket: gitlab-login-lfs-storage
         artifacts:
           enabled: true
           proxy_download: true
-          bucket: login-gitlab-artifacts
+          bucket: gitlab-login-artifacts
         uploads:
           enabled: true
           proxy_download: true
-          bucket: login-gitlab-uploads
+          bucket: gitlab-login-uploads
         packages:
           enabled: true
           proxy_download: true
-          bucket: login-gitlab-packages
+          bucket: gitlab-login-packages
         externalDiffs:
           enabled: true
           when:
           proxy_download: true
-          bucket: login-gitlab-mr-diffs
+          bucket: gitlab-login-mr-diffs
         terraformState:
           enabled: true
-          bucket: login-gitlab-terraform-state
+          bucket: gitlab-login-terraform-state
         dependencyProxy:
           enabled: true
           proxy_download: true
-          bucket: login-gitlab-dependency-proxy
+          bucket: gitlab-login-dependency-proxy
         backups:
-          bucket: login-gitlab-backup-storage
-          tmpBucket: login-gitlab-tmp-storage
+          bucket: gitlab-login-backup-storage
+          tmpBucket: gitlab-login-tmp-storage
         omniauth:
           enabled: true
           #autoSignInWithProvider: saml
