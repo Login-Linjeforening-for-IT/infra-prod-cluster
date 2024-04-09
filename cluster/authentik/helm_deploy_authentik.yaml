@@ -101,7 +101,7 @@ spec:
           - hosts:
               - authentik.login.no
         hosts:
-          - host: authentik.login.no
+          - authentik.login.no
         paths:
           - /
         pathType: Prefix
