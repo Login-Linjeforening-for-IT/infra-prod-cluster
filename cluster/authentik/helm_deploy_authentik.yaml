@@ -102,9 +102,6 @@ spec:
               - authentik.login.no
         hosts:
           - authentik.login.no
-        paths:
-          - /
-        pathType: Prefix
       volumes:
         - name: postgres-creds
           secret:
