@@ -28,7 +28,7 @@ spec:
         secretAccessKey:
           name: authentik-pg-backup
           key: secret
-  externalCLusters:
+  externalClusters:
     - name: clusterBackup
       barmanObjectStore:
         destinationPath: s3://psql-backups/infra/authentik
