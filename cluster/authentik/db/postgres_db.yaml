@@ -14,11 +14,8 @@ spec:
     parameters:
       timezone: "Europe/Oslo"
   bootstrap:
-    initdb:
-      database: authentik
-      owner: authentik
-      secret:
-        name: authentik-db-credentials
+    recovery:
+      source: clusterBackup
   backup:
     retentionPolicy: "30d"
     barmanObjectStore:
@@ -31,6 +28,18 @@ spec:
         secretAccessKey:
           name: authentik-pg-backup
           key: secret
+  externalCLusters:
+    - name: clusterBackup
+      barmanObjectStore:
+        destinationPath: s3://psql-backups/infra/authentik
+        endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
+        s3Credentials:
+          accessKeyId:
+            name: authentik-pg-backup
+            key: access
+          secretAccessKey:
+            name: authentik-pg-backup
+            key: secret
 
 ---
 apiVersion: postgresql.cnpg.io/v1
