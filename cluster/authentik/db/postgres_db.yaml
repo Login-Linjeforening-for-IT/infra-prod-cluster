@@ -15,10 +15,10 @@ spec:
       timezone: "Europe/Oslo"
   bootstrap:
     recovery:
-      database: authentik
-      owner: authentik
-      secret:
-        name: authentik-db-credentials
+      # database: authentik
+      # owner: authentik
+      # secret:
+      #   name: authentik-db-credentials
       source: authentik-psql
   backup:
     retentionPolicy: "30d"
