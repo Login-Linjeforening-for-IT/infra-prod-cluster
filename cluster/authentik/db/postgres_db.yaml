@@ -17,6 +17,8 @@ spec:
     recovery:
       database: authentik
       owner: authentik
+      secret:
+        name: authentik-db-credentials
       source: authentik-psql
   backup:
     retentionPolicy: "30d"
