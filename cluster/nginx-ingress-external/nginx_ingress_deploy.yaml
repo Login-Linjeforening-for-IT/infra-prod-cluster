@@ -73,10 +73,6 @@ spec:
               value: /etc/nginx/lua/plugins/crowdsec/templates/ban.html
             - name: CAPTCHA_TEMPLATE_PATH
               value: /etc/nginx/lua/plugins/crowdsec/templates/captcha.html
-            - name: MODE
-              value: stream
-            - name: UPDATE_FREQUENCY
-              value: "10"
           command:
             [
               "sh",
