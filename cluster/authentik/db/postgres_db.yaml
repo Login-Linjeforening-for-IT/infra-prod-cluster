@@ -26,7 +26,7 @@ spec:
   externalClusters:
     - name: authentik-psql
       barmanObjectStore:
-        destinationPath: https://psql-backups.ams3.digitaloceanspaces.com/psql-backups/infra/authentik
+        destinationPath: s3://psql-backups.ams3.digitaloceanspaces.com/psql-backups/infra/authentik
         serverName: authentik-psql
         s3Credentials:
           accessKeyId:
