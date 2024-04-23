@@ -23,7 +23,7 @@ spec:
         name: authentik-db-credentials
       source: authentik-psql
       recoveryTarget:
-        backupID: backup-20240221000006
+        backupID: "20240221000006"
 
   backup:
     retentionPolicy: "30d"
