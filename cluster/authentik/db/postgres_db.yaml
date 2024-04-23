@@ -22,8 +22,6 @@ spec:
       secret:
         name: authentik-db-credentials
       source: authentik-psql
-      recoveryTarget:
-        backupID: "20240221000006"
 
   externalClusters:
     - name: authentik-psql
