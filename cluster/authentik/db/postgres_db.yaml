@@ -5,7 +5,7 @@ metadata:
   name: authentik-psql-test-restore
   namespace: authentik
 spec:
-  description: Postgres for authentik
+  description: Postgres for Authentik
   instances: 3
   primaryUpdateStrategy: unsupervised
   storage:
@@ -26,8 +26,8 @@ spec:
   externalClusters:
     - name: authentik-psql
       barmanObjectStore:
-        destinationPath: s3://psql-backups.ams3.digitaloceanspaces.com/psql-backups/infra/authentik
-        serverName: authentik-psql
+        destinationPath: s3://psql-backups/infra/authentik
+        endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
         s3Credentials:
           accessKeyId:
             name: authentik-pg-backup
