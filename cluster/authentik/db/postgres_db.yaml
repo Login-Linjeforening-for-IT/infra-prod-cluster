@@ -5,7 +5,7 @@ metadata:
   name: authentik-psql-test-restore
   namespace: authentik
 spec:
-  description: Postgres for Authentik
+  description: Postgres for authentik
   instances: 3
   primaryUpdateStrategy: unsupervised
   storage:
