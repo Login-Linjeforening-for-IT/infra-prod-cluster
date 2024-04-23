@@ -17,18 +17,13 @@ spec:
 
   bootstrap:
     recovery:
-      database: authentik
-      owner: authentik
-      secret:
-        name: authentik-db-credentials
-      source: authentik-psql
+      source: gitlab-psql
 
   externalClusters:
-    - name: authentik-psql
+    - name: gitlab-psql
       barmanObjectStore:
-        destinationPath: s3://psql-backups/infra/authentik
+        destinationPath: s3://psql-backups/infra/gitlab
         endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
-        serverName: authentik-psql
         s3Credentials:
           accessKeyId:
             name: authentik-pg-backup
