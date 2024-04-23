@@ -36,9 +36,6 @@ spec:
           nginx.ingress.kubernetes.io/enable-websockets: "true"
         configureCertmanager: false
         class: nginx-external
-        tls:
-          enabled: true
-          secretName: login-no
       registry:
         bucket: gitlab-login-registry-storage
       minio:
