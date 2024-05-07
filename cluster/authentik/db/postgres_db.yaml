@@ -28,7 +28,7 @@ spec:
       barmanObjectStore:
         destinationPath: s3://psql-backups/infra/authentik
         endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
-        serverName: authentik-psql
+        serverName: authentik-psql-2
         s3Credentials:
           accessKeyId:
             name: authentik-pg-backup
