@@ -17,14 +17,14 @@ spec:
 
   bootstrap:
     recovery:
-      source: authentik-psql
+      source: authentik-psql-2
       database: authentik
       owner: authentik
       secret: 
         name: authentik-db-credentials
 
   externalClusters:
-    - name: authentik-psql
+    - name: authentik-psql-2
       barmanObjectStore:
         destinationPath: s3://psql-backups/infra/authentik
         endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
