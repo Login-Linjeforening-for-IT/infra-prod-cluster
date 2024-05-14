@@ -44,7 +44,7 @@ spec:
                   key: ca
             - name: HA_ACTIVE
               value: "1"
-          image: ghcr.io/requarks/wiki:2.5.301
+          image: ghcr.io/requarks/wiki:2.5.302@sha256:824f077aaf1e926ae4ce70a3c00ee741daa37a05c52fb2f97c7745c9936787a5
           imagePullPolicy: Always
           name: wiki-js
           ports:
