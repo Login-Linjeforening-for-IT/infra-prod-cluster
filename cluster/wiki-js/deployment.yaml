@@ -35,6 +35,13 @@ spec:
                   key: password
             - name: DB_NAME
               value: wikijs
+            - name: DB_SSL
+              value: "1"
+            - name: DB_SSL_CA
+              valueFrom:
+                secretKeyRef:
+                  name: wiki-do-db-ca
+                  key: ca
             - name: HA_ACTIVE
               value: "1"
           image: ghcr.io/requarks/wiki:2.5.301
