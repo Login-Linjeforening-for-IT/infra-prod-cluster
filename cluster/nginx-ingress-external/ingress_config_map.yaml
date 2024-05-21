@@ -35,7 +35,7 @@ data:
 
   # Timeouts
   proxy-connect-timeout: "10"
-  proxy-read-timeout: "1"
+  proxy-read-timeout: "60"
   keepalive-timeout: "10s"
   proxy-send-timeout: "10"
   client-header-timeout: "10"
@@ -43,7 +43,7 @@ data:
   # Div configs
   use_http2: "true"
   server-tokens: "false"
-  proxy-body-size: "100K"
+  proxy-body-size: "1m"
   large-client-header-buffers: "2 16k"
 
   # Logging

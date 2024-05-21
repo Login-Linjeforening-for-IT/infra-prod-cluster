@@ -23,25 +23,18 @@ spec:
             - name: DB_TYPE
               value: postgres
             - name: DB_HOST
-              value: db-login-prod-do-user-6724543-0.db.ondigitalocean.com
+              value: wiki-psql-rw.wiki.svc.cluster.local
             - name: DB_PORT
-              value: "25060"
+              value: "5432"
             - name: DB_USER
-              value: wikijs
+              value: wiki
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: wiki-do-db-credentials
+                  name: wiki-db-credentials
                   key: password
             - name: DB_NAME
-              value: wikijs
-            - name: DB_SSL
-              value: "1"
-            - name: DB_SSL_CA
-              valueFrom:
-                secretKeyRef:
-                  name: wiki-do-db-ca
-                  key: ca
+              value: wiki
             - name: HA_ACTIVE
               value: "1"
           image: ghcr.io/requarks/wiki:2.5.302@sha256:824f077aaf1e926ae4ce70a3c00ee741daa37a05c52fb2f97c7745c9936787a5
@@ -77,8 +70,8 @@ spec:
               memory: "256Mi"
               cpu: "100m"
             limits:
-              memory: "1024Mi"
-              cpu: "1000m"
+              memory: "2Gi"
+              cpu: "2"
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
