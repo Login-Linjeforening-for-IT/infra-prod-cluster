@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ns.yaml
   - secret_kustomization.yaml
-  - db_kust.yaml
-    #- deployment.yaml
-    #- svc.yaml
-    #- ingress.yaml
+  #- db_kust.yaml
+  - deployment.yaml
+  - svc.yaml
+  - ingress.yaml
