@@ -19,7 +19,7 @@ spec:
           image: debian:trixie
           env:
             - name: PGHOST
-              value: auth2-psql-rw.beehive.svc.cluster.local
+              value: authentik-psql-test-restore-rw.authentik.svc.cluster.local
             - name: PGPORT
               value: "5432"
             - name: PGDATABASE
