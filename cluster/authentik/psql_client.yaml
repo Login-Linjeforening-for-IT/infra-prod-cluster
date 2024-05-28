@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-client
+  namespace: authentik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-client
+  template:
+    metadata:
+      labels:
+        app: postgres-client
+    spec:
+      containers:
+        - name: postgres-client
+          image: debian:trixie
+          env:
+            - name: PGHOST
+              value: auth2-psql-rw.beehive.svc.cluster.local
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              value: authentik
+            - name: PGUSER
+              value: authentik
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-psql-credentials
+                  key: password
+          command: ["/bin/sh"]
+          args:
+            [
+              "-c",
+              "apt-get update && apt-get install -y vim postgresql-client && sleep infinity",
+            ]
