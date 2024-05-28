@@ -81,7 +81,7 @@ spec:
           name: authentik2-pg-backup
           key: access
         secretAccessKey:
-          name: authentik-2-pg-backup
+          name: authentik2-pg-backup
           key: secret
 
 ---
