@@ -94,3 +94,13 @@ spec:
   schedule: "0 0 0 * * *"
   cluster:
     name: auth2-psql
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Backup
+metadata:
+  name: backup-example
+  namespace: authentik
+spec:
+  cluster:
+    name: auth2-psql
