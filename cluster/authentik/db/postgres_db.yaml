@@ -67,7 +67,7 @@ spec:
       timezone: "Europe/Oslo"
   bootstrap:
     initdb:
-      database: authentic
+      database: authentik
       owner: authentik
       secret:
         name: authentik-db-credentials
