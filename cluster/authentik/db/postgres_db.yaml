@@ -20,7 +20,7 @@ spec:
       source: authentik-psql-2
       database: authentik
       owner: authentik
-      secret: 
+      secret:
         name: authentik-db-credentials
 
   externalClusters:
@@ -49,3 +49,49 @@ spec:
   schedule: "0 0 0 * * *"
   cluster:
     name: authentik-psql-test-restore
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: auth2-psql
+  namespace: authentik
+spec:
+  description: Postgres for Wiki-js
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 8Gi
+  postgresql:
+    parameters:
+      timezone: "Europe/Oslo"
+  bootstrap:
+    initdb:
+      database: authentic
+      owner: authentik
+      secret:
+        name: authentik-db-credentials
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://psql-backups/infra/authentik
+      endpointURL: https://gitlab-login-artifacts.s3.eu-north-1.amazonaws.com
+      s3Credentials:
+        accessKeyId:
+          name: authentik2-pg-backup
+          key: access
+        secretAccessKey:
+          name: authentik-2-pg-backup
+          key: secret
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: authentik2-psql-backup
+  namespace: authentik
+spec:
+  immediate: true
+  schedule: "0 0 0 * * *"
+  cluster:
+    name: auth2-psql
