@@ -27,6 +27,7 @@ spec:
     - name: authentik-psql-2
       barmanObjectStore:
         destinationPath: s3://gitlab-login-artifacts/psql-backups/authentik
+        serverName: auth2-psql
         s3Credentials:
           accessKeyId:
             name: authentik2-pg-backup
