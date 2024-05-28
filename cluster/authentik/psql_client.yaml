@@ -29,7 +29,7 @@ spec:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: authentik-psql-credentials
+                  name: authentik-db-credentials
                   key: password
           command: ["/bin/sh"]
           args:
