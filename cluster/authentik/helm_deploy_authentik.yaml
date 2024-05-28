@@ -71,7 +71,7 @@ spec:
         enabled: false
         send_pii: false
       postgresql:
-        host: auth2-psql-rw.authentik.svc.cluster.local
+        host: authentik-psql-test-restore-rw.authentik.svc.cluster.local
         name: authentik
         port: 5432
         user: file:///postgres-creds/username
