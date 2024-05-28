@@ -75,7 +75,6 @@ spec:
     retentionPolicy: "30d"
     barmanObjectStore:
       destinationPath: s3://gitlab-login-artifacts/psql-backups/authentik
-      endpointURL: https://gitlab-login-artifacts.s3.eu-north-1.amazonaws.com
       s3Credentials:
         accessKeyId:
           name: authentik2-pg-backup
