@@ -26,14 +26,13 @@ spec:
   externalClusters:
     - name: authentik-psql-2
       barmanObjectStore:
-        destinationPath: s3://psql-backups/infra/authentik
-        endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
+        destinationPath: s3://gitlab-login-artifacts/psql-backups/authentik
         s3Credentials:
           accessKeyId:
-            name: authentik-pg-backup
+            name: authentik2-pg-backup
             key: access
           secretAccessKey:
-            name: authentik-pg-backup
+            name: authentik2-pg-backup
             key: secret
         wal:
           maxParallel: 4
