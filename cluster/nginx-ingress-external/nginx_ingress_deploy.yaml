@@ -57,7 +57,7 @@ spec:
             secretName: crowdsec-external-prod-bouncer-tls
       extraInitContainers:
         - name: init-clone-crowdsec-bouncer
-          image: crowdsecurity/lua-bouncer-pluginv1.0.2@sha256:608f0ff0b78bdcc3eb68669900020352095671c0952c13e17155b584d3419085
+          image: crowdsecurity/lua-bouncer-plugin:v1.0.2@sha256:608f0ff0b78bdcc3eb68669900020352095671c0952c13e17155b584d3419085
           imagePullPolicy: IfNotPresent
           env:
             - name: API_URL
