@@ -95,7 +95,6 @@ spec:
         lua-shared-dicts: "crowdsec_cache: 50m"
         server-snippet: |
           lua_ssl_trusted_certificate /etc/nginx/crowdsec-certs/ca.crt;
-          resolver local=on ipv6=off;
       ingressClassResource:
         name: nginx-external
         enabled: true
