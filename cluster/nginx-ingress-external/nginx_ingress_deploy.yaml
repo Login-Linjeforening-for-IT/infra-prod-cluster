@@ -57,7 +57,7 @@ spec:
             secretName: crowdsec-external-prod-bouncer-tls
       extraInitContainers:
         - name: init-clone-crowdsec-bouncer
-          image: crowdsecurity/lua-bouncer-plugin
+          image: crowdsecurity/lua-bouncer-pluginv1.0.2@sha256:608f0ff0b78bdcc3eb68669900020352095671c0952c13e17155b584d3419085
           imagePullPolicy: IfNotPresent
           env:
             - name: API_URL
@@ -95,7 +95,7 @@ spec:
         lua-shared-dicts: "crowdsec_cache: 50m"
         server-snippet: |
           lua_ssl_trusted_certificate /etc/nginx/crowdsec-certs/ca.crt;
-          lua_ssl_verify_depth 2;
+          resolver local=on ipv6=off;
       ingressClassResource:
         name: nginx-external
         enabled: true
