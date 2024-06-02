@@ -35,7 +35,7 @@ spec:
       service:
         externalTrafficPolicy: "Local"
         annotations:
-          service.beta.kubernetes.io/do-loadbalancer-name: "external-nginx-ingress-infra-lb"
+          service.beta.kubernetes.io/do-loadbalancer-name: "nginx-ingress-infra-external-lb"
           service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
 
           # Health checks
