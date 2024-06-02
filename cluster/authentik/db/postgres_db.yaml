@@ -2,50 +2,43 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: authentik-psql-test-restore
+  name: authentik-psql
   namespace: authentik
 spec:
-  description: Postgres for Authentik 2
+  description: Postgres for Authentik
   instances: 3
   primaryUpdateStrategy: unsupervised
   storage:
     size: 8Gi
-
   postgresql:
     parameters:
       timezone: "Europe/Oslo"
-
   bootstrap:
-    recovery:
-      source: authentik-psql-2
+    initdb:
       database: authentik
       owner: authentik
       secret:
         name: authentik-db-credentials
-
-  externalClusters:
-    - name: authentik-psql-2
-      barmanObjectStore:
-        destinationPath: s3://gitlab-login-artifacts/psql-backups/authentik
-        serverName: auth2-psql
-        s3Credentials:
-          accessKeyId:
-            name: authentik2-pg-backup
-            key: access
-          secretAccessKey:
-            name: authentik2-pg-backup
-            key: secret
-        wal:
-          maxParallel: 4
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://login-infra-prod-psql-backups/authentik
+      s3Credentials:
+        accessKeyId:
+          name: authentik-pg-backup
+          key: access
+        secretAccessKey:
+          name: authentik-pg-backup
+          key: secret
 
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: authentik-psql-test-restore-backup
+  name: authentik-psql-backup
   namespace: authentik
 spec:
   immediate: true
   schedule: "0 0 0 * * *"
   cluster:
-    name: authentik-psql-test-restore
+    name: authentik-psql
