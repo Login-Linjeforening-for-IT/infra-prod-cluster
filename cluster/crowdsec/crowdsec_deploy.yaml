@@ -14,11 +14,13 @@ spec:
         kind: HelmRepository
         name: crowdsec-repo
         namespace: crowdsec
-      interval: 1m
+      interval: 5m
   values:
     container_runtime: json-nginx
     tls:
       enabled: true
+      certManager:
+        enabled: true
       bouncer:
         reflector:
           namespaces: ["nginx-ingress-external"]
