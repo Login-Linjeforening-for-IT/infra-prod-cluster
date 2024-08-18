@@ -25,10 +25,10 @@ spec:
       destinationPath: s3://login-infra-prod-psql-backups/authentik
       s3Credentials:
         accessKeyId:
-          name: authentik2-pg-backup
+          name: authentik-pg-backup
           key: access
         secretAccessKey:
-          name: authentik2-pg-backup
+          name: authentik-pg-backup
           key: secret
 
 ---
