@@ -35,7 +35,7 @@ spec:
           nginx.ingress.kubernetes.io/upgrade-proxy: "true"
           nginx.ingress.kubernetes.io/enable-websockets: "true"
         configureCertmanager: false
-        class: nginx-external
+        class: nginx-ntnu
       registry:
         bucket: gitlab-login-registry-storage
       minio:
