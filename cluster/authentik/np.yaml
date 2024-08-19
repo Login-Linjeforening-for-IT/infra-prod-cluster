@@ -44,6 +44,7 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/part-of: authentik
+      app.kubernetes.io/component: server
   policyTypes:
     - Ingress
   ingress:
@@ -53,6 +54,8 @@ spec:
               kubernetes.io/metadata.name: nginx-ingress-external
       ports:
         - port: 443
+          protocol: TCP
+        - port: 80
           protocol: TCP
 
 ---
