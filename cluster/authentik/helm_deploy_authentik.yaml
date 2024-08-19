@@ -86,6 +86,8 @@ spec:
     redis:
       enabled: true
     server:
+      service:
+        externalTrafficPolicy: "Local"
       autoscaling:
         enabled: true
         minReplicas: 3
