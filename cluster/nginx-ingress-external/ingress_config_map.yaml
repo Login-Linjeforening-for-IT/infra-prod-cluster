@@ -31,7 +31,7 @@ data:
   # DO proxy settings
   use-proxy-protocol: "true"
   enable-real-ip: "true"
-  proxy-real-ip-cidr: "192.168.2.0/28"
+  proxy-real-ip-cidr: "10.0.0.0/8"
 
   # Timeouts
   proxy-connect-timeout: "10"
