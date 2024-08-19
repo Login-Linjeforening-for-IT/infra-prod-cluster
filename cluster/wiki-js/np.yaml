@@ -46,7 +46,7 @@ spec:
               kubernetes.io/metadata.name: wiki
           podSelector:
             matchLabels:
-              cnpg.io/cluster: authentik-psql
+              cnpg.io/cluster: wiki-psql
       ports:
         - protocol: TCP
           port: 5432
