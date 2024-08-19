@@ -82,6 +82,21 @@ spec:
           mountPath: /secret-key
           readOnly: true
     authentik:
+      email:
+        port: 578
+        username:
+          sources:
+            - secret:
+              name: authentik-smtp-server-credentials
+              key: username
+        password:
+          sources:
+            - secret:
+              name: authentik-smtp-server-credentials
+              key: password
+        use_ssl: true
+        timeout: 30
+        from: "authentik@login.no"
       disable_update_check: true
       disable_startup_analytics: true
       secret_key: file:///secret-key/password
