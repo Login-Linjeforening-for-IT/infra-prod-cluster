@@ -86,6 +86,13 @@ spec:
     redis:
       enabled: true
     server:
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "100m"
+        limits:
+          memory: "1Gi"
+          cpu: "500m"
       service:
         externalTrafficPolicy: "Local"
       autoscaling:
@@ -110,6 +117,13 @@ spec:
         enabled: true
         minAvailable: 1
     worker:
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "100m"
+        limits:
+          memory: "1Gi"
+          cpu: "500m"
       autoscaling:
         enabled: true
         minReplicas: 3
