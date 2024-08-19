@@ -46,20 +46,6 @@ spec:
       app.kubernetes.io/component: server
   policyTypes:
     - Ingress
-    - Egress
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-external
-          podSelector:
-            matchLabels:
-              app.kubernetes.io/instance: nginx-ingress-external
-      ports:
-        - port: 443
-          protocol: TCP
-        - port: 80
-          protocol: TCP
   ingress:
     - from:
         - namespaceSelector:
@@ -69,6 +55,8 @@ spec:
             matchLabels:
               app.kubernetes.io/instance: nginx-ingress-external
       ports:
+        - port: 9443
+          protocol: TCP
         - port: 443
           protocol: TCP
         - port: 80
