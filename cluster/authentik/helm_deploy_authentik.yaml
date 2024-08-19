@@ -89,10 +89,10 @@ spec:
       resources:
         requests:
           memory: "512Mi"
-          cpu: "100m"
+          cpu: "1"
         limits:
           memory: "1Gi"
-          cpu: "500m"
+          cpu: "1"
       service:
         externalTrafficPolicy: "Local"
       autoscaling:
