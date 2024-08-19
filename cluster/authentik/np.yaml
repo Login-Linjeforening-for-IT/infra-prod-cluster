@@ -120,12 +120,12 @@ metadata:
   namespace: authentik
 spec:
   policyTypes:
-    - Egress
+    - Ingress
   podSelector:
     matchLabels:
       app.kubernetes.io/name: redis
-  egress:
-    - to:
+  ingress:
+    - from:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: authentik
