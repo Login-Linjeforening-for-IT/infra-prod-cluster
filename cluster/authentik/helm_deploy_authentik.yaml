@@ -112,8 +112,6 @@ spec:
         limits:
           memory: "1Gi"
           cpu: "1"
-      service:
-        externalTrafficPolicy: "Local"
       autoscaling:
         enabled: true
         minReplicas: 3
