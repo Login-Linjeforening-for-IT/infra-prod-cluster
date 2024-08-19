@@ -8,3 +8,4 @@ resources:
   - db_kustomization.yaml
   - blueprints.yaml
   - helm_deploy_authentik.yaml
+  - np.yaml
