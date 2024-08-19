@@ -89,6 +89,13 @@ spec:
               kubernetes.io/metadata.name: authentik
           podSelector:
             matchLabels:
+              app.kubernetes.io/name: redis
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: authentik
+          podSelector:
+            matchLabels:
               app.kubernetes.io/part-of: authentik
     - to:
         - namespaceSelector:
@@ -105,6 +112,26 @@ spec:
               - 192.168.0.0/16
               - 172.16.0.0/12
 
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-redis
+  namespace: authentik
+spec:
+  policyTypes:
+    - Egress
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: redis
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: authentik
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/part-of: authentik
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
