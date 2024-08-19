@@ -22,8 +22,7 @@ spec:
   backup:
     retentionPolicy: "30d"
     barmanObjectStore:
-      destinationPath: s3://psql-backups/infra/wiki
-      endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
+      destinationPath: s3://login-infra-prod-psql-backups/wiki
       s3Credentials:
         accessKeyId:
           name: wiki-pg-backup
