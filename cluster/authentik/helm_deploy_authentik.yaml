@@ -66,6 +66,8 @@ spec:
           mountPath: /secret-key
           readOnly: true
     authentik:
+      disable_update_check: true
+      disable_startup_analytics: true
       secret_key: file:///secret-key/password
       error_reporting:
         enabled: false
