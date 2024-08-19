@@ -45,7 +45,6 @@ spec:
     matchLabels:
       app.kubernetes.io/part-of: authentik
   policyTypes:
-    - Egress
     - Ingress
   ingress:
     - from:
@@ -53,13 +52,8 @@ spec:
             matchLabels:
               kubernetes.io/metadata.name: nginx-ingress-external
       ports:
-        - port: 8080
+        - port: 443
           protocol: TCP
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-external
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -82,6 +76,11 @@ spec:
           podSelector:
             matchLabels:
               app.kubernetes.io/part-of: authentik
+      ports:
+        - port: 80
+          protocol: TCP
+        - port: 443
+          protocol: TCP
   egress:
     - to:
         - namespaceSelector:
@@ -90,6 +89,9 @@ spec:
           podSelector:
             matchLabels:
               app.kubernetes.io/name: redis
+      ports:
+        - protocol: TCP
+          port: 6379
     - to:
         - namespaceSelector:
             matchLabels:
@@ -97,6 +99,11 @@ spec:
           podSelector:
             matchLabels:
               app.kubernetes.io/part-of: authentik
+      ports:
+        - port: 80
+          protocol: TCP
+        - port: 443
+          protocol: TCP
     - to:
         - namespaceSelector:
             matchLabels:
@@ -104,6 +111,9 @@ spec:
           podSelector:
             matchLabels:
               cnpg.io/cluster: authentik-psql
+      ports:
+        - protocol: TCP
+          port: 5432
     - to:
         - ipBlock:
             cidr: 0.0.0.0/0
@@ -111,6 +121,9 @@ spec:
               - 10.0.0.0/8
               - 192.168.0.0/16
               - 172.16.0.0/12
+      ports:
+        - protocol: TCP
+          port: 443
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -132,6 +145,9 @@ spec:
           podSelector:
             matchLabels:
               app.kubernetes.io/part-of: authentik
+      ports:
+        - protocol: TCP
+          port: 6379
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
