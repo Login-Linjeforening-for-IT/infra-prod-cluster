@@ -83,6 +83,7 @@ spec:
           readOnly: true
     authentik:
       email:
+        host: "secure.emailsrvr.com"
         port: 578
         username:
           sources:
