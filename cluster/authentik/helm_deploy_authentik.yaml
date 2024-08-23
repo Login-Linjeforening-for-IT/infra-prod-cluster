@@ -71,6 +71,9 @@ spec:
         - name: secret-key
           secret:
             secretName: authentik-secret-key
+        - name: email-sec
+          secret:
+            secretName: authentik-smtp-server-credentials
       volumeMounts:
         - name: authentik-certificate
           mountPath: "/certs"
@@ -81,20 +84,15 @@ spec:
         - name: secret-key
           mountPath: /secret-key
           readOnly: true
+        - name: email-sec
+          mountPath: /email-sec
+          readOnly: true
     authentik:
       email:
         host: "secure.emailsrvr.com"
         port: 578
-        username:
-          sources:
-            - secret:
-              name: authentik-smtp-server-credentials
-              key: username
-        password:
-          sources:
-            - secret:
-              name: authentik-smtp-server-credentials
-              key: password
+        username: file:///email-sec/username
+        password: file:///email-sec/password
         use_ssl: true
         timeout: 30
         from: "authentik <authentik@login.no>"
