@@ -95,7 +95,7 @@ spec:
         password: file:///email-sec/password
         use_ssl: true
         timeout: 30
-        from: "authentik <authentik@login.no>"
+        from: "Authentik - Login <authentik@login.no>"
       disable_update_check: true
       disable_startup_analytics: true
       secret_key: file:///secret-key/password
