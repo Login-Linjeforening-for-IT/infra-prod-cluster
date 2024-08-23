@@ -90,7 +90,7 @@ spec:
     authentik:
       email:
         host: "secure.emailsrvr.com"
-        port: 578
+        port: 465
         username: file:///email-sec/username
         password: file:///email-sec/password
         use_ssl: true
