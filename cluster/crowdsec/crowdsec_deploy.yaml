@@ -25,6 +25,7 @@ spec:
         reflector:
           namespaces: ["nginx-ingress-external"]
     agent:
+      priorityClassName: system-node-critical
       persistentVolume:
         config:
           enabled: false
@@ -42,6 +43,7 @@ spec:
         - name: TZ
           value: "Europe/Oslo"
     lapi:
+      priorityClassName: system-cluster-critical
       resources:
         limits:
           memory: 250Mi
