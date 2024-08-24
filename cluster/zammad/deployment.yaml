@@ -41,8 +41,6 @@ spec:
     elasticsearch:
       master:
         replicaCount: 3
-    memcached:
-      replicaCount: 3
     zammadConfig:
       postgresql:
         enabled: false
