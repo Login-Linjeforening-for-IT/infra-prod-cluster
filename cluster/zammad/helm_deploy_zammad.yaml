@@ -17,8 +17,12 @@ spec:
         namespace: zammad
       interval: 5m
   values:
-    postgresql:
-      enabled: false
+    nameOverride: zammad
+    secrets:
+      postgresql:
+        useExisting: true
+        secretName: zammad-db-credentials
+        secretKey: password
     ingress:
       enabled: true
       ingressClassName: nginx-ntnu
