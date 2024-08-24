@@ -8,9 +8,9 @@ spec:
   description: Postgres for GitLab
   instances: 3
   primaryUpdateStrategy: unsupervised
-  imageName: ghcr.io/cloudnative-pg/postgresql:15.6
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.8
   storage:
-    size: 8Gi
+    size: 10Gi
   postgresql:
     parameters:
       timezone: "Europe/Oslo"
@@ -23,8 +23,7 @@ spec:
   backup:
     retentionPolicy: "30d"
     barmanObjectStore:
-      destinationPath: s3://psql-backups/infra/gitlab
-      endpointURL: https://psql-backups.ams3.digitaloceanspaces.com
+      destinationPath: s3://login-infra-prod-psql-backups/gitlab
       s3Credentials:
         accessKeyId:
           name: gitlab-pg-backup
