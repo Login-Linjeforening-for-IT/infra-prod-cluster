@@ -38,9 +38,11 @@ spec:
           paths:
             - path: "/"
               pathType: Prefix
-    redis:
-      auth:
-        password: zammad
+    elasticsearch:
+      master:
+        replicaCount: 3
+    memcached:
+      replicaCount: 3
     zammadConfig:
       postgresql:
         enabled: false
@@ -56,3 +58,7 @@ spec:
         enabled: true
       minio:
         enabled: false
+      nginx:
+        replicas: 3
+      railsserver:
+        replicas: 3
