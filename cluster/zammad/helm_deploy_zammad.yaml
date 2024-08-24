@@ -19,7 +19,7 @@ spec:
   values:
     secrets:
       postgresql:
-        useExisting: true
+        useExisting: false
         secretKey: password
         secretName: zammad-db-credentials
     ingress:
@@ -38,6 +38,16 @@ spec:
           paths:
             - path: "/"
               pathType: Prefix
+    postgresql:
+      auth:
+        username: zammad
+        database: zammad
+        replicationUsername: repl_user
+        existingSecret: zammad-db-credentials
+        secretKeys:
+          adminPasswordKey: password
+          userPasswordKey: password
+          replicationPasswordKey: password
     zammadConfig:
       postgresql:
         enabled: false
