@@ -17,7 +17,6 @@ spec:
         namespace: zammad
       interval: 5m
   values:
-    nameOverride: zammad
     secrets:
       postgresql:
         useExisting: true
