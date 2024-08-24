@@ -9,7 +9,7 @@ spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
   storage:
-    size: 8Gi
+    size: 15Gi
   postgresql:
     parameters:
       timezone: "Europe/Oslo"
