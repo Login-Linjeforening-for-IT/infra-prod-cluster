@@ -37,7 +37,7 @@ spec:
         configureCertmanager: false
         tls:
           enabled: true
-          secretName: ""
+          secretName: login-no-cert
         class: nginx-ntnu
       registry:
         bucket: gitlab-login-registry-storage
