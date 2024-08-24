@@ -3,10 +3,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: zammad-prod
+  name: zammad
   namespace: zammad
 spec:
-  interval: 10m
+  interval: 5m
   chart:
     spec:
       chart: zammad
@@ -21,7 +21,7 @@ spec:
       postgresql:
         useExisting: true
         secretKey: password
-        secretName: zammad-postgresql
+        secretName: zammad-db-credentials
     ingress:
       enabled: true
       ingressClassName: nginx-ntnu
@@ -38,21 +38,21 @@ spec:
           paths:
             - path: "/"
               pathType: Prefix
-    postgresql:
-      auth:
-        username: "zammad"
-        replicationUsername: repl_user
-        database: "zammad_production"
-        # Passwords
-        postgresPassword: "zammad"
-        password: "zammad"
-        replicationPassword: "zammad"
     redis:
       auth:
         password: zammad
     zammadConfig:
       postgresql:
-        enabled: true
+        enabled: false
+        db: zammad
+        host: zammad-psql-rw.zammad.svc.cluster.local
+        user: zammad
+        port: "5432"
       redis:
         enabled: true
-
+      elasticsearch:
+        enabled: true
+      memcached:
+        enabled: true
+      minio:
+        enabled: false
