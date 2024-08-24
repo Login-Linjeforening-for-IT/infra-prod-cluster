@@ -4,13 +4,23 @@ kind: Ingress
 metadata:
   name: wiki-js-ingress
   namespace: wiki
+  annotations:
+    nginx.ingress.kubernetes.io/client-body-buffer-size: 100m
+    nginx.ingress.kubernetes.io/client-header-buffer-size: 16k
+    nginx.ingress.kubernetes.io/client-max-body-size: 100m
+    nginx.ingress.kubernetes.io/connection-proxy-header: keep-alive
+    nginx.ingress.kubernetes.io/large-client-header-buffers: 8 32k
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: 3600s
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 3600s
+    nginx.ingress.kubernetes.io/proxy-send-timeout: 3600s
 spec:
-  ingressClassName: nginx-ntnu
+  ingressClassName: nginx-external
   tls:
     - hosts:
-        - wikitest.login.no
+        - wiki.login.no
   rules:
-    - host: wikitest.login.no
+    - host: wiki.login.no
       http:
         paths:
           - pathType: Prefix

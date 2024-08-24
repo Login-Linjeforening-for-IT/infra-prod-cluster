@@ -27,7 +27,7 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-ntnu
+              kubernetes.io/metadata.name: nginx-ingress-external
       ports:
         - port: 3000
           protocol: TCP

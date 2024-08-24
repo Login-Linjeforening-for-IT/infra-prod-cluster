@@ -5,9 +5,9 @@ resources:
   - ns.yaml
   - secret_kustomization.yaml
   - db_kust.yaml
-  #- deployment.yaml
+  - deployment.yaml
   - svc.yaml
   - ingress.yaml
   - pdb.yaml
-  #- np.yaml
+  - np.yaml
   - hpa.yaml

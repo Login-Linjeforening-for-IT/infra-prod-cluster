@@ -8,7 +8,7 @@ metadata:
   namespace: wiki
 spec:
   strategy:
-    type: Recreate
+    type: RollingUpdate
   selector:
     matchLabels:
       app: wiki-js
