@@ -6,7 +6,7 @@ metadata:
   name: zammad-prod
   namespace: zammad
 spec:
-  interval: 10m
+  interval: 5m
   chart:
     spec:
       chart: zammad
@@ -40,18 +40,17 @@ spec:
               pathType: Prefix
     postgresql:
       auth:
-        username: "zammad"
+        username: zammad
+        database: zammad
         replicationUsername: repl_user
-        database: "zammad"
-        postgresPassword: "zammad"
-        password: "zammad"
-        replicationPassword: "zammad"
-    redis:
-      auth:
-        password: zammad
+        existingSecret: zammad-db-credentials
+        secretKeys:
+          adminPasswordKey: password
+          userPasswordKey: password
+          replicationPasswordKey: password
     zammadConfig:
       postgresql:
-        enabled: true
+        enabled: false
         db: zammad
         host: zammad-psql-rw.zammad.svc.cluster.local
         user: zammad
