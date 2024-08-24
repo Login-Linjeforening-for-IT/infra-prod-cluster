@@ -17,11 +17,6 @@ spec:
         namespace: zammad
       interval: 5m
   values:
-    secrets:
-      postgresql:
-        useExisting: true
-        secretName: zammad-db-credentials
-        secretKey: password
     ingress:
       enabled: true
       ingressClassName: nginx-ntnu
@@ -38,20 +33,4 @@ spec:
           paths:
             - path: "/"
               pathType: Prefix
-    zammadConfig:
-      postgresql:
-        enabled: false
-        db: zammad
-        host: zammad-psql-rw.zammad.svc.cluster.local
-        user: zammad
-        pass: "123"
-        port: "5432"
-      redis:
-        enabled: true
-      elasticsearch:
-        enabled: true
-      memcached:
-        enabled: true
-      minio:
-        enabled: false
 
