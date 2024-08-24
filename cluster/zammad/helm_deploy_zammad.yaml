@@ -38,22 +38,14 @@ spec:
           paths:
             - path: "/"
               pathType: Prefix
-    postgresql:
-      auth:
-        username: zammad
-        database: zammad
-        replicationUsername: repl_user
-        existingSecret: zammad-db-credentials
-        secretKeys:
-          adminPasswordKey: password
-          userPasswordKey: password
-          replicationPasswordKey: password
     zammadConfig:
       postgresql:
         enabled: false
         db: zammad
         host: zammad-psql-rw.zammad.svc.cluster.local
         user: zammad
+        pass: "123"
+        port: "5432"
       redis:
         enabled: true
       elasticsearch:
