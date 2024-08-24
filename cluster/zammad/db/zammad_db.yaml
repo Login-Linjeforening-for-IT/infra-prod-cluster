@@ -1,0 +1,44 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: zammad-psql
+  namespace: zammad
+spec:
+  description: Postgres for Zammad
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 8Gi
+  postgresql:
+    parameters:
+      timezone: "Europe/Oslo"
+  bootstrap:
+    initdb:
+      database: zammad
+      owner: zammad
+      secret:
+        name: zammad-db-credentials
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://login-infra-prod-psql-backups/zammad
+      s3Credentials:
+        accessKeyId:
+          name: zammad-pg-backup
+          key: access
+        secretAccessKey:
+          name: zammad-pg-backup
+          key: secret
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: zammad-psql-backup
+  namespace: zammad
+spec:
+  immediate: true
+  schedule: "0 0 0 * * *"
+  cluster:
+    name: zammad-psql

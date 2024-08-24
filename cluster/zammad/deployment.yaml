@@ -21,7 +21,7 @@ spec:
       postgresql:
         useExisting: true
         secretKey: password
-        secretName: zammad-db-credentials
+        secretName: zammad-postgresql
     ingress:
       enabled: true
       ingressClassName: nginx-ntnu
@@ -42,7 +42,8 @@ spec:
       auth:
         username: "zammad"
         replicationUsername: repl_user
-        database: "zammad"
+        database: "zammad_production"
+        # Passwords
         postgresPassword: "zammad"
         password: "zammad"
         replicationPassword: "zammad"
@@ -52,15 +53,6 @@ spec:
     zammadConfig:
       postgresql:
         enabled: true
-        db: zammad
-        host: zammad-psql-rw.zammad.svc.cluster.local
-        user: zammad
       redis:
         enabled: true
-      elasticsearch:
-        enabled: true
-      memcached:
-        enabled: true
-      minio:
-        enabled: false
 
