@@ -43,8 +43,6 @@ spec:
         bucket: gitlab-login-registry-storage
       minio:
         enabled: false
-      gitaly:
-        enabled: true
       psql:
         host: gitlab-psql-rw.gitlab.svc.cluster.local
         username: gitlab
@@ -143,7 +141,9 @@ spec:
       config:
         proxyProtocol: false
     gitaly:
+      install: true
       persistence:
+        enabled: true
         storageClass: "do-block-storage-retain"
         size: 20Gi
     gitlab:
