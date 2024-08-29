@@ -138,10 +138,10 @@ spec:
       install: false
     postgresql:
       install: false
-    gitlab-shell:
-      config:
-        proxyProtocol: false
     gitlab:
+      gitlab-shell:
+        config:
+          proxyProtocol: false
       gitaly:
         persistence:
           enabled: true
