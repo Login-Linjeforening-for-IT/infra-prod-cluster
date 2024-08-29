@@ -119,6 +119,10 @@ spec:
         backups:
           bucket: gitlab-login-backup-storage
           tmpBucket: gitlab-login-tmp-storage
+        ciSecureFiles:
+          enabled: true
+          proxy_download: true
+          bucket: gitlab-login-ci-secure-files
         omniauth:
           enabled: true
           #autoSignInWithProvider: saml
