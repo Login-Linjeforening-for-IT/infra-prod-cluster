@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: gitlab-repo
         namespace: gitlab
-      interval: 10m
+      interval: 5m
   values:
     global:
       hosts:
