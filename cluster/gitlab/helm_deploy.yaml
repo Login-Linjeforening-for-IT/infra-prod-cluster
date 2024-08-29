@@ -141,13 +141,12 @@ spec:
     gitlab-shell:
       config:
         proxyProtocol: false
-    gitaly:
-      install: true
-      persistence:
-        enabled: true
-        storageClass: "do-block-storage-retain"
-        size: 20Gi
     gitlab:
+      gitaly:
+        persistence:
+          enabled: true
+          storageClass: "do-block-storage-retain"
+          size: 20Gi
       toolbox:
         backups:
           objectStorage:
