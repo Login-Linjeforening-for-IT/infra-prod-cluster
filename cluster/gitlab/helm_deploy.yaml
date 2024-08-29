@@ -45,9 +45,6 @@ spec:
         enabled: false
       gitaly:
         enabled: true
-        persistence:
-          storageClass: "do-block-storage-retain"
-          size: 20Gi
       psql:
         host: gitlab-psql-rw.gitlab.svc.cluster.local
         username: gitlab
@@ -141,6 +138,10 @@ spec:
     gitlab-shell:
       config:
         proxyProtocol: false
+    gitaly:
+      persistence:
+        storageClass: "do-block-storage-retain"
+        size: 20Gi
     gitlab:
       toolbox:
         backups:
