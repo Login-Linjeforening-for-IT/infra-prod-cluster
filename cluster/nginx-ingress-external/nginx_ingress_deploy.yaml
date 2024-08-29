@@ -47,7 +47,8 @@ spec:
           service.beta.kubernetes.io/do-loadbalancer-healthcheck-healthy-threshold: "5"
 
           # Fix for internal traffic with authentik
-          service.beta.kubernetes.io/do-loadbalancer-hostname: authentik.login.no
+          service.beta.kubernetes.io/do-loadbalancer-hostname: infra-ext-lb.login.no
+          external-dns.alpha.kubernetes.io/hostname: "infra-ext-lb.login.no"
       extraVolumes:
         - name: crowdsec-bouncer-plugin
           emptyDir: {}
