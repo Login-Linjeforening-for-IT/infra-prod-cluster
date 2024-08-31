@@ -60,14 +60,15 @@ spec:
         create: true
       email:
         display_name: "GitLab - Login"
-        from: "gitlab@example.com"
-        reply_to: "noreply@example.com"
+        from: "gitlab@login.no"
+        reply_to: "kontakt@login.no"
       smtp:
         enabled: true
-        address: "smtp.example.com"
+        address: "secure.emailsrvr.com"
         tls: true
         authentication: "plain"
-        user_name: "example"
+        user_name: "gitlab@login.no"
+        port: 465
         password:
           secret: "gitlab-email"
           key: "password"
