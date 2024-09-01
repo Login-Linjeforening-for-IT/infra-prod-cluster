@@ -17,6 +17,7 @@ spec:
       interval: 5m
   values:
     global:
+      addPrometheusAnnotations: true
       env:
         - name: AUTHENTIK_STORAGE__MEDIA__BACKEND
           value: s3
