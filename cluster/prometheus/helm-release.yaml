@@ -17,6 +17,11 @@ spec:
       interval: 5m
   values:
     server:
+      ingress:
+        enabled: true
+        ingressClassName: nginx-ntnu
+        hosts:
+          - prometheus-infra.login.no
       extraArgs:
         web.route-prefix: "/"
       hostNetwork: false
