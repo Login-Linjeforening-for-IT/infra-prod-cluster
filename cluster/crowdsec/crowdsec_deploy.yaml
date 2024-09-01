@@ -25,6 +25,10 @@ spec:
         reflector:
           namespaces: ["nginx-ingress-external"]
     agent:
+      podAnnotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "6060"
+        prometheus.io/path: "/metrics"
       priorityClassName: system-node-critical
       persistentVolume:
         config:
