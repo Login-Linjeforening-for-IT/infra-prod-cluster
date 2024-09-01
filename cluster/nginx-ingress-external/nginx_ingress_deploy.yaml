@@ -82,6 +82,12 @@ spec:
           volumeMounts:
             - name: crowdsec-bouncer-plugin
               mountPath: /lua_plugins
+      podAnnotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"
+        prometheus.io/path: "/metrics"
+      metrics:
+        enabled: true
       extraVolumeMounts:
         - name: crowdsec-bouncer-plugin
           mountPath: /etc/nginx/lua/plugins/crowdsec
