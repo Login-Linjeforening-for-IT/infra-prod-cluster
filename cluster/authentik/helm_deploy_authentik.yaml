@@ -117,6 +117,8 @@ spec:
     redis:
       enabled: true
     server:
+      metrics:
+        enabled: true
       env:
         - name: AUTHENTIK_LISTEN__TRUSTED_PROXY_CIDRS
           value: 10.0.0.0/8
