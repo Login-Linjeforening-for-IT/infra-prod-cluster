@@ -194,4 +194,4 @@ spec:
           kubernetes.io/metadata.name: prometheus
     ports:
     - protocol: TCP
-      port: 9252
+      port: 9300
