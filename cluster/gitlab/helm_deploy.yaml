@@ -143,14 +143,6 @@ spec:
       gitlab-shell:
         config:
           proxyProtocol: false
-      gitlab-exporter:
-        enabled: true
-        metrics:
-          enabled: true
-          serviceMonitor:
-            enabled: true
-            # additionalLabels:
-              # release: prometheus
       gitaly:
         persistence:
           enabled: true
