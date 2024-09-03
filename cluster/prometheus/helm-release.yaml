@@ -8,29 +8,38 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: prometheus
-      version: "25.26.0"
+      chart: kube-prometheus-stack
+      version: "62.3.1"
       sourceRef:
         kind: HelmRepository
         name: prometheus-repo
         namespace: prometheus
       interval: 5m
   values:
-    server:
+    grafana:
+      enabled: false
+    crds:
+      enabled: true
+    prometheus:
       ingress:
         enabled: true
         ingressClassName: nginx-ntnu
         hosts:
           - prometheus-infra.login.no
-      extraArgs:
-        web.route-prefix: "/"
-      hostNetwork: false
-      baseURL: prometheus-infra.login.no
-      persistentVolume:
-        storageClass: do-block-storage
-      service:
-        enabled: true
-        type: NodePort
-        nodePort: 32050
-        annotations:
-          kubernetes.digitalocean.com/firewall-managed: "false"
+        paths:
+          - /
+        tls:
+          - secretName: prometheus-infra-tls
+            hosts:
+              - prometheus-infra.login.no
+    prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: do-block-storage
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 8Gi
+          selector: {}
