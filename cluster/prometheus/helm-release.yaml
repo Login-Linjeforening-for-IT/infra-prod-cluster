@@ -36,6 +36,10 @@ spec:
             hosts:
               - prometheus-infra.login.no
     prometheusSpec:
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
       storageSpec:
         volumeClaimTemplate:
           spec:
