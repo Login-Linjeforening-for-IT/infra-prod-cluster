@@ -119,9 +119,10 @@ spec:
     server:
       metrics:
         enabled: true
-        serviceMonitor: enabled
-        labels:
-          release: prometheus
+        serviceMonitor:
+          enabled: true
+          labels:
+            release: prometheus
       env:
         - name: AUTHENTIK_LISTEN__TRUSTED_PROXY_CIDRS
           value: 10.0.0.0/8
