@@ -40,6 +40,20 @@ spec:
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       probeSelectorNilUsesHelmValues: false
+      serviceMonitorSelector:
+        matchExpressions:
+          - key: release
+            operator: In
+            values:
+              - prometheus
+              - gitlab-instance-runner
+      podMonitorSelector:
+        matchExpressions:
+          - key: release
+            operator: In
+            values:
+              - prometheus
+              - gitlab-instance-runner
       storageSpec:
         volumeClaimTemplate:
           spec:

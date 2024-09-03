@@ -144,7 +144,7 @@ spec:
       server:
         service:
           type: NodePort
-          servicePort: 32050
+          servicePort: 32051
     gitlab:
       gitlab-shell:
         config:
