@@ -45,12 +45,12 @@ spec:
 
           # Block traffic and allow only from NTNU
           service.beta.kubernetes.io/do-loadbalancer-allow-rules: "cidr:129.241.0.0/16,cidr:78.91.0.0/18,cidr:78.91.64.0/20,cidr:78.91.80.0/22,cidr:128.39.0.0/16,cidr:158.38.0.0/16"
-      podAnnotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "10254"
-        prometheus.io/path: "/metrics"
       metrics:
         enabled: true
+        serviceMonitor:
+          enabled: true
+          additionalLabels:
+            release: prometheus
       ingressClassResource:
         name: nginx-ntnu
         enabled: true
