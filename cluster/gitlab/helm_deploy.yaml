@@ -17,8 +17,6 @@ spec:
       interval: 5m
   values:
     global:
-      monitoring:
-        enabled: true
       hosts:
         domain: login.no
         https: true
@@ -143,21 +141,17 @@ spec:
       install: false
     gitlab:
       gitlab-shell:
-        metrics:
-          enabled: true
-          serviceMonitor:
-            enabled: true
-            additionalLabels:
-              release: prometheus
         config:
           proxyProtocol: false
-      gitaly:
+      gitlab-exporter:
+        enabled: true
         metrics:
           enabled: true
           serviceMonitor:
             enabled: true
             additionalLabels:
               release: prometheus
+      gitaly:
         persistence:
           enabled: true
           storageClass: "do-block-storage-retain"
