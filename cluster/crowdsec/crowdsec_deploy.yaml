@@ -25,6 +25,12 @@ spec:
         reflector:
           namespaces: ["nginx-ingress-external"]
     agent:
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          additionalLabels:
+            release: prometheus
       priorityClassName: system-node-critical
       persistentVolume:
         config:
@@ -43,6 +49,12 @@ spec:
         - name: TZ
           value: "Europe/Oslo"
     lapi:
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          additionalLabels:
+            release: prometheus
       priorityClassName: system-cluster-critical
       resources:
         limits:
