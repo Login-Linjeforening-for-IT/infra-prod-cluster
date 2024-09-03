@@ -54,12 +54,14 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-ingress-nginx
+  name: allow-ingress-nginx-web
   namespace: gitlab
 spec:
-  podSelector: {}
+  podSelector:
+    matchLabels:
+      app: webservice
+      release: gitlab-prod
   policyTypes:
-    - Egress
     - Ingress
   ingress:
     - from:
@@ -69,8 +71,43 @@ spec:
       ports:
         - port: 8080
           protocol: TCP
-  egress:
-    - to:
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-nginx-ssh
+  namespace: gitlab
+spec:
+  podSelector:
+    matchLabels:
+      app: gitlab-shell                                                                                                                                                                                                                                                                                                                                     │
+      release: gitlab-prod
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: nginx-ingress-external
+      ports:
+        - port: 22
+          protocol: TCP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-psql
+  namespace: gitlab
+spec:
+  policyTypes:
+    - Ingress
+    - Egress
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: gitlab-psql
+  ingress:
+    - {}
+  egress:
+    - {}

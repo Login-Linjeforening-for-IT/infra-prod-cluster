@@ -7,3 +7,4 @@ resources:
   - db_kust.yaml
   - helm_repo.yaml
   - helm_deploy.yaml
+  - network_policy.yaml
