@@ -81,7 +81,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: gitlab-shell                                                                                                                                                                                                                                                                                                                                     │
+      app: gitlab-shell
       release: gitlab-prod
   policyTypes:
     - Ingress
