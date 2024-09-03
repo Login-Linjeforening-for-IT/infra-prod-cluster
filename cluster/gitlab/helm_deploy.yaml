@@ -139,11 +139,12 @@ spec:
       install: false
     postgresql:
       install: false
+    # This is IF this section is linked to subchart Prometheus
     prometheus:
-      prometheus:
+      server:
         service:
           type: NodePort
-          nodePort: 32050
+          servicePort: 32050
     gitlab:
       gitlab-shell:
         config:
