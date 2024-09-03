@@ -139,6 +139,11 @@ spec:
       install: false
     postgresql:
       install: false
+    prometheus:
+      prometheus:
+        service:
+          type: NodePort
+          nodePort: 32050
     gitlab:
       gitlab-shell:
         config:
