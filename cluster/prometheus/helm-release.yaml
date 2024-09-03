@@ -23,7 +23,7 @@ spec:
     prometheus:
       service:
         type: NodePort
-        nodeport: 32050
+        nodePort: 32050
       ingress:
         enabled: true
         ingressClassName: nginx-ntnu
