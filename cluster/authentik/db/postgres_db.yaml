@@ -62,5 +62,30 @@ spec:
     name: authentik-db-credentials
   bootstrap:
     recovery:
-      backup:
-        name: authentik-psql-backup-20240905000000
+      source: clusterBackup
+      recoveryTarget:
+        targetTime: "2024-09-05 08:00:00.00000+02"
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:
+        destinationPath: s3://login-infra-prod-psql-backups/authentik-restore
+        s3Credentials:
+          accessKeyId:
+            name: authentik-pg-backup
+            key: access
+          secretAccessKey:
+            name: authentik-pg-backup
+            key: secret
+          wal:
+            maxParallel: 8
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://login-infra-prod-psql-backups/authentik-restore
+      s3Credentials:
+        accessKeyId:
+          name: authentik-pg-backup
+          key: access
+        secretAccessKey:
+          name: authentik-pg-backup
+          key: secret
