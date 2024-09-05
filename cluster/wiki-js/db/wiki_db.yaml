@@ -40,7 +40,7 @@ metadata:
   namespace: wiki
 spec:
   podMetricsEndpoints:
-    port: metrics
+    - port: metrics
   selector:
     matchLabels:
       cnpg.io/cluster: wiki-psql

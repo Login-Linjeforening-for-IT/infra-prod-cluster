@@ -41,7 +41,7 @@ metadata:
   namespace: gitlab
 spec:
   podMetricsEndpoints:
-    port: metrics
+    - port: metrics
   selector:
     matchLabels:
       cnpg.io/cluster: gitlab-psql
