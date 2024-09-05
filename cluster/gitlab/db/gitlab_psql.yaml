@@ -39,6 +39,8 @@ kind: PodMonitor
 metadata:
   name: gitlab-psql
   namespace: gitlab
+  labels:
+    release: prometheus
 spec:
   podMetricsEndpoints:
     - port: metrics

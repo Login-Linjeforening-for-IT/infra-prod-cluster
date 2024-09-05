@@ -38,6 +38,8 @@ kind: PodMonitor
 metadata:
   name: zammad-psql
   namespace: zammad
+  labels:
+    release: prometheus
 spec:
   podMetricsEndpoints:
     - port: metrics

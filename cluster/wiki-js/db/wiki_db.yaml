@@ -38,6 +38,8 @@ kind: PodMonitor
 metadata:
   name: wiki-psql
   namespace: wiki
+  labels:
+    release: prometheus
 spec:
   podMetricsEndpoints:
     - port: metrics

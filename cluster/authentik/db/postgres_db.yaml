@@ -38,6 +38,8 @@ kind: PodMonitor
 metadata:
   name: authentik-psql
   namespace: authentik
+  labels:
+    release: prometheus
 spec:
   podMetricsEndpoints:
     - port: metrics
@@ -86,6 +88,8 @@ kind: PodMonitor
 metadata:
   name: authentik-restore-psql
   namespace: authentik
+  labels:
+    release: prometheus
 spec:
   podMetricsEndpoints:
     - port: metrics
