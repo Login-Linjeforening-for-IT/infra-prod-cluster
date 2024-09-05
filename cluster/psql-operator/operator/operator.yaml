@@ -25,3 +25,7 @@ spec:
       retries: 3
   values:
     replicaCount: 1
+    monitoring:
+      podMonitorEnabled: true
+      podMonitorAdditionalLabels:
+        release: prometheus
