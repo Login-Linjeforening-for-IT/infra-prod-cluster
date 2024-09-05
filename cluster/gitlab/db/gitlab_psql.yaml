@@ -33,7 +33,18 @@ spec:
         secretAccessKey:
           name: gitlab-pg-backup
           key: secret
-
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: gitlab-psql
+  namespace: gitlab
+spec:
+  podMetricsEndpoints:
+    port: metrics
+  selector:
+    matchLabels:
+      cnpg.io/cluster: gitlab-psql
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup

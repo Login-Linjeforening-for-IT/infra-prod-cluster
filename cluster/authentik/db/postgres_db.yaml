@@ -32,7 +32,18 @@ spec:
         secretAccessKey:
           name: authentik-pg-backup
           key: secret
-
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: authentik-psql
+  namespace: authentik
+spec:
+  podMetricsEndpoints:
+    port: metrics
+  selector:
+    matchLabels:
+      cnpg.io/cluster: authentik-psql
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -69,7 +80,18 @@ spec:
         secretAccessKey:
           name: authentik-pg-backup
           key: secret
-
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: authentik-restore-psql
+  namespace: authentik
+spec:
+  podMetricsEndpoints:
+    port: metrics
+  selector:
+    matchLabels:
+      cnpg.io/cluster: authentik-restore-psql
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
