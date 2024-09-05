@@ -33,18 +33,6 @@ spec:
 
 ---
 apiVersion: postgresql.cnpg.io/v1
-kind: ScheduledBackup
-metadata:
-  name: authentik-psql-backup
-  namespace: authentik
-spec:
-  immediate: true
-  schedule: "0 0 0 * * *"
-  cluster:
-    name: authentik-psql
-
----
-apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: authentik-restore-psql
@@ -77,3 +65,15 @@ spec:
         secretAccessKey:
           name: authentik-pg-backup
           key: secret
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: authentik-restore-psql-backup
+  namespace: authentik
+spec:
+  immediate: true
+  schedule: "0 0 0 * * *"
+  cluster:
+    name: authentik-restore-psql
