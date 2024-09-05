@@ -12,6 +12,7 @@ spec:
   selector:
     matchLabels:
       app: wiki-js
+  replicas: 1
   template:
     metadata:
       labels:
