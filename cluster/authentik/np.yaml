@@ -117,6 +117,16 @@ spec:
               kubernetes.io/metadata.name: authentik
           podSelector:
             matchLabels:
+              cnpg.io/cluster: authentik-restore-psql
+      ports:
+        - protocol: TCP
+          port: 5432
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: authentik
+          podSelector:
+            matchLabels:
               cnpg.io/cluster: authentik-psql
       ports:
         - protocol: TCP
