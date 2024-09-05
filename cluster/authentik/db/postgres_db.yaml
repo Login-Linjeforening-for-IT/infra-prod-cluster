@@ -68,7 +68,7 @@ spec:
   externalClusters:
     - name: clusterBackup
       barmanObjectStore:
-        destinationPath: s3://login-infra-prod-psql-backups/authentik-restore
+        destinationPath: s3://login-infra-prod-psql-backups/authentik
         s3Credentials:
           accessKeyId:
             name: authentik-pg-backup
