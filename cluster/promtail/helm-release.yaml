@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: promtail
+  namespace: promtail
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: promtail
+      version: "6.16.5"
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-repo
+        namespace: promtail
+      interval: 5m
+  values:
+    namespace: promtail
+    daemonset:
+      enabled: true
+    config:
+      clients:
+      - url: http://10.133.94.147:3101/loki/api/v1/push
+        tenant_id: 1
