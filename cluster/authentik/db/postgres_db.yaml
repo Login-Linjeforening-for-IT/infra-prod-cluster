@@ -5,6 +5,8 @@ metadata:
   name: authentik-psql
   namespace: authentik
 spec:
+  monitoring:
+    enablePodMonitor: true
   description: Postgres for Authentik
   instances: 3
   primaryUpdateStrategy: unsupervised
@@ -38,6 +40,8 @@ metadata:
   name: authentik-restore-psql
   namespace: authentik
 spec:
+  monitoring:
+    enablePodMonitor: true
   description: Postgres for Authentik
   instances: 3
   primaryUpdateStrategy: unsupervised

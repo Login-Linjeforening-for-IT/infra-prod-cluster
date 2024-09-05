@@ -5,6 +5,8 @@ metadata:
   name: wiki-psql
   namespace: wiki
 spec:
+  monitoring:
+    enablePodMonitor: true
   description: Postgres for Wiki-js
   instances: 3
   primaryUpdateStrategy: unsupervised

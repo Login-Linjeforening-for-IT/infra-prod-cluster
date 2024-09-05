@@ -5,6 +5,8 @@ metadata:
   name: zammad-psql
   namespace: zammad
 spec:
+  monitoring:
+    enablePodMonitor: true
   description: Postgres for Zammad
   instances: 3
   primaryUpdateStrategy: unsupervised

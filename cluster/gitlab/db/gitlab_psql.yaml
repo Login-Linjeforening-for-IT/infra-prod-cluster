@@ -5,6 +5,8 @@ metadata:
   name: gitlab-psql
   namespace: gitlab
 spec:
+  monitoring:
+    enablePodMonitor: true
   description: Postgres for GitLab
   instances: 3
   primaryUpdateStrategy: unsupervised
