@@ -21,5 +21,5 @@ spec:
       enabled: true
     config:
       clients:
-      - url: http://10.133.94.147:3101/loki/api/v1/push
+      - url: http://10.133.94.147:31001/loki/api/v1/push
         tenant_id: 1
