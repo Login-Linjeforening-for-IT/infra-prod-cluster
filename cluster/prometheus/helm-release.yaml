@@ -61,10 +61,9 @@ spec:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: do-block-storage
+            storageClassName: do-block-storage-retain
             accessModes:
               - ReadWriteOnce
             resources:
               requests:
-                storage: 8Gi
-          selector: {}
+                storage: 10Gi
