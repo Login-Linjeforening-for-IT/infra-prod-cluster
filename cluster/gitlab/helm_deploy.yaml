@@ -128,7 +128,7 @@ spec:
           allowSingleSignOn: ["openid_connect"]
           syncProfileFromProvider: ["openid_connect"]
           syncProfileAttributes: ["email"]
-          block_auto_created_users: false
+          blockAutoCreatedUsers: false
           autoLinkSamlUser: true
           autoLinkUser: ["openid_connect"]
           allowBypassTwoFactor: ["openid_connect"]
