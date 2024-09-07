@@ -125,7 +125,7 @@ spec:
         omniauth:
           enabled: true
           autoSignInWithProvider: openid_connect
-          allow_single_sign_on: ["openid_connect"]
+          allowSingleSignOn: ["openid_connect"]
           syncProfileFromProvider: ["openid_connect"]
           syncProfileAttributes: ["email"]
           block_auto_created_users: false
