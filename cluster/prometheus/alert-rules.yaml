@@ -24,10 +24,10 @@ spec:
       rules:
         - alert: storage-usage-high-50
           expr: |-
-            '(1-(kubelet_volume_stats_available_bytes / 
+            (1-(kubelet_volume_stats_available_bytes / 
             kubelet_volume_stats_capacity_bytes))*100 > 50 and 
             (1-(kubelet_volume_stats_available_bytes / 
-            kubelet_volume_stats_capacity_bytes))*100 <= 85'
+            kubelet_volume_stats_capacity_bytes))*100 <= 85
           for: 3m
           labels:
             severity: info
