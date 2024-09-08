@@ -51,3 +51,4 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
+        externalUrl: https://prometheus-infra.login.no
