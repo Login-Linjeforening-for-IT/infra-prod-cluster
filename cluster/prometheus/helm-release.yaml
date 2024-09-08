@@ -35,35 +35,19 @@ spec:
           - secretName: prometheus-infra-tls
             hosts:
               - prometheus-infra.login.no
-    prometheusSpec:
-      ruleSelectorNilUsesHelmValues: false
-      serviceMonitorSelectorNilUsesHelmValues: false
-      podMonitorSelectorNilUsesHelmValues: false
-      probeSelectorNilUsesHelmValues: false
-      serviceMonitorSelector:
-        matchExpressions:
-          - key: release
-            operator: In
-            values:
-              - prometheus
-              - gitlab-instance-runner
-          - key: cnpg.io/cluster
-            operator: Exists
-      podMonitorSelector:
-        matchExpressions:
-          - key: release
-            operator: In
-            values:
-              - prometheus
-              - gitlab-instance-runner
-          - key: cnpg.io/cluster
-            operator: Exists
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: do-block-storage-retain
-            accessModes:
-              - ReadWriteOnce
-            resources:
-              requests:
-                storage: 10Gi
+      prometheusSpec:
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        serviceMonitorSelector: {}
+        podMonitorSelector: {}
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: do-block-storage-retain
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 10Gi
