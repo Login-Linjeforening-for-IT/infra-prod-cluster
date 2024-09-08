@@ -22,11 +22,48 @@ spec:
             description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is in a non-running state.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
     - name: psql
       rules:
-        - alert: psql-storage-usage-high
-          expr: (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~".*psql.*"} / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=~".*psql.*"})*100 > 85
+        - alert: psql-storage-usage-high-85
+          expr: |
+                (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~".*psql.*"} / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=~".*psql.*"})*100 > 85 && 
+                (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~".*psql.*"} / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=~".*psql.*"})*100 <= 95
+          for: 3m
+          labels:
+            severity: warning
+          annotations:
+            summary: PSQL storage usage is above 85% (PVC {{ $labels.persistentvolumeclaim }})
+            description: "Persistent volume claim {{ $labels.persistentvolumeclaim }} is more than 85% full.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        - alert: psql-storage-usage-high-95
+          expr: (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~".*psql.*"} / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=~".*psql.*"})*100 > 95
           for: 3m
           labels:
             severity: critical
           annotations:
-            summary: PSQL storage usage high (PVC {{ $labels.persistentvolumeclaim }})
+            summary: PSQL storage usage is above 95% (PVC {{ $labels.persistentvolumeclaim }})
             description: "Persistent volume claim {{ $labels.persistentvolumeclaim }} is more than 85% full.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        - alert: psql-wal-age-one-hour
+          expr: | 
+              max by(pod) ((1 - cnpg_pg_replication_in_recovery) * 
+              (time() - timestamp(cnpg_pg_stat_archiver_seconds_since_last_archival) + 
+              cnpg_pg_stat_archiver_seconds_since_last_archival)) 
+              > 3600 and max by(pod) ((1 - cnpg_pg_replication_in_recovery) * 
+              (time() - timestamp(cnpg_pg_stat_archiver_seconds_since_last_archival) + 
+              cnpg_pg_stat_archiver_seconds_since_last_archival)) 
+              <= 7200
+          for: 3m
+          labels:
+            severity: warning
+          annotations:
+            summary: PSQL WAL is more than 1 hour old (instance {{ $labels.pod }})
+            description: "WAL for {{ $labels.pod }} is more than 1 hour old.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        - alert: psql-wal-age-two-hours
+          expr: | 
+              max by(pod) ((1 - cnpg_pg_replication_in_recovery) * 
+              (time() - timestamp(cnpg_pg_stat_archiver_seconds_since_last_archival) + 
+              cnpg_pg_stat_archiver_seconds_since_last_archival)) 
+              > 7200
+          for: 3m
+          labels:
+            severity: critical
+          annotations:
+            summary: PSQL WAL is more than 2 hours old (instance {{ $labels.pod }})
+            description: "WAL for {{ $labels.pod }} is more than 2 hours old.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
