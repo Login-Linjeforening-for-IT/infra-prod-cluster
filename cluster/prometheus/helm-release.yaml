@@ -52,3 +52,19 @@ spec:
                 requests:
                   storage: 10Gi
         externalUrl: https://prometheus-infra.login.no
+    alertmanager:
+      enabled: true
+      ingress: 
+        enabled: true
+        ingressClassName: nginx-ntnu
+        hosts:
+          - alertmanager-infra.login.no
+        paths:
+          - /
+        tls:
+          - secretName: alertmanager-infra-tls
+            hosts:
+              - alertmanager-infra.login.no
+      alertmanagerSpec:
+        externalUrl: https://alertmanager-infra.login.no
+
