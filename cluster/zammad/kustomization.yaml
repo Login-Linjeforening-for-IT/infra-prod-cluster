@@ -6,6 +6,6 @@ resources:
   - secret_kust.yaml
   - db_kust.yaml
   - helm_repo.yaml
-  - deployment.yaml
+  #- deployment.yaml
   #- np.yaml
   - psql.yaml
