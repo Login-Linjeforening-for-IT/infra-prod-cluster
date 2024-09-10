@@ -32,6 +32,7 @@ spec:
         secretAccessKey:
           name: zammad-pg-backup
           key: secret
+
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -46,6 +47,7 @@ spec:
   selector:
     matchLabels:
       cnpg.io/cluster: zammad-psql
+
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
