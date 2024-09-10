@@ -7,5 +7,5 @@ resources:
   - db_kust.yaml
   - helm_repo.yaml
   - deployment.yaml
-  #- np.yaml
+  - np.yaml
   - psql.yaml
