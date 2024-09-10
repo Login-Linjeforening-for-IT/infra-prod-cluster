@@ -8,3 +8,4 @@ resources:
   - helm_repo.yaml
   - deployment.yaml
   - np.yaml
+  - psql.yaml

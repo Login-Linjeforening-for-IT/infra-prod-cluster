@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-client
+  namespace: zammad
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-client
+  template:
+    metadata:
+      labels:
+        app: postgres-client
+    spec:
+      containers:
+        - name: postgres-client
+          image: debian:trixie
+          env:
+            - name: PGHOST
+              value: zammad-psql-rw.zammad.svc.cluster.local
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              value: zammad
+            - name: PGUSER
+              value: zammad
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zammad-db-credentials
+                  key: password
+          command: ["/bin/sh"]
+          args:
+            [
+              "-c",
+              "apt-get update && apt-get install -y vim postgresql-client && sleep infinity",
+            ]
