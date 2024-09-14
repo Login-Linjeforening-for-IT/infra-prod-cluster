@@ -33,7 +33,7 @@ spec:
           verbs: ["create", "patch", "delete"]
         - apiGroups: [""]
           resources: ["namespaces"]
-          verbs: ["get"]
+          verbs: ["get", "list", "create", "update"]
     metrics:
       enabled: true
       serviceMonitor:
