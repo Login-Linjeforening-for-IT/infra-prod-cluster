@@ -1,0 +1,110 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: beehive-backend
+  name: beehive-backend
+  namespace: beehive
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: beehive-backend
+  template:
+    metadata:
+      labels:
+        app: beehive-backend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-token-beehive-backend
+      containers:
+        - image: registry.login.no/tekkom/web/beehive/public-api:0.7.1@sha256:7b9c85d5b3d84a6e199e9fd5c7c8f5eb6fec26ffbebfbfacdab42a6426107663
+          imagePullPolicy: Always
+          name: beehive-backend
+          env:
+            - name: PORT
+              value: "8080"
+            - name: ALLOWED_ORIGINS
+              value: "https://login.no,https://www.login.no"
+            - name: DB_HOST
+              value: public-api-psql-ro.beehive.svc.cluster.local
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: beehive
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: beehive-public-api-db-credentials
+                  key: password
+            - name: DB_NAME
+              value: beehive
+            - name: DB_SSL_MODE
+              value: require
+            - name: GIN_MODE
+              value: release
+            - name: TLS_ENABLED
+              value: "true"
+            - name: TLS_CERT
+              value: /tls/tls.crt
+            - name: TLS_KEY
+              value: /tls/tls.key
+          ports:
+            - containerPort: 8080
+              name: 8080tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+              scheme: HTTPS
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+              scheme: HTTPS
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: tls-certs
+              readOnly: true
+              mountPath: "/tls"
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - beehive-backend
+                topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: tls-certs
+          secret:
+            secretName: backend-self-signed
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key

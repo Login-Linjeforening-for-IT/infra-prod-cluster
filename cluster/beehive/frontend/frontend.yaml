@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: beehive-frontend
+  name: beehive-frontend
+  namespace: beehive
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: beehive-frontend
+  template:
+    metadata:
+      labels:
+        app: beehive-frontend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-token-beehive-frontend
+      containers:
+        - name: beehive-frontend
+          image: registry.login.no/tekkom/web/beehive/frontend:2.6.3
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: API_URL
+              value: https://workerbee.login.no/api
+          ports:
+            - containerPort: 80
+              name: 80tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - beehive-frontend
+                topologyKey: kubernetes.io/hostname

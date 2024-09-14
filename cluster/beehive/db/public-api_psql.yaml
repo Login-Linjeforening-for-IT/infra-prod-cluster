@@ -1,0 +1,58 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: public-api-psql
+  namespace: beehive
+spec:
+  description: Postgres for Beehive public API
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 2Gi
+  postgresql:
+    pg_hba:
+      - host all all 10.0.0.0/8 md5
+    parameters:
+      timezone: "Europe/Oslo"
+  superuserSecret:
+    name: beehive-public-api-db-credentials
+  bootstrap:
+    recovery:
+      source: clusterBackup
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:
+      destinationPath: s3://login-external-prod-psql-backups/beehive-public-api/public-api-psql
+      s3Credentials:
+        accessKeyId:
+          name: beehive-public-api-pg-backup
+          key: access
+        secretAccessKey:
+          name: beehive-public-api-pg-backup
+          key: secret
+        wal:
+          maxParallel: 8
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://login-infra-prod-psql-backups/beehive-public-api
+      s3Credentials:
+        accessKeyId:
+          name: beehive-public-api-pg-backup
+          key: access
+        secretAccessKey:
+          name: beehive-public-api-pg-backup
+          key: secret
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: beehive-public-api-psql-backup
+  namespace: beehive
+spec:
+  immediate: true
+  schedule: "0 0 0 * * *"
+  cluster:
+    name: public-api-psql

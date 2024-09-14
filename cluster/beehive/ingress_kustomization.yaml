@@ -1,0 +1,17 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: beehive-ingress
+  namespace: beehive
+spec:
+  interval: 1m
+  path: "cluster/beehive/ingress"
+  dependsOn:
+    - name: cert-manager
+      namespace: cert-manager
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
