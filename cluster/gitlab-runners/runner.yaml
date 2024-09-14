@@ -1,0 +1,56 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gitlab-instance-runner
+  namespace: gitlab-runners
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: gitlab-runner
+      version: "0.68.1"
+      sourceRef:
+        kind: HelmRepository
+        name: gitlab
+        namespace: gitlab-runners
+      interval: 5m
+  values:
+    replicas: 3
+    imagePullPolicy: IfNotPresent
+    gitlabUrl: https://gitlab.login.no/
+    terminationGracePeriodSeconds: 3600
+    concurrent: 10
+    checkInterval: 30
+    rbac:
+      create: false
+      podSecurityPolicy:
+        enabled: true
+        resourceNames:
+          - gitlab-runner
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+    runners:
+      secret: runner-token
+      config: |
+        [[runners]]
+          [runners.kubernetes]
+            namespace = "{{.Release.Namespace}}"
+            image = "ubuntu:24.10"
+            retry_limit = 5
+            privileged = false
+            allow_privilege_escalation = false
+
+            [runners.kubernetes.retry_limits]
+              "TLS handshake timeout" = 10
+              "tls: internal error" = 10
+
+            [runners.kubernetes.pod_labels]
+              "job_id" = "${CI_JOB_ID}"
+              "job_name" = "${CI_JOB_NAME}"
+              "pipeline_id" = "${CI_PIPELINE_IID}"
+              "project" = "${CI_PROJECT_PATH}"
+              "app" = "gitlab-instance-runner-gitlab-runner"
+      executor: kubernetes
