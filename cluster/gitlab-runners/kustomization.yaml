@@ -7,4 +7,3 @@ resources:
   - secret_kustomization.yaml
   - runner.yaml
   - np.yaml
-  - role_binding.yaml
