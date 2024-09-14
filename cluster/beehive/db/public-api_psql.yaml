@@ -11,8 +11,6 @@ spec:
   storage:
     size: 2Gi
   postgresql:
-    pg_hba:
-      - host all all 10.0.0.0/8 md5
     parameters:
       timezone: "Europe/Oslo"
   superuserSecret:
