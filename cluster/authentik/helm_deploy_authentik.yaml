@@ -109,9 +109,6 @@ spec:
         port: 5432
         user: file:///postgres-creds/username
         password: file:///postgres-creds/password
-    blueprints:
-      configMaps:
-        - authentik-blueprints
     postgresql:
       enabled: false
     redis:

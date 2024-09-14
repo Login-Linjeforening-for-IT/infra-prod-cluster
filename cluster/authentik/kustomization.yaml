@@ -6,6 +6,5 @@ resources:
   - helm_repo.yaml
   - sec_kustomization.yaml
   - db_kustomization.yaml
-  - blueprints.yaml
   - helm_deploy_authentik.yaml
   - np.yaml
