@@ -23,11 +23,7 @@ spec:
     concurrent: 10
     checkInterval: 30
     rbac:
-      create: false
-      podSecurityPolicy:
-        enabled: true
-        resourceNames:
-          - gitlab-runner
+      create: true
     metrics:
       enabled: true
       serviceMonitor:
