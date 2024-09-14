@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: studentbee-api
+  namespace: studentbee
+spec:
+  interval: 5m
+  path: "cluster/beehive-studentbee/api"
+  dependsOn:
+    - name: studentbee-secrets
+      namespace: studentbee
+    - name: cert-manager
+      namespace: cert-manager
+  ## implement additional dependencies as flux-kustomizations are added
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system

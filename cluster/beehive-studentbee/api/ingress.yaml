@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: studentbee-api
+  namespace: studentbee
+spec:
+  ingressClassName: nginx-external
+  tls:
+    - hosts:
+        - exam-api.login.no
+  rules:
+    - host: exam-api.login.no
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: studentbee-api
+                port:
+                  number: 8080

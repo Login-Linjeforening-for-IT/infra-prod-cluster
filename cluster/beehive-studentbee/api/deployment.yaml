@@ -1,0 +1,131 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: studentbee-api
+    component: api
+    part-of: beehive
+    project: exam.login.no
+    confidentiality: not-defined
+    compliance: not-defined
+  name: studentbee-api
+  namespace: studentbee
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: studentbee-api
+  template:
+    metadata:
+      labels:
+        app: studentbee-api
+        component: api
+        part-of: beehive
+        project: exam.login.no
+        confidentiality: not-defined
+        compliance: not-defined
+    spec:
+      imagePullSecrets:
+        - name: gitlab-deploy-key-studentbee
+      containers:
+        - name: api
+          image: registry.login.no/tekkom/web/beehive/exam.login.no/api:1.1.1@sha256:4b9e2e123932226605efed25889eb97c6efd9e7e66bae71518bd05e0d88679b1
+          command:
+            - npm
+            - start
+          env:
+            # Shared environment variables
+            - name: BACKEND_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: 1pwd-exam-secrets-studentbee
+                  key: BACKEND_SECRET
+            - name: TYPE
+              value: service_account
+            - name: AUTH_URI
+              value: https://accounts.google.com/o/oauth2/auth
+            - name: TOKEN_URI
+              value: https://oauth2.googleapis.com/token
+            - name: AUTH_CERT_URL
+              value: https://www.googleapis.com/oauth2/v1/certs
+            - name: UNIVERSE_DOMAIN
+              value: googleapis.com
+            - name: REDIS_HOST
+              value: localhost
+            - name: REDIS_PORT
+              value: "6379"
+            # Prod environment variables
+            - name: PRODUCTION
+              value: "true"
+            - name: PROD_PROJECT_ID
+              value: exam2-59f98
+            - name: PROD_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: 1pwd-exam-secrets-studentbee
+                  key: PROD_PRIVATE_KEY
+            - name: PROD_PRIVATE_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: 1pwd-exam-secrets-studentbee
+                  key: PROD_PRIVATE_KEY_ID
+            - name: PROD_CLIENT_EMAIL
+              value: firebase-adminsdk-0yrh3@exam2-59f98.iam.gserviceaccount.com
+            - name: PROD_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: 1pwd-exam-secrets-studentbee
+                  key: PROD_CLIENT_ID
+            - name: PROD_CLIENT_CERT_URL
+              value: https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-0yrh3%40exam2-59f98.iam.gserviceaccount.com
+          ports:
+            - containerPort: 8080
+              name: 8080tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 125m
+            limits:
+              memory: 512Mi
+              cpu: 1000m
+        - name: redis
+          image: redis:7.4.0-alpine3.20@sha256:c35af3bbcef51a62c8bae5a9a563c6f1b60d7ebaea4cb5a3ccbcc157580ae098
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6379
+              name: 6379tcp
+              protocol: TCP
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 125m
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - studentbee-api
+                topologyKey: kubernetes.io/hostname
