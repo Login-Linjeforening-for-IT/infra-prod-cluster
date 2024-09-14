@@ -107,3 +107,27 @@ spec:
   schedule: "0 0 0 * * *"
   cluster:
     name: authentik-restore-psql
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: authentik-test-restore-newest
+  namespace: authentik
+spec:
+  monitoring:
+    enablePodMonitor: true
+  description: Postgres for Authentik
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 10Gi
+  postgresql:
+    parameters:
+      timezone: "Europe/Oslo"
+  superuserSecret:
+    name: authentik-db-credentials
+  bootstrap:
+    recovery:
+      backup:
+        name: authentik-restore-psql-backup-20240914000000
