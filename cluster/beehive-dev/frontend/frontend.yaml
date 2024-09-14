@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: beehive-frontend
+  name: beehive-frontend
+  namespace: beehive-dev
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: beehive-frontend
+  template:
+    metadata:
+      labels:
+        app: beehive-frontend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-token-beehive-frontend
+      containers:
+        - name: beehive-frontend
+          image: registry.login.no/tekkom/web/beehive/frontend:2.8.2-dev@sha256:26c3160d72faa769719a853c5bb9d38f2ef6929453a08d14a0e443c053f47b3a
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: REACT_APP_API_URL
+              value: testapi.login.no
+            - name: API_URL
+              value: https://testapi.login.no/api
+          ports:
+            - containerPort: 80
+              name: 80tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - nginx
+              topologyKey: kubernetes.io/hostname

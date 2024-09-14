@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-client
+  namespace: beehive-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-client
+  template:
+    metadata:
+      labels:
+        app: postgres-client
+    spec:
+      containers:
+        - name: postgres-client
+          image: debian:trixie
+          env:
+            - name: PGHOST
+              value: public-api-psql-rw.beehive-dev.svc.cluster.local
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              value: beehive
+            - name: PGUSER
+              value: beehive
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: beehive-public-api-db-credentials
+                  key: password
+          command: ["/bin/sh"]
+          args:
+            [
+              "-c",
+              "apt-get update && apt-get install -y vim postgresql-client && sleep infinity",
+            ]

@@ -1,0 +1,24 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: beehive-backend-ingress
+  namespace: beehive-dev
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx-ntnu
+  tls:
+    - hosts:
+        - testapi.login.no
+  rules:
+    - host: testapi.login.no
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: beehive-backend-svc
+                port:
+                  number: 8080
