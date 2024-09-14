@@ -23,7 +23,8 @@ spec:
   externalClusters:
     - name: clusterBackup
       barmanObjectStore:
-        destinationPath: s3://login-external-prod-psql-backups/beehive-public-api/public-api-psql
+        destinationPath: s3://login-external-prod-psql-backups/beehive-public-api
+        serverName: public-api-psql
         s3Credentials:
           accessKeyId:
             name: beehive-public-api-pg-backup
