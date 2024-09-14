@@ -23,14 +23,14 @@ spec:
   externalClusters:
     - name: clusterBackup
       barmanObjectStore:
-      destinationPath: s3://login-external-prod-psql-backups/beehive-public-api/public-api-psql
-      s3Credentials:
-        accessKeyId:
-          name: beehive-public-api-pg-backup
-          key: access
-        secretAccessKey:
-          name: beehive-public-api-pg-backup
-          key: secret
+        destinationPath: s3://login-external-prod-psql-backups/beehive-public-api/public-api-psql
+        s3Credentials:
+          accessKeyId:
+            name: beehive-public-api-pg-backup
+            key: access
+          secretAccessKey:
+            name: beehive-public-api-pg-backup
+            key: secret
         wal:
           maxParallel: 8
   backup:
