@@ -5,7 +5,7 @@ metadata:
   name: 1password-connect
   namespace: 1pwd
 spec:
-  interval: 1m
+  interval: 5m
   path: "cluster/1pwd-connect/connect"
   prune: true
   sourceRef:

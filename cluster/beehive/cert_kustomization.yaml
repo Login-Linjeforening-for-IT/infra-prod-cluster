@@ -5,7 +5,7 @@ metadata:
   name: beehive-certs
   namespace: beehive
 spec:
-  interval: 1m
+  interval: 5m
   path: "cluster/beehive/certificate"
   dependsOn:
     - name: cert-manager

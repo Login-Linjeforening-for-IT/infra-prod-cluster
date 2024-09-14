@@ -11,7 +11,7 @@ spec:
     - name: 1password-connect
       namespace: 1pwd
   prune: true
-  timeout: 1m
+  timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system

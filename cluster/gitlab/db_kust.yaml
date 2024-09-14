@@ -5,7 +5,7 @@ metadata:
   name: db
   namespace: gitlab
 spec:
-  interval: 1m
+  interval: 5m
   path: "cluster/gitlab/db"
   dependsOn:
     - name: psql

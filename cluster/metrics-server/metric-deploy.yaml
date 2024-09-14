@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: metrics-server-repo
         namespace: metrics-server
-      interval: 1m
+      interval: 5m
   values:
     replicas: 2
     rbac:

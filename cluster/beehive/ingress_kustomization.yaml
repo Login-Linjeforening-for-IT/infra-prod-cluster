@@ -5,7 +5,7 @@ metadata:
   name: beehive-ingress
   namespace: beehive
 spec:
-  interval: 1m
+  interval: 5m
   path: "cluster/beehive/ingress"
   dependsOn:
     - name: cert-manager

@@ -4,5 +4,6 @@ metadata:
   name: grafana-repo
   namespace: promtail
 spec:
-  interval: 1m
+  interval: 5m
   url: https://grafana.github.io/helm-charts/
+

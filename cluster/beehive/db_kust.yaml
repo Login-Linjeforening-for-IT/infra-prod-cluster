@@ -5,7 +5,7 @@ metadata:
   name: db
   namespace: beehive
 spec:
-  interval: 1m
+  interval: 5m
   path: "cluster/beehive/db"
   dependsOn:
     - name: psql
