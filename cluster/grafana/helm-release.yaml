@@ -1,0 +1,192 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: grafana
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: grafana
+      version: "7.3.7"
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-repo
+        namespace: grafana
+      interval: 5m
+  values:
+    extraSecretMounts:
+      - name: grafana-oidc
+        secretName: grafana-oidc
+        mountPath: /etc/secrets/auth_generic_oauth
+    grafana.ini:
+      server:
+        root_url: "https://grafana.login.no"
+      auth:
+        signout_redirect_url: "https://authentik.login.no/application/o/grafana/end-session/"
+        oauth_auto_login: true
+      auth.generic_oauth:
+        name: authentik
+        enabled: true
+        client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
+        client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
+        scopes: "openid profile email"
+        auth_url: "https://authentik.login.no/application/o/authorize/"
+        token_url: "https://authentik.login.no/application/o/token/"
+        api_url: "https://authentik.login.no/application/o/userinfo/"
+        role_attribute_path: contains(groups, 'grafana-admin') && 'Admin' || contains(groups, 'grafana-editor') && 'Editor' || contains(groups, 'grafana-viewer') && 'Viewer'
+    sidecar:
+      dashboards:
+        enabled: true
+    replicas: 1
+    persistence:
+      enabled: true
+      size: 5Gi
+      storageClassName: do-block-storage
+      extraPvcLabels:
+        app: grafana
+        managedBy: kubernetes
+    ingress:
+      enabled: true
+      ingressClassName: nginx-ntnu
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: 100m
+      hosts:
+        - grafana.login.no
+      tls:
+        - hosts:
+            - grafana.login.no
+    admin:
+      existingSecret: grafana-admin-credentials
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: loki-internal
+            type: loki
+            access: proxy
+            url: http://loki-gateway.loki.svc.cluster.local:80
+            isDefault: false
+            editable: true
+            uid: "lokinternal"
+          - name: prometheus-infra
+            type: prometheus
+            access: proxy
+            url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
+            isDefault: false
+            editable: true
+            uid: "prominfra"
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+          - name: "internal"
+            folder: "Internal Cluster"
+            type: file
+            disableDeletion: true
+            editable: true
+            foldersFromFilesStructure: true
+            options:
+              path: /var/lib/grafana/dashboards/internal
+          - name: "external"
+            folder: "External Cluster"
+            type: file
+            disableDeletion: true
+            editable: true
+            foldersFromFilesStructure: true
+            options:
+              path: /var/lib/grafana/dashboards/external
+          - name: "infra"
+            folder: "Infra Cluster"
+            type: file
+            disableDeletion: true
+            editable: true
+            foldersFromFilesStructure: true
+            options:
+              path: /var/lib/grafana/dashboards/infra
+    dashboards:
+      internal:
+        gitlab-digital-ocean-dashboard:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Fdigital%2Docean%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        gitlab-kubernetes-dashboard-internal:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Fk8s%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        gitlab-node-exporter-dashboard-internal:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Fnode%2Dexporter%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        flux-1-internal:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Fflux1%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        flux-2-internal:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Ffluxcluster%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        flux-3-internal:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Ffluxlogs%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        psql-1:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Fpsql%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        nginx:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Fnginx%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        uptime-kuma:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Fuptime%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        certmanager:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/internal%2Fcertmanager%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+        loki-1:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/loki%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-internal
+      infra:
+        gitlab-kubernetes-dashboard-infra:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Fk8s%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
+        gitlab-node-exporter-dashboard-infra:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Fnode%2Dexporter%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
+        flux-1-internal:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Fflux1%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
+        flux-2-internal:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Ffluxcluster%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
+        psql-1:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Fpsql%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
+        nginx:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Fnginx%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
+        certmanager:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Fcertmanager%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
+        crowdsec:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Fcrowdsec%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
+        authentik:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Fauthentik%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
+    downloadDashboards:
+      envFromSecret: grafana-dashboard-gitlab-token
