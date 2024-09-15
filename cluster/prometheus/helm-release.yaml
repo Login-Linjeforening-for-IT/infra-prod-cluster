@@ -73,6 +73,6 @@ spec:
           receiver: discord
       alertmanagerSpec:
         secrets:
-          - name: prometheus-webhook-url
+          - prometheus-webhook-url
         externalUrl: https://alertmanager-infra.login.no
 
