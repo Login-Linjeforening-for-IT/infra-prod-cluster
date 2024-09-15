@@ -65,6 +65,14 @@ spec:
           - secretName: alertmanager-infra-tls
             hosts:
               - alertmanager-infra.login.no
+      config:
+        receivers:
+          - name: discord
+            webhook_url_file: /etc/alertmanager/secrets/url
+        route:
+          receiver: discord
       alertmanagerSpec:
+        secrets:
+          - prometheus-webhook-url
         externalUrl: https://alertmanager-infra.login.no
 
