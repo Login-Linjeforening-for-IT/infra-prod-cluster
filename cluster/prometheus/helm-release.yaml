@@ -74,6 +74,5 @@ spec:
       alertmanagerSpec:
         secrets:
           - name: prometheus-webhook-url
-            key: url
         externalUrl: https://alertmanager-infra.login.no
 
