@@ -38,6 +38,8 @@ spec:
         role_attribute_path: contains(groups, 'grafana-admin') && 'Admin' || contains(groups, 'grafana-editor') && 'Editor' || contains(groups, 'grafana-viewer') && 'Viewer'
       date:
         default_timezone: "Europe/Oslo"
+      log:
+        level: debug
     sidecar:
       dashboards:
         enabled: true
