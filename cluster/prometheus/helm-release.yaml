@@ -74,6 +74,7 @@ spec:
         route:
           receiver: discord
       alertmanagerSpec:
+        logFormat: json
         secrets:
           - prometheus-webhook-url
         externalUrl: https://alertmanager-infra.login.no
