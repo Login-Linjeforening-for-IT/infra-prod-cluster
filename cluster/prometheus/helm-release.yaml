@@ -78,3 +78,4 @@ spec:
           - prometheus-webhook-url
         externalUrl: https://alertmanager-infra.login.no
 
+
