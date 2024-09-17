@@ -74,9 +74,6 @@ spec:
         route:
           receiver: discord
       alertmanagerSpec:
-        version: v0.27.0
-        image:
-          tag: main
         logFormat: json
         secrets:
           - prometheus-webhook-url
