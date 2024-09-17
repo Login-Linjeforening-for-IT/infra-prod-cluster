@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: "62.6.0"
+      version: "62.7.0"
       sourceRef:
         kind: HelmRepository
         name: prometheus-repo
@@ -65,14 +65,18 @@ spec:
           - secretName: alertmanager-infra-tls
             hosts:
               - alertmanager-infra.login.no
-      config:
-        receivers:
-          - name: discord
-            webhook_url_file: /etc/alertmanager/secrets/url
-        route:
-          receiver: discord
+      # config:
+      #   receivers:
+      #     - name: discord
+      #       discord_configs:
+      #         - send_resolved: true
+      #           webhook_url_file: /etc/alertmanager/secrets/prometheus-webhook-url/url
+      #   route:
+      #     receiver: discord
       alertmanagerSpec:
+        logFormat: json
         secrets:
           - prometheus-webhook-url
         externalUrl: https://alertmanager-infra.login.no
+
 
