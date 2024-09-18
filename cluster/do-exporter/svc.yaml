@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: do-exporter-svc
+  namespace: do-exporter
+  labels:
+    app: do-exporter
+spec:
+  type: ClusterIP
+  selector:
+    app: do-exporter
+  ports:
+    - protocol: TCP
+      port: 9212
+      name: http
+      targetPort: 9212

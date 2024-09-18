@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: do-exporter
+  namespace: do-exporter
+  labels:
+    app: do-exporter
+    release: prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+      - do-exporter
+  selector:
+    matchLabels:
+      app: do-exporter
+  endpoints:
+    - port: http
+      path: /metrics

@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: do-exporter
+  namespace: do-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: do-exporter
+  template:
+    metadata:
+      labels:
+        app: do-exporter
+    spec:
+      containers:
+        - name: do-exporter
+          image: metalmatze/digitalocean_exporter:0.6.1@sha256:8c8c9830b19fa7e8e36f0081f3b34f0276ae25e3fec5c962aa17e6ec2cf98603
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9212
+          env:
+            - name: DIGITALOCEAN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: do-token
+                  key: token
+            - name: DIGITALOCEAN_SPACES_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: do-spaces-key
+                  key: id
+            - name: DIGITALOCEAN_SPACES_ACCESS_KEY_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: do-spaces-key
+                  key: secret
