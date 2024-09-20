@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crowdsec
+  namespace: crowdsec
+spec:
+  template:
+    spec:
+      containers:
+        - name: whitelist-updater
+          image: crowdsecurity/crowdsec:latest
+          command: ["/bin/bash", "/scripts/whitelist.sh"]
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+          resources:
+            limits:
+              cpu: 50m
+              memory: 64Mi
+            requests:
+              cpu: 10m
+              memory: 32Mi
+      volumes:
+        - name: scripts
+          configMap:
+            name: crowdsec-whitelist-script
+            defaultMode: 0755
