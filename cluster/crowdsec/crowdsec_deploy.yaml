@@ -101,6 +101,14 @@ spec:
               name: capi-token
               key: token
     config:
+      scenarios:
+        exclude-admin-api.yaml: |
+          name: exclude-admin-api
+          description: "Exclude requests to admin-api from triggering alerts"
+          filter: '"admin-api" in evt.Meta.http_path && Alert.GetScenario() == "crowdsecurity/http-admin-interface-probing"'
+          exclusions:
+            - reason: "Exclude admin-api paths"
+              remediation: false
       parsers:
         s00-raw:
           nginx-json.yaml: |
