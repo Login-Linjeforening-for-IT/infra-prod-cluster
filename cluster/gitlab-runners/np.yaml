@@ -65,33 +65,13 @@ spec:
     matchLabels:
       app: gitlab-instance-runner-gitlab-runner
   policyTypes:
-    - Ingress
+  - Ingress
   ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: prometheus
-      ports:
-        - protocol: TCP
-          port: 9252
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: prometheus
+    ports:
+    - protocol: TCP
+      port: 9252
 
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-internal-gitlab
-  namespace: gitlab-runners
-spec:
-  podSelector:
-    matchLabels:
-      app: gitlab-instance-runner-gitlab-runner
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: gitlab
-          podSelector:
-            matchLabels:
-              app: webservice
