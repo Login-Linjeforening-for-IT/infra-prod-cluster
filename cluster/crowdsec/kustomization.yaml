@@ -6,7 +6,7 @@ metadata:
   namespace: crowdsec
 spec:
   interval: 5m
-  path: cluster/crowdsec/crowdsec-kust
+  path: "cluster/crowdsec/crowdsec-kust"
   prune: true
   sourceRef:
     kind: GitRepository
