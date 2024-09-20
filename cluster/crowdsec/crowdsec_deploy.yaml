@@ -101,14 +101,6 @@ spec:
               name: capi-token
               key: token
     config:
-      scenarios:
-        exclude-admin-api.yaml: |
-          name: exclude-admin-api
-          description: "Exclude requests to admin-api from triggering alerts"
-          filter: '"admin-api" in evt.Meta.http_path && Alert.GetScenario() == "crowdsecurity/http-admin-interface-probing"'
-          exclusions:
-            - reason: "Exclude admin-api paths"
-              remediation: false
       parsers:
         s00-raw:
           nginx-json.yaml: |
@@ -166,3 +158,17 @@ spec:
               - grok:
                   pattern: '%{WORD:method} %{URIPATHPARAM:request} HTTP/%{NUMBER:http_version}'
                   apply_on: full_request
+        s02-enrich:
+          whitelist-admin-api.yaml: |
+            name: crowdsecurity/whitelist-admin-api
+            description: "Whitelist requests to gitlab.login.no where 'admin-api' is in the URL"
+            stage: enrich
+            filter: |
+              evt.Meta.http_request_uri && evt.Meta.http_host &&
+              Contains(evt.Meta.http_request_uri, 'admin-api') &&
+              evt.Meta.http_host == 'gitlab.login.no'
+            on_success: next_stage
+            process:
+              - set:
+                  target: evt.Whitelisted
+                  value: true
