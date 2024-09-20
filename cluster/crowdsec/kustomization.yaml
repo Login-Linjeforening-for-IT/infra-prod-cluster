@@ -6,6 +6,3 @@ resources:
   - helm_repo.yaml
   - secrets_kustomization.yaml
   - crowdsec_deploy.yaml
-  - whitelist-script.yaml
-patchesStrategicMerge:
-  - patches/lapi-patch.yaml
