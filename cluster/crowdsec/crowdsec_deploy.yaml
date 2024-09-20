@@ -167,7 +167,6 @@ spec:
               evt.Meta.http_request_uri && evt.Meta.http_host &&
               Contains(evt.Meta.http_request_uri, 'admin-api') &&
               evt.Meta.http_host == 'gitlab.login.no'
-            on_success: next_stage
             process:
               - set:
                   target: evt.Whitelisted
