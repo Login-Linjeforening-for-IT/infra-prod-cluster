@@ -1,5 +1,4 @@
 ---
-#change
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -162,7 +161,7 @@ spec:
         s02-enrich:
           whitelist-admin-api.yaml: |
             name: login/whitelist-admin-api
-            description: "Whitelist requests to gitlab where 'admin-api' is in the URL"
+            description: "Whitelist requests to gitlab.login.no where 'admin-api' is in the URL"
             whitelist:
               reason: "issues with blocking of these urls"
               expression:
