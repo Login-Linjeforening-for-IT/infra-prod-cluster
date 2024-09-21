@@ -165,4 +165,4 @@ spec:
             whitelist:
               reason: "issues with blocking of these urls"
               expression:
-                - evt.Meta.http_request_uri and evt.Meta.http_host and  evt.Meta.http_host == gitlab.login.no
+                - "evt.Parsed.host == 'gitlab.login.no'"
