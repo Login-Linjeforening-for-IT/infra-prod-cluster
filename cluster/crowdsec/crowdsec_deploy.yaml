@@ -158,11 +158,11 @@ spec:
               - grok:
                   pattern: '%{WORD:method} %{URIPATHPARAM:request} HTTP/%{NUMBER:http_version}'
                   apply_on: full_request
-        s02-enrich:
-          whitelist-admin-api.yaml: |
-            name: crowdsecurity/whitelist-admin-api
-            description: "Whitelist requests to gitlab.login.no where 'admin-api' is in the URL"
-            whitelist:
-              reason: "issues with blocking of these urls"
-              expression:
-                - "evt.Parsed.request contains 'admin-api'"
+      s02-enrich:
+        whitelist-admin-api.yaml: |
+          name: login/whitelist-admin-api
+          description: "Whitelist requests to gitlab where 'admin-api' is in the URL"
+          whitelist:
+            reason: "issues with blocking of these urls"
+            expression:
+              - "evt.Parsed.request contains 'admin-api' && evt.Meta.http_host == 'gitlab.login.no"
