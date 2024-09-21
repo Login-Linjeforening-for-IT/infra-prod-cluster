@@ -162,6 +162,7 @@ spec:
           whitelist-admin-api.yaml: |
             name: crowdsecurity/whitelist-admin-api
             description: "Whitelist requests to gitlab.login.no where 'admin-api' is in the URL"
-            type: whitelist
-            filter: "evt.Parsed.host == 'gitlab.login.no' && evt.Parsed.path && 'admin-api' in evt.Parsed.path"
-            reason: "issues with blocking of these URLs"
+            whitelist:
+              reason: "issues with blocking of these urls"
+              expression:
+                - evt.Meta.http_request_uri and evt.Meta.http_host and evt.Meta.http_request_uri contains "admin-api" and evt.Meta.http_host == "gitlab.login.no"
