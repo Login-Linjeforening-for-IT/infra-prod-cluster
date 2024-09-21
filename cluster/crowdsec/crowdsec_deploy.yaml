@@ -165,4 +165,4 @@ spec:
             whitelist:
               reason: "issues with blocking of these urls"
               expression:
-                - "evt.Parsed.host == 'gitlab.login.no'"
+                - "evt.Parsed.host == 'gitlab.login.no' && evt.Parsed.path && 'admin-api' in evt.Parsed.path"
