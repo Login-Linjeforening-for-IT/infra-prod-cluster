@@ -2,7 +2,13 @@
 
 This holds the Kubernetes files for the infra-prod Kubernetes cluster in Digital Ocean.
 
-## FluxCD
+## Bootstrapping
+
+### 1Password connect
+
+Before bootstrapping the cluster with FluxCD, 1password-connect must be set up.
+
+### FluxCD
 
 To bootstrap this FluxCD repo to a cluster, run the following command. A GitLab project access token must be provided.
 It should have the `maintainer` role and `api` access. This is because FluxCD sometime has to write to the repository.
