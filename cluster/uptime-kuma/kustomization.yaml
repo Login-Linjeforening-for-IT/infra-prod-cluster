@@ -8,3 +8,4 @@ resources:
   - deploy.yaml
   - ingress.yaml
   - svc.yaml
+  - sec_kust.yaml
