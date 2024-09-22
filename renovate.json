@@ -5,21 +5,6 @@
       "\\.yaml$"
     ]
   },
-  "packageRules": [
-    {
-      "matchPackageNames": [
-        "registry.login.no/tekkom/infrastructure/pipeline-test-project",
-        "registry.login.no/tekkom/web/beehive/exam.login.no/api",
-        "registry.login.no/tekkom/web/beehive/exam.login.no/frontend",
-        "registry.login.no/tekkom/web/beehive/public-api",
-        "registry.login.no/tekkom/web/beehive/frontend",
-        "registry.login.no/tekkom/web/beehive/admin-api",
-        "registry.login.no/tekkom/web/beehive/queenbee"
-      ],
-      "allowedVersions": "/^\\d+\\.\\d+\\.\\d+-dev$/",
-      "automerge": true
-    }
-  ],
   "flux": {
     "fileMatch": [
       "\\.yaml$"
