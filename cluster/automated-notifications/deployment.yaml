@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: automated-notifications
+  name: automated-notifications
+  namespace: automated-notifications
+spec:
+  strategy:
+    rollingUpdate:
+      # K8S rounds up to 1 in cases where the number is less than 1.
+      # IE, since this only deploys one pod, it will still succesfully use rollingupdate since 0.25 rounds up to 1.
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: automated-notifications
+  template:
+    metadata:
+      labels:
+        app: automated-notifications
+    spec:
+      imagePullSecrets:
+        - name: automated-notifications-pull-secret
+      containers:
+        - name: automated-notifications
+          image: registry.login.no/tekkom/apps/automatednotifications:2.2.0@sha256:f31fe9c45c14392ccc150037bd473ea284a96e9c71891f7ecea74528144cd42a
+          imagePullPolicy: Always
+          env:
+            - name: api_url
+              value: https://fcm.googleapis.com/fcm/send
+          envFrom:
+            - secretRef:
+                name: automated-notifications-api-token
+          volumeMounts:
+            - name: firebase-secrets
+              mountPath: /usr/src/app/secrets
+              readOnly: true
+          livenessProbe:
+            exec:
+              command:
+                - cat
+                - /usr/src/app/tmp/healthy.txt
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - cat
+                - /usr/src/app/tmp/ready.txt
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "50Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+      volumes:
+        - name: firebase-secrets
+          secret:
+            secretName: automated-notifications-firebase-secrets
