@@ -36,6 +36,8 @@ spec:
       enabled: true
       allocatedMemory: 512
     loki:
+      limits_config:
+        retention_period: 15w
       storage:
         type: s3
         bucketNames:
