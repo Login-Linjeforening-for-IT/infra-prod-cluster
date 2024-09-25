@@ -18,7 +18,7 @@ spec:
   values:
     replicas: 3
     imagePullPolicy: IfNotPresent
-    gitlabUrl: https://gitlab.login.no/
+    gitlabUrl: https://gitlab-prod-webservice-default.gitlab.svc.cluster.local:8181/
     terminationGracePeriodSeconds: 3600
     concurrent: 10
     checkInterval: 30
