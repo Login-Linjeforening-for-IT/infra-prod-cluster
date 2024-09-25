@@ -45,7 +45,7 @@ spec:
         - name: COLLECTIONS
           value: "crowdsecurity/nginx crowdsecurity/nginx crowdsecurity/http-cve crowdsecurity/base-http-scenarios crowdsecurity/http-dos"
         - name: PARSERS
-          value: "crowdsecurity/geoip-enrich crowdsecurity/geoip-enrich crowdsecurity/nginx-logs"
+          value: "crowdsecurity/geoip-enrich crowdsecurity/nginx-logs"
         - name: TZ
           value: "Europe/Oslo"
     lapi:
