@@ -43,7 +43,9 @@ spec:
         - name: DISABLE_ONLINE_API
           value: "true"
         - name: COLLECTIONS
-          value: "crowdsecurity/nginx crowdsecurity/nginx crowdsecurity/http-cve crowdsecurity/base-http-scenarios crowdsecurity/http-dos"
+          value: >
+            crowdsecurity/nginx crowdsecurity/nginx crowdsecurity/http-cve
+            crowdsecurity/base-http-scenarios crowdsecurity/http-dos
         - name: PARSERS
           value: "crowdsecurity/geoip-enrich crowdsecurity/nginx-logs"
         - name: TZ
@@ -116,11 +118,14 @@ spec:
               apply_on: Line.Raw
             statics:
               - target: evt.StrTime
-                expression: JsonExtract(evt.Parsed.extracted_value, "nginx_timestamp")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "nginx_timestamp")
               - meta: source_ip
-                expression: JsonExtract(evt.Parsed.extracted_value, "remote_addr")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "remote_addr")
               - meta: http_status
-                expression: JsonExtract(evt.Parsed.extracted_value, "response_status")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "response_status")
               - meta: http_path
                 expression: JsonExtract(evt.Parsed.extracted_value, "request")
               - meta: log_type
@@ -130,39 +135,59 @@ spec:
               - parsed: "logsource"
                 value: "json-nginx"
               - parsed: remote_addr
-                expression: JsonExtract(evt.Parsed.extracted_value, "remote_addr")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "remote_addr")
               - parsed: remote_user
-                expression: JsonExtract(evt.Parsed.extracted_value, "remote_user")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "remote_user")
               - parsed: http_user_agent
-                expression: JsonExtract(evt.Parsed.extracted_value, "http_user_agent")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "http_user_agent")
               - parsed: http_referer
-                expression: JsonExtract(evt.Parsed.extracted_value, "http_referrer")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "http_referrer")
               - parsed: target_fqdn
-                expression: JsonExtract(evt.Parsed.extracted_value, "host")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "host")
               - parsed: method
-                expression: JsonExtract(evt.Parsed.extracted_value, "request_method")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "request_method")
               - parsed: body_bytes_sent
-                expression: JsonExtract(evt.Parsed.extracted_value, "body_bytes_sent")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "body_bytes_sent")
               - parsed: http_version
-                expression: JsonExtract(evt.Parsed.extracted_value, "http_version")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "http_version")
               - parsed: status
-                expression: JsonExtract(evt.Parsed.extracted_value, "response_status")
+                expression: >
+                  JsonExtract(evt.Parsed.extracted_value, "response_status")
               - parsed: full_request
                 expression: JsonExtract(evt.Parsed.extracted_value, "request")
         s01-parse:
           nginx-json-logs.yaml: |
-            filter: "evt.Meta.service == 'http' && evt.Meta.log_type in ['http_access-log', 'http_error-log']"
+            filter: >
+              evt.Meta.service == 'http'
+              && evt.Meta.log_type in ['http_access-log', 'http_error-log']
             onsuccess: next_stage
             name: local/json-nginx
             nodes:
               - grok:
-                  pattern: '%{WORD:method} %{URIPATHPARAM:request} HTTP/%{NUMBER:http_version}'
+                  pattern: >
+                    %{WORD:method} %{URIPATHPARAM:request}
+                    HTTP/%{NUMBER:http_version}
                   apply_on: full_request
         s02-enrich:
           whitelist-admin-api.yaml: |
             name: login/whitelist-admin-api
-            description: "Whitelist requests to gitlab.login.no where 'admin-api' is in the URL"
+            description: >
+              Whitelists requests to gitlab.login.no where 'admin-api' is in the
+              URL
             whitelist:
-              reason: "issues with blocking of these urls"
+              reason: >
+                Requests involving 'admin-api' are legitimate, and should not be
+                blocked.
               expression:
-                - "evt.Parsed.request contains 'admin-api' && evt.Meta.http_host == 'gitlab.login.no'"
+                - >
+                  evt.Parsed.request contains 'admin-api'
+                  && evt.Meta.target_fqdn == 'gitlab.login.no'
+                  && evt.Meta.status in ['200', '404']
