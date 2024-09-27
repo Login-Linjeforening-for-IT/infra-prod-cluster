@@ -190,4 +190,5 @@ spec:
                 - >
                   evt.Parsed.request contains 'admin-api'
                   && evt.Meta.target_fqdn == 'gitlab.login.no'
-                  && evt.Meta.status in ['200', '404']
+                  && evt.Meta.status == '404'
+                  && evt.Meta.method == 'HEAD'
