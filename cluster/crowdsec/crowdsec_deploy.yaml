@@ -108,7 +108,6 @@ spec:
           nginx-json.yaml: |
             filter: "evt.Line.Labels.type == 'json-nginx'"
             onsuccess: next_stage
-            debug: true
             name: login/nginx-logs
             description: "Parse nginx access logs in json"
             pattern_syntax:

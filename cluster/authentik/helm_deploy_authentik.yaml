@@ -89,7 +89,6 @@ spec:
           mountPath: /email-sec
           readOnly: true
     authentik:
-      log_level: debug
       email:
         host: "secure.emailsrvr.com"
         port: 465
