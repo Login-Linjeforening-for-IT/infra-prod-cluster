@@ -107,7 +107,7 @@ spec:
               memory: 512Mi
               cpu: 1000m
         - name: redis
-          image: redis:7.4.0-alpine3.20@sha256:c35af3bbcef51a62c8bae5a9a563c6f1b60d7ebaea4cb5a3ccbcc157580ae098
+          image: redis:7.4.1-alpine3.20@sha256:69ffdec65a1a91fee5e30530c559f0531efae1fd4ddbd93c6d84ffac821c02c7
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 6379
