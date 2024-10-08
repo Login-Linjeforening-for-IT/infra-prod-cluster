@@ -17,6 +17,8 @@ spec:
       interval: 10m
   values:
     installCRDs: true
+    webhook:
+      timeoutSeconds: 25
     prometheus:
       enabled: true
       servicemonitor:
