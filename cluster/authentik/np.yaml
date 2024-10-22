@@ -225,3 +225,46 @@ spec:
       ports:
         - protocol: TCP
           port: 9300
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-prometheus-scrape
+  namespace: authentik
+spec:
+  podSelector:
+    matchLabels:
+      goauthentik.io/outpost-name: do-infra-prod-ldap-outpost
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: zammad
+      ports:
+        - protocol: TCP
+          port: 389
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 192.168.0.0/16
+              - 172.16.0.0/12
+      ports:
+        - protocol: TCP
+          port: 443
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
