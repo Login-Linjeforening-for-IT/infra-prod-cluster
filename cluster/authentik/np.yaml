@@ -240,6 +240,7 @@ spec:
     - Ingress
     - Egress
   ingress:
+    - {}
     - from:
         - namespaceSelector:
             matchLabels:
@@ -248,6 +249,7 @@ spec:
         - protocol: TCP
           port: 389
   egress:
+    - {}
     - to:
         - ipBlock:
             cidr: 0.0.0.0/0
