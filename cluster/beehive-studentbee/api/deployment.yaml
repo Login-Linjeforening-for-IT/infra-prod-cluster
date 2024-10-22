@@ -83,6 +83,22 @@ spec:
                   key: PROD_CLIENT_ID
             - name: PROD_CLIENT_CERT_URL
               value: https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-0yrh3%40exam2-59f98.iam.gserviceaccount.com
+            - name: BASE_URL
+              value: https://authentik.login.no
+            - name: REDIRECT_URI
+              value: https://exam-api.login.no/api/callback
+            - name: EXAM_URL
+              value: https://exam.login.no
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: oauth-secrets
+                  key: client_id
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: oauth-secrets
+                  key: client_secret
           ports:
             - containerPort: 8080
               name: 8080tcp
