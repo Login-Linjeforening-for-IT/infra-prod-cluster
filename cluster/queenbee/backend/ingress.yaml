@@ -1,0 +1,24 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: queenbee-backend-ingress
+  namespace: queenbee
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx-ntnu
+  tls:
+    - hosts:
+        - queenbee-api-dev.login.no
+  rules:
+    - host: queenbee-api-dev.login.no
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: admin-api-svc
+                port:
+                  number: 8080

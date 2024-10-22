@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: admin-api
+  namespace: queenbee
+spec:
+  interval: 5m
+  path: "cluster/queenbee/backend"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: test-cluster
+    namespace: flux-system

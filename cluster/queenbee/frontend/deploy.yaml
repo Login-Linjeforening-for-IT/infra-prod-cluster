@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: queenbee-frontend
+  name: queenbee-frontend
+  namespace: queenbee
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: queenbee-frontend
+  template:
+    metadata:
+      labels:
+        app: queenbee-frontend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-frontend-pull-token
+      containers:
+        - image: registry.login.no/tekkom/web/beehive/queenbee:1.3.13-dev
+          imagePullPolicy: Always
+          name: queenbee-frontend
+          env:
+            - name: BASE_URL
+              value: https://queenbee-api-dev.login.no/v1
+          ports:
+            - containerPort: 4200
+              name: 4200tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 4200
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 4200
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/src/app/environment.prod.ts
+              subPath: environment.prod.ts
+            - name: config-volume
+              mountPath: /usr/src/app/environment.ts
+              subPath: environment.prod.ts
+      volumes:
+        - name: config-volume
+          configMap:
+            name: frontend-config
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - queenbee-frontend
+                topologyKey: kubernetes.io/hostname
