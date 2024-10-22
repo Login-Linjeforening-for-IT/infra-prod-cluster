@@ -230,7 +230,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-prometheus-scrape
+  name: allow-ldap-outpost
   namespace: authentik
 spec:
   podSelector:
