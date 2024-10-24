@@ -6,5 +6,5 @@ kubescore:
   image: registry.hub.docker.com/zegl/kube-score:latest
   stage: security
   script:
-    - kube-score score --all-default-optional --kubernetes-version v1.29 cluster/*/*.yaml
+    - kube-score score --all-default-optional --kubernetes-version v1.30 cluster/*/*.yaml
   allow_failure: true
