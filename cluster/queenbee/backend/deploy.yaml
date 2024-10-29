@@ -24,7 +24,7 @@ spec:
       imagePullSecrets:
         - name: gitlab-api-pull-token
       containers:
-        - image: registry.login.no/tekkom/web/beehive/admin-api:1.0.2-dev@sha256:b038b8849080d8bfdc9ad0f61fa5042cb2794da48de0555cf60a76165e9d4f22
+        - image: registry.login.no/tekkom/web/beehive/admin-api:1.0.2@sha256:bb7b7216b7f5ff1f4da8e6cd0b1cc725a96c2a2213b7bc23f10847c3d45f9b11
           imagePullPolicy: Always
           name: admin-api
           env:
@@ -64,9 +64,9 @@ spec:
                   name: admin-api-auth
                   key: client_secret
             - name: OAUTH2_REDIRECT_URL
-              value: https://queenbee-api-dev.login.no/v1/oauth2/callback
+              value: https://queenbee-api.login.no/v1/oauth2/callback
             - name: OAUTH2_FRONTEND_REDIRECT_URL
-              value: https://queenbee-dev.login.no/login
+              value: https://queenbee.login.no/login
             - name: OAUTH2_AUTHENTIK_BASE_URL
               value: https://authentik.login.no
             - name: TOKEN_ACCESS_TOKEN_SYMMETRIC_KEY

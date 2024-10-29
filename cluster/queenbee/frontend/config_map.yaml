@@ -7,5 +7,5 @@ metadata:
 data:
   environment.prod.ts: |
     export const environment = {
-      BASE_URL: 'https://queenbee-api-dev.login.no/v1'
+      BASE_URL: 'https://queenbee-api.login.no/v1'
     }
