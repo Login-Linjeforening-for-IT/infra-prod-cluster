@@ -1,0 +1,22 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned-issuer
+  namespace: queenbee
+spec:
+  selfSigned: {}
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: backend-self-signed
+  namespace: queenbee
+spec:
+  secretName: backend-self-signed
+  dnsNames:
+    - admin-api-svc.queenbee.svc.cluster.local
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
