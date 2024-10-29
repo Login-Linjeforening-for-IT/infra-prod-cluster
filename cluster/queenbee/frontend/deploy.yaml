@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: queenbee-frontend
+  name: queenbee-frontend
+  namespace: queenbee
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: queenbee-frontend
+  template:
+    metadata:
+      labels:
+        app: queenbee-frontend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-frontend-pull-token
+      containers:
+        - image: registry.login.no/tekkom/web/beehive/queenbee:1.3.13@sha256:3402cdc8c9ee0b62c33e77bb4927eaf959cf9fed6fee81b21ce34a50842a35f1
+          imagePullPolicy: Always
+          name: queenbee-frontend
+          env:
+            - name: BASE_URL
+              value: https://queenbee-api.login.no/v1
+          ports:
+            - containerPort: 4200
+              name: 4200tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 4200
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 4200
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - queenbee-frontend
+                topologyKey: kubernetes.io/hostname
