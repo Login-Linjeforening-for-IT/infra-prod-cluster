@@ -53,17 +53,6 @@ spec:
           securityContext:
             runAsNonRoot: true
             runAsUser: 1000
-          volumeMounts:
-            - name: config-volume
-              mountPath: /usr/src/app/environment.prod.ts
-              subPath: environment.prod.ts
-            - name: config-volume
-              mountPath: /usr/src/app/environment.ts
-              subPath: environment.prod.ts
-      volumes:
-        - name: config-volume
-          configMap:
-            name: frontend-config
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
