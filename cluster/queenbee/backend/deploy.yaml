@@ -46,7 +46,7 @@ spec:
             - name: DB_SSL_MODE
               value: require
             - name: GIN_MODE
-              value: debug
+              value: release
             - name: TLS_ENABLED
               value: "true"
             - name: TLS_CERT
