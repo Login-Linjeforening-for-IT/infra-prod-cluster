@@ -23,11 +23,6 @@ spec:
         name: zammad-psql-backup-20241105000000
       recoveryTarget:
         targetTime: 2024-11-05 20:00:00.000000+02
-    initdb:
-      database: zammad
-      owner: zammad
-      secret:
-        name: zammad-db-credentials
   backup:
     retentionPolicy: "30d"
     barmanObjectStore:
