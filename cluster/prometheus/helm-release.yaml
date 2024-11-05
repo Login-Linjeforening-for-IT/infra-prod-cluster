@@ -76,7 +76,7 @@ spec:
           routes:
             - match:
                 alertname: Watchdog
-              receiver: 'null'
+              receiver: 'email'
         receivers:
           - name: 'email'
             email_configs:
