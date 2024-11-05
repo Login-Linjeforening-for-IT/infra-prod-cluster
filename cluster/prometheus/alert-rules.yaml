@@ -97,7 +97,7 @@ spec:
           annotations:
             summary: Certificate is about to expire ({{ $labels.monitor_name }})
             description: "Certificate for {{ $labels.monitor_name }} is about to expire with {{ $value }} days left."
-        - alert: TEST-RULE
+        - alert: TEST-RULE-2
           expr: |-
             monitor_cert_days_remaining > 5
           for: 3m
