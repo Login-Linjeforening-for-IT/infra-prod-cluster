@@ -45,7 +45,7 @@ spec:
       postgresql:
         enabled: false
         db: zammad
-        host: zammad-psql-rw.zammad.svc.cluster.local
+        host: zammad-recovery-rw.zammad.svc.cluster.local
         user: zammad
         port: "5432"
       redis:
