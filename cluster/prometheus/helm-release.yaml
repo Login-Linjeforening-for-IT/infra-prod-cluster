@@ -67,21 +67,21 @@ spec:
             hosts:
               - alertmanager-infra.login.no
       config:
-        route:
-          receiver: email
-          group_by: ['alertname']
-          group_wait: 5s
-          group_interval: 1m
-          repeat_interval: 5h
-        receivers:
-          - name: email
-            email_configs:
-              - send_resolved: true
-                to: 'support@login.no'
-                from: 'notifikasjon@login.no'
-                smarthost: 'secure.emailsrvr.com:465'
-                auth_username: 'notifikasjon@login.no'
-                auth_password_file: /etc/alertmanager/secrets/prometheus-email-password/password
+        # route:
+        #   receiver: email
+        #   group_by: ['alertname']
+        #   group_wait: 5s
+        #   group_interval: 1m
+        #   repeat_interval: 5h
+        # receivers:
+        #   - name: email
+        #     email_configs:
+        #       - send_resolved: true
+        #         to: 'support@login.no'
+        #         from: 'notifikasjon@login.no'
+        #         smarthost: 'secure.emailsrvr.com:465'
+        #         auth_username: 'notifikasjon@login.no'
+        #         auth_password_file: /etc/alertmanager/secrets/prometheus-email-password/password
       alertmanagerSpec:
         loglevel: debug
         logFormat: json
