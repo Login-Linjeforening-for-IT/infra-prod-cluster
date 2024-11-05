@@ -85,4 +85,29 @@ spec:
           annotations:
             summary: PSQL WAL is more than 2 hours old (instance {{ $labels.pod }})
             description: "WAL for {{ $labels.pod }} is more than 2 hours old.\n  VALUE = {{ $value }}"
+    - name: Certificates
+      rules:
+        - alert: certificate-expiry
+          expr: |-
+            monitor_cert_days_remaining < 10
+          for: 3m
+          labels:
+            severity: warning
+            ruleset: login-custom
+          annotations:
+            summary: Certificate is about to expire ({{ $labels.monitor_name }})
+            description: "Certificate for {{ $labels.monitor_name }} is about to expire with {{ $value }} days left."
+    - name: Ingress
+      rules:
+        - alert: service-latency-too-high
+          expr: |-
+            avg_over_time(monitor_response_time[1h]) > 3*1000
+          for: 1s
+          labels:
+            severity: warning
+            ruleset: login-custom
+          annotations:
+            summary: Service latency is too high ({{ $labels.monitor_name }})
+            description: "Service {{ $labels.monitor_name }} is experiencing high latency of {{ $value }} ms."
+
 
