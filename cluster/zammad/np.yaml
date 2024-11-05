@@ -96,6 +96,24 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  name: allow-psql-recover
+  namespace: zammad
+spec:
+  policyTypes:
+    - Ingress
+    - Egress
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: zammad-recovery
+  ingress:
+    - {}
+  egress:
+    - {}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
   name: allow-ldap
   namespace: zammad
 spec:
