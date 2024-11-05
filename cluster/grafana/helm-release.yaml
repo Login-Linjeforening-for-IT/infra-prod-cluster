@@ -145,5 +145,9 @@ spec:
           url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Floki%2Ejson/raw?ref=main"
           gitlabToken: "$token"
           datasource: prometheus-infra
+        test-12:
+          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/test12%2Ejson/raw?ref=main"
+          gitlabToken: "$token"
+          datasource: prometheus-infra
     downloadDashboards:
       envFromSecret: grafana-dashboard-gitlab-token
