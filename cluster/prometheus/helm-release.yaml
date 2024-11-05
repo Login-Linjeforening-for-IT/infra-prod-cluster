@@ -68,13 +68,13 @@ spec:
               - alertmanager-infra.login.no
       config:
         route:
-          receiver: email
+          receiver: 'email'
           group_by: ['alertname']
           group_wait: 5s
           group_interval: 1m
           repeat_interval: 5h
         receivers:
-          - name: email
+          - name: 'email'
             email_configs:
               - send_resolved: true
                 to: 'support@login.no'
