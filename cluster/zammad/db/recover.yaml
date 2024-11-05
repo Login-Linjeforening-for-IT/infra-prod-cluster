@@ -1,0 +1,41 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: zammad-recovery
+  namespace: zammad
+spec:
+  monitoring:
+    enablePodMonitor: true
+  description: Recovery for zammad
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 30Gi
+  postgresql:
+    parameters:
+      timezone: "Europe/Oslo"
+  superuserSecret:
+    name: zammad-db-credentials
+  bootstrap:
+    recovery:
+      backup:
+        name: zammad-psql-backup-20241105000000
+      recoveryTarget:
+        targetTime: 2024-11-05 20:00:00.000000+02
+    initdb:
+      database: zammad
+      owner: zammad
+      secret:
+        name: zammad-db-credentials
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://login-infra-prod-psql-backups/zammad
+      s3Credentials:
+        accessKeyId:
+          name: zammad-pg-backup
+          key: access
+        secretAccessKey:
+          name: zammad-pg-backup
+          key: secret
