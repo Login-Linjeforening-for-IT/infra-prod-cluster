@@ -5,6 +5,7 @@ metadata:
   name: zammad-recovery
   namespace: zammad
 spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4
   monitoring:
     enablePodMonitor: true
   description: Recovery for zammad
