@@ -1,3 +1,4 @@
+#comment
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
