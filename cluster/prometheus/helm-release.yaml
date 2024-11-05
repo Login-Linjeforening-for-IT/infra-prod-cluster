@@ -86,6 +86,7 @@ spec:
                 smarthost: 'secure.emailsrvr.com:465'
                 auth_username: 'notifikasjon@login.no'
                 auth_password_file: /etc/alertmanager/secrets/prometheus-email-password/password
+                require_tls: false
       alertmanagerSpec:
         loglevel: debug
         logFormat: json
