@@ -86,7 +86,6 @@ spec:
         loglevel: debug
         logFormat: json
         secrets:
-          - prometheus-webhook-url
           - prometheus-email-password
         externalUrl: https://alertmanager-infra.login.no
 
