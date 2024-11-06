@@ -97,16 +97,6 @@ spec:
           annotations:
             summary: Certificate is about to expire ({{ $labels.monitor_name }})
             description: "Certificate for {{ $labels.monitor_name }} is about to expire with {{ $value }} days left."
-        - alert: TEST-RULE-4
-          expr: |-
-            monitor_cert_days_remaining > 5
-          for: 3m
-          labels:
-            severity: critical
-            ruleset: login-custom
-          annotations:
-            summary: TEST-RULE ({{ $labels.monitor_name }})
-            description: "TEST-RULE for {{ $labels.monitor_name }} with {{ $value }} days left."
     - name: Ingress
       rules:
         - alert: service-latency-too-high
