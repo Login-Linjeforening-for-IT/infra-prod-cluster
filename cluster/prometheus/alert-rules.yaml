@@ -23,19 +23,6 @@ spec:
             description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is in a non-running state.\n  VALUE = {{ $value }}"
     - name: volumes-and-storage
       rules:
-        - alert: storage-usage-high-50
-          expr: |-
-            (1-(kubelet_volume_stats_available_bytes / 
-            kubelet_volume_stats_capacity_bytes))*100 > 50 and 
-            (1-(kubelet_volume_stats_available_bytes / 
-            kubelet_volume_stats_capacity_bytes))*100 <= 85
-          for: 3m
-          labels:
-            severity: warning
-            ruleset: login-custom
-          annotations:
-            summary: Storage usage is above 50% (PVC {{ $labels.persistentvolumeclaim }})
-            description: "Persistent volume claim {{ $labels.persistentvolumeclaim }} is more than 50% full.\n  VALUE = {{ $value }}"
         - alert: storage-usage-high-85
           expr: |-
             (1-(kubelet_volume_stats_available_bytes / 

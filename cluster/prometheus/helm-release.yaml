@@ -68,14 +68,14 @@ spec:
               - alertmanager-infra.login.no
       config:
         route:
-          receiver: 'email'
+          receiver: 'null'
           group_by: ['alertname']
           group_wait: 5s
           group_interval: 1m
-          repeat_interval: 5h
+          repeat_interval: 72h
           routes:
             - match:
-                alertname: Watchdog
+                ruleset: login-custom
               receiver: 'email'
         receivers:
           - name: 'email'
