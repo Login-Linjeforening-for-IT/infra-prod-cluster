@@ -14,12 +14,13 @@ spec:
       rules:
         - alert: KubernetesPodNotHealthy
           expr: sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed"}) > 0
-          for: 5m
+          for: 20m
           labels:
             severity: critical
             ruleset: login-custom
           annotations:
             summary: Kubernetes Pod not healthy (instance {{ $labels.instance }})
+            description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is in a non-running state for more than 20 minutes.\n  VALUE = {{ $value }}"
         - alert: KubernetesPodNotReady
           expr: sum by (namespace, pod) (kube_pod_status_ready{condition="false"}) > 0
           for: 20m
@@ -37,7 +38,7 @@ spec:
             kubelet_volume_stats_capacity_bytes))*100 > 85 and 
             (1-(kubelet_volume_stats_available_bytes / 
             kubelet_volume_stats_capacity_bytes))*100 <= 95
-          for: 3m
+          for: 20m
           labels:
             severity: warning
             ruleset: login-custom
@@ -48,7 +49,7 @@ spec:
           expr: |-
             (1-(kubelet_volume_stats_available_bytes / 
             kubelet_volume_stats_capacity_bytes))*100 > 95
-          for: 3m
+          for: 20m
           labels:
             severity: critical
             ruleset: login-custom
@@ -57,29 +58,29 @@ spec:
             description: "Persistent volume claim {{ $labels.persistentvolumeclaim }} is more than 95% full.\n  VALUE = {{ $value }}"
     - name: psql
       rules:
-        - alert: psql-wal-age-one-hour
+        - alert: psql-wal-age-one-day
           expr: |-
             max by(pod) ((1 - cnpg_pg_replication_in_recovery) * (time() - timestamp(cnpg_pg_stat_archiver_seconds_since_last_archival) + 
-            cnpg_pg_stat_archiver_seconds_since_last_archival)) > 3600 and max by(pod) ((1 - cnpg_pg_replication_in_recovery) * (time() - 
-            timestamp(cnpg_pg_stat_archiver_seconds_since_last_archival) + cnpg_pg_stat_archiver_seconds_since_last_archival)) <= 7200
+            cnpg_pg_stat_archiver_seconds_since_last_archival)) > 60*60*24 and max by(pod) ((1 - cnpg_pg_replication_in_recovery) * (time() - 
+            timestamp(cnpg_pg_stat_archiver_seconds_since_last_archival) + cnpg_pg_stat_archiver_seconds_since_last_archival)) <= 60*60*24*2
           for: 3m
           labels:
             ruleset: login-custom
             severity: warning
           annotations:
-            summary: PSQL WAL is more than 1 hour old (instance {{ $labels.pod }})
-            description: "WAL for {{ $labels.pod }} is more than 1 hour old.\n  VALUE = {{ $value }}"
-        - alert: psql-wal-age-two-hours
+            summary: PSQL WAL is more than 1 day old (instance {{ $labels.pod }})
+            description: "WAL for {{ $labels.pod }} is more than 1 day old.\n  VALUE = {{ $value }}"
+        - alert: psql-wal-age-two-days
           expr: |-
             max by(pod) ((1 - cnpg_pg_replication_in_recovery) * (time() - timestamp(cnpg_pg_stat_archiver_seconds_since_last_archival) + 
-            cnpg_pg_stat_archiver_seconds_since_last_archival)) > 7200
+            cnpg_pg_stat_archiver_seconds_since_last_archival)) > 60*60*24*2
           for: 3m
           labels:
             severity: critical
             ruleset: login-custom
           annotations:
-            summary: PSQL WAL is more than 2 hours old (instance {{ $labels.pod }})
-            description: "WAL for {{ $labels.pod }} is more than 2 hours old.\n  VALUE = {{ $value }}"
+            summary: PSQL WAL is more than 2 days old (instance {{ $labels.pod }})
+            description: "WAL for {{ $labels.pod }} is more than 2 days old.\n  VALUE = {{ $value }}"
     - name: Certificates
       rules:
         - alert: certificate-expiry
@@ -97,12 +98,10 @@ spec:
         - alert: service-latency-too-high
           expr: |-
             avg_over_time(monitor_response_time[1h]) > 3*1000
-          for: 1s
+          for: 0s
           labels:
             severity: warning
             ruleset: login-custom
           annotations:
             summary: Service latency is too high ({{ $labels.monitor_name }})
             description: "Service {{ $labels.monitor_name }} is experiencing high latency of {{ $value }} ms."
-
-
