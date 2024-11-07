@@ -20,7 +20,15 @@ spec:
             ruleset: login-custom
           annotations:
             summary: Kubernetes Pod not healthy (instance {{ $labels.instance }})
-            description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is in a non-running state.\n  VALUE = {{ $value }}"
+        - alert: KubernetesPodNotReady
+          expr: sum by (namespace, pod) (kube_pod_status_ready{condition="false"}) > 0
+          for: 20m
+          labels:
+            severity: critical
+            ruleset: login-custom
+          annotations:
+            summary: Kubernetes Pod not ready (instance {{ $labels.instance }})
+            description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is not ready for more than 20 minutes.\n  VALUE = {{ $value }}"
     - name: volumes-and-storage
       rules:
         - alert: storage-usage-high-85
