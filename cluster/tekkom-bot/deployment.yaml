@@ -87,6 +87,8 @@ spec:
               value: /public/docs/minutes/styremoter/
             - name: GRAPHQL_URL
               value: https://wiki.login.no/graphql
+            - name: WIKI_URL
+              value: "https://wiki.login.no"
             - name: WIKIJS_TOKEN
               valueFrom:
                 secretKeyRef:
