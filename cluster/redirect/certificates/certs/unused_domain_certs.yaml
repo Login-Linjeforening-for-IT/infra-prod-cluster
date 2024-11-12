@@ -1,0 +1,28 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: redirect-old-domains
+  namespace: redirect-namespace
+spec:
+  secretName: redirect-old-domains-cert
+  issuerRef:
+    kind: Issuer
+    name: do-issuer-unused-domains
+  dnsNames:
+    - "linjeforeningen.it"
+    - "cyberdagen.net"
+    - "cyberdagen.no"
+    - "cyberdagene.net"
+    - "cyberdagene.no"
+    - "fadderuka.com"
+    - "fadderuka.org"
+    - "karrieredag.no"
+    - "login-ntnu.no"
+    - "login.coffee"
+    - "loginlf.no"
+    - "loginntnu.no"
+    - "logintnu.no"
+    - "logntnu.com"
+    - "logout.no"
+    - "ntnulogin.no"
