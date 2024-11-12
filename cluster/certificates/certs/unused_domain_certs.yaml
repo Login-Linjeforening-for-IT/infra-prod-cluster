@@ -1,0 +1,32 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: redirect-old-domains
+  namespace: redirect-namespace
+  annotations:
+    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+    reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: redirect-namespace
+    reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+spec:
+  secretName: redirect-old-domains-cert
+  issuerRef:
+    kind: Issuer
+    name: do-issuer-prod
+  dnsNames:
+    - "linjeforeningen.it"
+    - "cyberdagen.net"
+    - "cyberdagen.no"
+    - "cyberdagene.net"
+    - "cyberdagene.no"
+    - "fadderuka.com"
+    - "fadderuka.org"
+    - "karrieredag.no"
+    - "login-ntnu.no"
+    - "login.coffee"
+    - "loginlf.no"
+    - "loginntnu.no"
+    - "logintnu.no"
+    - "logntnu.com"
+    - "logout.no"
+    - "ntnulogin.no"
