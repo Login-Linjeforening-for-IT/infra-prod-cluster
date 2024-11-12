@@ -28,7 +28,6 @@ spec:
         - ntnulogin.no
       secretName: redirect-old-domains-cert
   rules:
-    - host: test-discord.login.no
     - host: linjeforeningen.it
     - host: cyberdagen.net
     - host: cyberdagen.no
