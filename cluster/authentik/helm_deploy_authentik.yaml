@@ -133,6 +133,7 @@ spec:
       autoscaling:
         enabled: true
         minReplicas: 3
+        maxReplicas: 5
       ingress:
         ingressClassName: nginx-external
         annotations:
@@ -163,6 +164,7 @@ spec:
       autoscaling:
         enabled: true
         minReplicas: 3
+        maxReplicas: 5
       pdb:
         enabled: true
         minAvailable: 1
