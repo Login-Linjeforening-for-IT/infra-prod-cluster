@@ -128,8 +128,8 @@ spec:
           memory: "512Mi"
           cpu: "100m"
         limits:
-          memory: "1Gi"
-          cpu: "1"
+          memory: "2Gi"
+          cpu: "2"
       autoscaling:
         enabled: true
         minReplicas: 3
@@ -159,8 +159,8 @@ spec:
           memory: "512Mi"
           cpu: "100m"
         limits:
-          memory: "1Gi"
-          cpu: "1"
+          memory: "2Gi"
+          cpu: "2"
       autoscaling:
         enabled: true
         minReplicas: 3
