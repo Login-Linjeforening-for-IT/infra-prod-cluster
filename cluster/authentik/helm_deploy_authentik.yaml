@@ -134,6 +134,7 @@ spec:
         enabled: true
         minReplicas: 3
         maxReplicas: 5
+        targetCPUUtilizationPercentage: 80
       ingress:
         ingressClassName: nginx-external
         annotations:
