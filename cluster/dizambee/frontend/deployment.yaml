@@ -12,7 +12,7 @@ metadata:
   name: dizambee-frontend
   namespace: dizambee
 spec:
-  replicas: 2
+  replicas: 0
   strategy:
     rollingUpdate:
       maxSurge: 25%
