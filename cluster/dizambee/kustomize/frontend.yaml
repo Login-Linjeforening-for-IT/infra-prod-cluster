@@ -1,21 +1,21 @@
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: dizambee-frontend
-  namespace: dizambee
-spec:
-  interval: 5m
-  path: "cluster/dizambee/frontend"
-  dependsOn:
-    - name: dizambee-secrets
-      namespace: dizambee
-    - name: dizambee-api
-      namespace: dizambee
-    - name: cert-manager
-      namespace: cert-manager
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: dizambee-frontend
+#   namespace: dizambee
+# spec:
+#   interval: 5m
+#   path: "cluster/dizambee/frontend"
+#   dependsOn:
+#     - name: dizambee-secrets
+#       namespace: dizambee
+#     - name: dizambee-api
+#       namespace: dizambee
+#     - name: cert-manager
+#       namespace: cert-manager
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#     namespace: flux-system
