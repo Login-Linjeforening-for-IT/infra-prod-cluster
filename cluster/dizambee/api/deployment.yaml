@@ -35,7 +35,7 @@ spec:
         - name: gitlab-deploy-key-dizambee
       containers:
         - name: api
-          image: registry.login.no/tekkom/web/beehive/dizambee/api:0.0.2@sha256:3a32d4f26643d0b3b176b17c8e0d7f9990b0231b40299daf50395b5c0563c8cb
+          image: registry.login.no/tekkom/web/beehive/dizambee/api:1.0.4@sha256:3eca40579acb263f9b067c023a89a40e043423819ed78726fc4e4bb324b84ed0
           command:
             - npm
             - start
