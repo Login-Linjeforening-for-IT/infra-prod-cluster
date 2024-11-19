@@ -1,4 +1,3 @@
-# General network policies for the dizambee namespace
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -10,6 +9,53 @@ spec:
   policyTypes:
     - Ingress
     - Egress
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-egress-except-internal
+  namespace: dizambee
+spec:
+  podSelector:
+    matchLabels:
+      app: dizambee-api
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-to-kube-dns
+  namespace: dizambee
+spec:
+  podSelector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - dizambee-api
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -26,9 +72,9 @@ spec:
 
   ingress:
     - from:
-      - namespaceSelector:
-          matchLabels:
-            kubernetes.io/metadata.name: tekkom-bot
-      - podSelector:
-          matchLabels:
-            app: tekkom-bot
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: tekkom-bot
+        - podSelector:
+            matchLabels:
+              app: tekkom-bot
