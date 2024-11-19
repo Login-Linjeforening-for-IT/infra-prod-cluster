@@ -2,54 +2,6 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: authentik-psql
-  namespace: authentik
-spec:
-  monitoring:
-    enablePodMonitor: true
-  description: Postgres for Authentik
-  instances: 3
-  primaryUpdateStrategy: unsupervised
-  storage:
-    size: 10Gi
-  postgresql:
-    parameters:
-      timezone: "Europe/Oslo"
-  bootstrap:
-    initdb:
-      database: authentik
-      owner: authentik
-      secret:
-        name: authentik-db-credentials
-  backup:
-    retentionPolicy: "30d"
-    barmanObjectStore:
-      destinationPath: s3://login-infra-prod-psql-backups/authentik
-      s3Credentials:
-        accessKeyId:
-          name: authentik-pg-backup
-          key: access
-        secretAccessKey:
-          name: authentik-pg-backup
-          key: secret
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: authentik-psql
-  namespace: authentik
-  labels:
-    release: prometheus
-spec:
-  podMetricsEndpoints:
-    - port: metrics
-  selector:
-    matchLabels:
-      cnpg.io/cluster: authentik-psql
----
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
   name: authentik-restore-psql
   namespace: authentik
 spec:
