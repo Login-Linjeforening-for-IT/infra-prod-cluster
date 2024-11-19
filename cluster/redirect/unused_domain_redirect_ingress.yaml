@@ -1,0 +1,46 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://login.no
+  name: unused-domains-redirect-ingress
+  namespace: redirect-namespace
+spec:
+  ingressClassName: nginx-external
+  tls:
+    - hosts:
+        - linjeforeningen.it
+        - cyberdagen.net
+        - cyberdagen.no
+        - cyberdagene.net
+        - cyberdagene.no
+        - fadderuka.com
+        - fadderuka.org
+        - karrieredag.no
+        - login-ntnu.no
+        - login.coffee
+        - loginlf.no
+        - loginntnu.no
+        - logintnu.no
+        - logntnu.com
+        - logout.no
+        - ntnulogin.no
+      secretName: redirect-old-domains-cert
+  rules:
+    - host: linjeforeningen.it
+    - host: cyberdagen.net
+    - host: cyberdagen.no
+    - host: cyberdagene.net
+    - host: cyberdagene.no
+    - host: fadderuka.com
+    - host: fadderuka.org
+    - host: karrieredag.no
+    - host: login-ntnu.no
+    - host: login.coffee
+    - host: loginlf.no
+    - host: loginntnu.no
+    - host: logintnu.no
+    - host: logntnu.com
+    - host: logout.no
+    - host: ntnulogin.no
