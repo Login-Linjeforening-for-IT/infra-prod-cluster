@@ -31,6 +31,8 @@ spec:
             - containerPort: 6969
               protocol: TCP
           env:
+            - name: API
+              value: dizambee-api.dizambee.svc.cluster.local/api
             - name: TYPE
               value: service_account
             - name: PROJECT_ID
