@@ -32,7 +32,7 @@ spec:
               protocol: TCP
           env:
             - name: API
-              value: dizambee-api.dizambee.svc.cluster.local/api
+              value: dizambee-api.dizambee.svc.cluster.local:8080/api
             - name: TYPE
               value: service_account
             - name: PROJECT_ID
