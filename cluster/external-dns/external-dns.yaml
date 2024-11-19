@@ -23,6 +23,7 @@ spec:
           args:
             - --source=ingress
             - --source=service
+            - --domain-filter=login.no
             - --provider=digitalocean
             - --txt-owner-id=inf
           env:
