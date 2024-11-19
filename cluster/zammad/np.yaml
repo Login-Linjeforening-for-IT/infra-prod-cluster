@@ -146,6 +146,3 @@ spec:
         - podSelector:
             matchLabels:
               goauthentik.io/outpost-name: do-infra-prod-ldap-outpost
-      ports:
-        - protocol: TCP
-          port: 389

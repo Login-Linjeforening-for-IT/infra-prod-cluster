@@ -240,16 +240,14 @@ spec:
     - Ingress
     - Egress
   ingress:
-    - {}
     - from:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: zammad
-      ports:
-        - protocol: TCP
-          port: 389
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: zammad
   egress:
-    - {}
     - to:
         - ipBlock:
             cidr: 0.0.0.0/0
