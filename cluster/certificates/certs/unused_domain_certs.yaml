@@ -4,12 +4,13 @@ kind: Certificate
 metadata:
   name: redirect-old-domains
   namespace: certificates
-  annotations:
-    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
-    reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: redirect-namespace
-    reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
 spec:
   secretName: redirect-old-domains-cert
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: redirect-namespace
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
   issuerRef:
     kind: Issuer
     name: do-issuer-prod
