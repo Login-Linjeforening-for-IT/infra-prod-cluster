@@ -13,3 +13,4 @@ spec:
         - usb.login.no
   rules:
     - host: usb.login.no
+

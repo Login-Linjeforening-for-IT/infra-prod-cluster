@@ -13,3 +13,4 @@ spec:
         - discord.login.no
   rules:
     - host: discord.login.no
+
