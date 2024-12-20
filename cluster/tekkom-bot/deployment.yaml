@@ -25,7 +25,7 @@ spec:
         - name: tekkom-bot-pull-secret
       containers:
         - name: tekkom-bot
-          image: registry.login.no/tekkom/playground/tekkom-bot:2.0.1@sha256:e356fb1f9ced7264e3d04ee7c8e6c3f4b6847c5ab849010484136ebd41e41cb2
+          image: registry.login.no/tekkom/playground/tekkom-bot:2.0.2@sha256:79d6bf885ff1427032412698856320492b09f5720dc01dba0cfb4dd798cffbf2
           imagePullPolicy: Always
           ports:
             - containerPort: 6969
