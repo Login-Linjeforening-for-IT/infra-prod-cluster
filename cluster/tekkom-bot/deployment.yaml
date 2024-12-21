@@ -113,6 +113,11 @@ spec:
               value: "survival"
             - name: MINECRAFT_CREATIVE
               value: "creative"
+            - name: PRIVATE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: PRIVATE_TOKEN
           # No liveness and readiness probes - awaiting solution.
           resources:
             requests:
