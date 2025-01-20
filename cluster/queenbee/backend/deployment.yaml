@@ -139,7 +139,6 @@ spec:
                       values:
                         - admin-api
                 topologyKey: kubernetes.io/hostname
-
       volumes:
         - name: tls-certs
           secret:
