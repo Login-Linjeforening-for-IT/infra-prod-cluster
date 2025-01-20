@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: admin-api-certs
+  name: queenbee-api-certs
   namespace: queenbee
 spec:
   interval: 5m

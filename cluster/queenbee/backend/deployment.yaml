@@ -4,10 +4,14 @@ kind: Deployment
 metadata:
   labels:
     app: admin-api
+    component: api
+    part-of: queenbee
+    project: queenbee
+    confidentiality: not-defined
+    compliance: not-defined
   name: admin-api
   namespace: queenbee
 spec:
-  replicas: 1
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,6 +24,11 @@ spec:
     metadata:
       labels:
         app: admin-api
+        component: api
+        part-of: queenbee
+        project: queenbee
+        confidentiality: not-defined
+        compliance: not-defined
     spec:
       imagePullSecrets:
         - name: gitlab-api-pull-token
