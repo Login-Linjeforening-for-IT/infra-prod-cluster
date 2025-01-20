@@ -16,7 +16,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/usr/src/app/dist/queenbee/"
+            path: "/"
             backend:
               service:
                 name: queenbee-api
