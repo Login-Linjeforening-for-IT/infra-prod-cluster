@@ -3,13 +3,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: admin-api
+    app: queenbee-api
     component: api
     part-of: queenbee
     project: queenbee
     confidentiality: not-defined
     compliance: not-defined
-  name: admin-api
+  name: queenbee-api
   namespace: queenbee
 spec:
   strategy:
@@ -19,11 +19,11 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: admin-api
+      app: queenbee-api
   template:
     metadata:
       labels:
-        app: admin-api
+        app: queenbee-api
         component: api
         part-of: queenbee
         project: queenbee
@@ -33,9 +33,9 @@ spec:
       imagePullSecrets:
         - name: gitlab-api-pull-token
       containers:
-        - image: registry.login.no/tekkom/web/beehive/admin-api:1.0.3@sha256:ff43041ad70c4bb5f4cb971646af56bf18786eb579442c3f88bb344f00b58896
+        - image: registry.login.no/tekkom/web/beehive/queenbee-api:1.0.3@sha256:ff43041ad70c4bb5f4cb971646af56bf18786eb579442c3f88bb344f00b58896
           imagePullPolicy: Always
-          name: admin-api
+          name: queenbee-api
           env:
             - name: PORT
               value: "8080"
@@ -65,12 +65,12 @@ spec:
             - name: OAUTH2_CLIENT_ID
               valueFrom:
                 secretKeyRef:
-                  name: admin-api-auth
+                  name: queenbee-api-auth
                   key: client_id
             - name: OAUTH2_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: admin-api-auth
+                  name: queenbee-api-auth
                   key: client_secret
             - name: OAUTH2_REDIRECT_URL
               value: https://queenbee-api.login.no/v1/oauth2/callback
@@ -81,12 +81,12 @@ spec:
             - name: TOKEN_ACCESS_TOKEN_SYMMETRIC_KEY
               valueFrom:
                 secretKeyRef:
-                  name: admin-api-auth
+                  name: queenbee-api-auth
                   key: access_token_key
             - name: TOKEN_REFRESH_TOKEN_SYMMETRIC_KEY
               valueFrom:
                 secretKeyRef:
-                  name: admin-api-auth
+                  name: queenbee-api-auth
                   key: refresh_token_key
             - name: TOKEN_ACCESS_TOKEN_DURATION
               value: 15m
@@ -146,7 +146,7 @@ spec:
                     - key: app
                       operator: In
                       values:
-                        - admin-api
+                        - queenbee-api
                 topologyKey: kubernetes.io/hostname
       volumes:
         - name: tls-certs
