@@ -16,7 +16,7 @@ metadata:
 spec:
   secretName: backend-self-signed
   dnsNames:
-    - queenbee-api-svc.queenbee.svc.cluster.local
+    - queenbee-api.queenbee.svc.cluster.local
   issuerRef:
     name: selfsigned-issuer
     kind: Issuer
