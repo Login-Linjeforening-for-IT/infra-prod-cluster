@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: queenbee-api
   namespace: queenbee
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx-external
   tls:
