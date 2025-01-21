@@ -18,8 +18,6 @@ spec:
   values:
     replicaCount: 1
     controller:
-      config:
-        annotation-risk-level: Critical
       kind: DaemonSet
       allowSnippetAnnotations: true
       containerPort:
@@ -99,6 +97,7 @@ spec:
           type: secret
           readOnly: true
       config:
+        annotation-risk-level: Critical
         plugins: "crowdsec"
         lua-shared-dicts: "crowdsec_cache: 50m"
         server-snippet: |
