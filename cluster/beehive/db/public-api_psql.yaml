@@ -55,3 +55,18 @@ spec:
   schedule: "0 0 0 * * *"
   cluster:
     name: public-api-psql
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: public-api-psql
+  namespace: beehive
+  labels:
+    release: prometheus
+spec:
+  podMetricsEndpoints:
+    - port: metrics
+  selector:
+    matchLabels:
+      cnpg.io/cluster: public-api-psql
