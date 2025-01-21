@@ -34,11 +34,11 @@ data:
   proxy-real-ip-cidr: "10.0.0.0/8"
 
   # Timeouts
-  proxy-connect-timeout: "10"
-  proxy-read-timeout: "10"
-  keepalive-timeout: "10s"
-  proxy-send-timeout: "10"
-  client-header-timeout: "10"
+  proxy-connect-timeout: "100"
+  proxy-read-timeout: "100"
+  keepalive-timeout: "100s"
+  proxy-send-timeout: "100"
+  client-header-timeout: "100"
 
   # Div configs
   use_http2: "true"
