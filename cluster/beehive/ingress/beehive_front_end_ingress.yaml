@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: beehive-frontend-ingress-change
+  name: beehive-frontend-ingress
   namespace: beehive
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
