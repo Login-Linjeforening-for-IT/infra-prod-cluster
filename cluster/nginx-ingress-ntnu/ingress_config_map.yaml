@@ -35,7 +35,7 @@ data:
 
   # Timeouts
   proxy-connect-timeout: "10"
-  proxy-read-timeout: "1"
+  proxy-read-timeout: "10"
   keepalive-timeout: "10s"
   proxy-send-timeout: "10"
   client-header-timeout: "10"
