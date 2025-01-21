@@ -19,7 +19,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/"
+            path: /
             backend:
               service:
                 name: beehive-frontend-svc
@@ -29,7 +29,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/"
+            path: /
             backend:
               service:
                 name: beehive-frontend-svc
