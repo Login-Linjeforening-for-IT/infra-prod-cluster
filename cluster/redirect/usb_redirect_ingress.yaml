@@ -3,8 +3,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/permanent-redirect: "https://shop.tpgo.no/\\#/?countryCode=NO&companyIdent=811940372"
-    nginx.ingress.kubernetes.io/permanent-redirect-code: "301"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      return 301 https://shop.tpgo.no/#/?countryCode=NO&companyIdent=811940372;
   name: usb-redirect-ingress
   namespace: redirect-namespace
 spec:
