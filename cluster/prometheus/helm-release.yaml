@@ -43,6 +43,8 @@ spec:
         probeSelectorNilUsesHelmValues: false
         serviceMonitorSelector: {}
         podMonitorSelector: {}
+        retention: 90d
+        retentionSize: 40GB
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -72,7 +74,7 @@ spec:
           group_by: ["alertname"]
           group_wait: 5s
           group_interval: 1m
-          repeat_interval: 72h
+          repeat_interval: 720h
           routes:
             - match:
                 ruleset: login-custom
