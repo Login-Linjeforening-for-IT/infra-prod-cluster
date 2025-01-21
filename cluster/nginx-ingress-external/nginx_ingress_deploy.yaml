@@ -97,7 +97,6 @@ spec:
           type: secret
           readOnly: true
       config:
-        annotation-risk-level: Critical
         plugins: "crowdsec"
         lua-shared-dicts: "crowdsec_cache: 50m"
         server-snippet: |
