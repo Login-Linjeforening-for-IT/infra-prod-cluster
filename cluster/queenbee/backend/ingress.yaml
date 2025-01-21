@@ -2,12 +2,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: queenbee-api
+  name: queenbee-backend-ingress
   namespace: queenbee
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
-  ingressClassName: nginx-ntnu
+  ingressClassName: nginx-external
   tls:
     - hosts:
         - queenbee-api.login.no

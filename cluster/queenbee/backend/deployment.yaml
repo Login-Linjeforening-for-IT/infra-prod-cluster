@@ -4,11 +4,6 @@ kind: Deployment
 metadata:
   labels:
     app: queenbee-api
-    component: api
-    part-of: queenbee
-    project: queenbee
-    confidentiality: not-defined
-    compliance: not-defined
   name: queenbee-api
   namespace: queenbee
 spec:
@@ -24,11 +19,6 @@ spec:
     metadata:
       labels:
         app: queenbee-api
-        component: api
-        part-of: queenbee
-        project: queenbee
-        confidentiality: not-defined
-        compliance: not-defined
     spec:
       imagePullSecrets:
         - name: gitlab-api-pull-token
