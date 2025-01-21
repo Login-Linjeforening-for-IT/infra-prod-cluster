@@ -34,17 +34,17 @@ data:
   proxy-real-ip-cidr: "10.0.0.0/8"
 
   # Timeouts
-  proxy-connect-timeout: "100"
-  proxy-read-timeout: "100"
-  keepalive-timeout: "100s"
-  proxy-send-timeout: "100"
-  client-header-timeout: "100"
+  proxy-connect-timeout: "10"
+  proxy-read-timeout: "10"
+  keepalive-timeout: "10s"
+  proxy-send-timeout: "10"
+  client-header-timeout: "10"
 
   # Div configs
   use_http2: "true"
   server-tokens: "false"
-  proxy-body-size: "5m"
-  large-client-header-buffers: "2 16k"
+  proxy-body-size: "100K"
+  large-client-header-buffers: "2 1k"
   proxy-headers-hash-max-size: "1024"
   proxy-headers-hash-bucket-size: "128"
 
