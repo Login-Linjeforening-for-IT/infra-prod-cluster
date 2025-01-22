@@ -89,6 +89,7 @@ spec:
                 auth_username: "notifikasjon@login.no"
                 auth_password_file: /etc/alertmanager/secrets/prometheus-email-password/password
                 require_tls: false
+          - name: "null"
       alertmanagerSpec:
         loglevel: debug
         logFormat: json
