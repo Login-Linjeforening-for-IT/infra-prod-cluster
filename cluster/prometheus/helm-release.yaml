@@ -71,14 +71,12 @@ spec:
       config:
         route:
           receiver: "email"
+          matchers:
+            - ruleset: login-custom
           group_by: ["alertname"]
           group_wait: 5s
           group_interval: 1m
           repeat_interval: 720h
-          routes:
-            - match:
-                ruleset: login-custom
-              receiver: "email"
         receivers:
           - name: "email"
             email_configs:
