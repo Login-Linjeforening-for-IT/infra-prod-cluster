@@ -162,6 +162,7 @@ spec:
           cron:
             enabled: true
             schedule: "0 10 * * 1"
+            extraArgs: --skip registry
           objectStorage:
             config:
               secret: gitlab-object-storage
