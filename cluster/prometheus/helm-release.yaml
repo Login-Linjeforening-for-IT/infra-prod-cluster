@@ -72,7 +72,7 @@ spec:
         route:
           receiver: "email"
           matchers:
-            - ruleset: login-custom
+            - ruleset="login-custom"
           group_by: ["alertname"]
           group_wait: 5s
           group_interval: 1m
