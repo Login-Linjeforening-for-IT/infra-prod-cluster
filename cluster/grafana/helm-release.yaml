@@ -37,7 +37,6 @@ spec:
         api_url: "https://authentik.login.no/application/o/userinfo/"
         role_attribute_path: contains(groups, 'grafana-admin') && 'Admin' || contains(groups, 'grafana-editor') && 'Editor' || contains(groups, 'grafana-viewer') && 'Viewer'
         use_refresh_token: true
-        login_attribute_path: "sub"
       date:
         default_timezone: "Europe/London"
     sidecar:
