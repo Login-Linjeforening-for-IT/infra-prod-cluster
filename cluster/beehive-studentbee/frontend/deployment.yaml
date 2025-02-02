@@ -36,9 +36,6 @@ spec:
         - name: webserver
           image: registry.login.no/tekkom/web/beehive/exam.login.no/frontend:2.0.0@sha256:38c69cafc5a88260144fbbaf169962518e440c5238a0b08cadbbaf48ffe57287
           imagePullPolicy: IfNotPresent
-          command:
-            - npm
-            - start
           env:
             - name: API_URL
               value: http://studentbee-api.studentbee.svc.cluster.local:8080/api
