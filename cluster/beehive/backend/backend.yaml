@@ -23,7 +23,7 @@ spec:
       imagePullSecrets:
         - name: gitlab-token-beehive-backend
       containers:
-        - image: registry.login.no/tekkom/web/beehive/public-api:0.7.1@sha256:7b9c85d5b3d84a6e199e9fd5c7c8f5eb6fec26ffbebfbfacdab42a6426107663
+        - image: registry.login.no/tekkom/web/beehive/public-api:1.1.0@sha256:9808d0e355e9467f46b0a92a9f26f576f84825719ce71ab4a1de38e5d15c4ae0
           imagePullPolicy: Always
           name: beehive-backend
           env:
