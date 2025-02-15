@@ -119,9 +119,9 @@ spec:
                   name: tekkom-bot-secrets
                   key: PRIVATE_TOKEN
             - name: WIKI_STYRET_TEMPLATE_ID
-              value: 830
+              value: "830"
             - name: WIKI_TEKKOM_TEMPLATE_ID
-              value: 556
+              value: "556"
           # No liveness and readiness probes - awaiting solution.
           resources:
             requests:
