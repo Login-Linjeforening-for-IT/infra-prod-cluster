@@ -27,10 +27,10 @@ spec:
           image: registry.login.no/tekkom/web/beehive/frontend:3.0.2
           imagePullPolicy: Always
           env:
-            - name: NODE_ENV
-              value: production
             - name: API_URL
               value: https://workerbee.login.no/api
+            - name: CDN_URL
+              value: https://cdn.login.no
           ports:
             - containerPort: 3000
               name: 3000tcp
