@@ -32,19 +32,19 @@ spec:
             - name: API_URL
               value: https://workerbee.login.no/api
           ports:
-            - containerPort: 80
-              name: 80tcp
+            - containerPort: 3000
+              name: 3000tcp
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: 80
+              port: 3000
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
-              port: 80
+              port: 3000
             initialDelaySeconds: 5
             periodSeconds: 5
           resources:
