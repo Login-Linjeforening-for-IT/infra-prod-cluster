@@ -121,7 +121,7 @@ spec:
             - name: WIKI_STYRET_TEMPLATE_ID
               value: "830"
             - name: WIKI_TEKKOM_TEMPLATE_ID
-              value: "556"
+              value: "835"
           # No liveness and readiness probes - awaiting solution.
           resources:
             requests:
