@@ -82,6 +82,15 @@ spec:
               value: 15m
             - name: TOKEN_REFRESH_TOKEN_DURATION
               value: 12h
+            - name: DO_ACCESS_KEY_ID
+              value: DO801ADRKWK7UTX6RHYV
+            - name: DO_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: DO-auth
+                  key: credential
+            - name: DO_BASE_URL
+              value: https://ams3.digitaloceanspaces.com
           ports:
             - containerPort: 8080
               name: 8080tcp
