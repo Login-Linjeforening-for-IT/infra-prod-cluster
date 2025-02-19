@@ -87,7 +87,7 @@ spec:
             - name: DO_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: DO-auth
+                  name: do-auth
                   key: credential
             - name: DO_BASE_URL
               value: https://ams3.digitaloceanspaces.com
