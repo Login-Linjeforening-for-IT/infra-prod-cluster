@@ -43,7 +43,7 @@ data:
   # Div configs
   use_http2: "true"
   server-tokens: "false"
-  proxy-body-size: "5m"
+  proxy-body-size: "50m"
   large-client-header-buffers: "2 16k"
   proxy-headers-hash-max-size: "1024"
   proxy-headers-hash-bucket-size: "128"
