@@ -6,8 +6,10 @@ metadata:
   namespace: queenbee
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      add_header Content-Security-Policy "img-src 'self' data: blob: https://cdn.login.no; connect-src 'self' https://queenbee-api.login.no https://queenbee.login.no";
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://queenbee.login.no"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Origin, Content-Type, Accept, Authorization"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
 spec:
   ingressClassName: nginx-ntnu
   tls:
