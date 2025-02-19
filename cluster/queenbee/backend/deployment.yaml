@@ -23,7 +23,7 @@ spec:
       imagePullSecrets:
         - name: gitlab-api-pull-token
       containers:
-        - image: registry.login.no/tekkom/web/beehive/admin-api:1.1.6@sha256:4aa657a91b900d2cf9b50109d8287e7f230cdae2b2f29a1f1a04ba5c174f55b2
+        - image: registry.login.no/tekkom/web/beehive/admin-api:1.1.7@sha256:cba9db6116ae05981d08fd05d4810721733f92c8813da860dfd1ea9fd22e8d67
           imagePullPolicy: Always
           name: queenbee-api
           env:
