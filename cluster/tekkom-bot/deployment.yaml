@@ -122,6 +122,18 @@ spec:
               value: "830"
             - name: WIKI_TEKKOM_TEMPLATE_ID
               value: "835"
+            - name: DB
+              value: "tekkom"
+            - name: DB_HOST
+              value: "tekkom-bot_database"
+            - name: DB_USER
+              value: "tekkom"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: DB_PASSWORD
+
           # No liveness and readiness probes - awaiting solution.
           resources:
             requests:
