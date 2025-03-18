@@ -24,7 +24,7 @@ spec:
               service:
                 name: beehive-frontend-svc
                 port:
-                  number: 80
+                  number: 3000
     - host: www.login.no
       http:
         paths:
@@ -34,4 +34,4 @@ spec:
               service:
                 name: beehive-frontend-svc
                 port:
-                  number: 80
+                  number: 3000
