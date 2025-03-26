@@ -6,10 +6,8 @@ metadata:
   namespace: beehive
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      add_header Content-Security-Policy "default-src 'self'; img-src 'self' data: cdn.login.no login.no; style-src 'self' fonts.googleapis.com; style-src-attr 'self' 'unsafe-inline'; style-src-elem 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://api.mapbox.com; connect-src 'self' api.login.no testapi.login.no events.mapbox.com https://*.mazemap.com https://api.mapbox.com; worker-src 'self' blob:; frame-src 'self' use.mazemap.com";
+      add_header Content-Security-Policy "default-src 'self'; img-src 'self' data: cdn.login.no login.no; style-src 'self' fonts.googleapis.com; style-src-attr 'self' 'unsafe-inline'; style-src-elem 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; script-src 'self' 'unsafe-eval'; connect-src 'self' https://workerbee.login.no events.mapbox.com https://*.mazemap.com https://api.mapbox.com; script-src-elem 'self' https://api.mapbox.com; worker-src 'self' blob:; frame-src 'self' use.mazemap.com";
       more_clear_headers "X-Robots-Tag";
-
-
 spec:
   ingressClassName: nginx-external
   tls:
