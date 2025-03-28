@@ -30,9 +30,6 @@ spec:
         nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
         nginx.ingress.kubernetes.io/upgrade-proxy: "true"
         nginx.ingress.kubernetes.io/enable-websockets: "true"
-        nginx.ingress.kubernetes.io/configuration-snippet: |
-          proxy_hide_header X-Content-Type-Options;
-        nginx.ingress.kubernetes.io/whitelist-source-range: 129.241.0.0/16,78.91.0.0/18,78.91.64.0/20,78.91.80.0/22,128.39.0.0/16
       tls:
         - hosts:
             - zammad.login.no
