@@ -68,5 +68,3 @@ spec:
                       values:
                         - beehive-frontend
                 topologyKey: kubernetes.io/hostname
-
-
