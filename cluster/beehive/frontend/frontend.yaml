@@ -30,7 +30,7 @@ spec:
             - name: NODE_ENV
               value: production
             - name: API_URL
-              value: http://beehive-backend.beehive.svc.cluster.local:8080/api
+              value: https://workerbee.login.no/api
             - name: CDN_URL
               value: https://cdn.login.no
           ports:
