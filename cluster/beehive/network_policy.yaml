@@ -125,6 +125,41 @@ spec:
   egress:
     - {}
 
+# Allowing api ingress traffic
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-ingress-traffic
+  namespace: beehive
+spec:
+  podSelector:
+    matchLabels:
+      app: beehive-backend
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-external
+      ports:
+        - protocol: TCP
+          port: 8080
+    - from:
+        - podSelector:
+            matchLabels:
+              app: beehive-frontend
+      ports:
+        - protocol: TCP
+          port: 8080
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-external
+
 # Allowing frontend to api traffic
 ---
 apiVersion: networking.k8s.io/v1
