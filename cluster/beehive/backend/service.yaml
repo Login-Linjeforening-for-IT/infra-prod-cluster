@@ -2,15 +2,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: beehive-frontend-svc
+  name: beehive-backend
   namespace: beehive
   labels:
-    app: beehive-frontend
+    app: beehive-backend
 spec:
   type: ClusterIP
   selector:
-    app: beehive-frontend
+    app: beehive-backend
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 8080
+      targetPort: 8080

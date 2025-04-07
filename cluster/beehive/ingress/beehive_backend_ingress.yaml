@@ -19,6 +19,6 @@ spec:
             path: "/"
             backend:
               service:
-                name: beehive-backend-svc
+                name: beehive-backend
                 port:
                   number: 8080

@@ -125,6 +125,34 @@ spec:
   egress:
     - {}
 
+# Allowing api to kube-dns traffic
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-to-kube-dns
+  namespace: beehive
+spec:
+  podSelector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - beehive-backend
+          - beehive-frontend
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+
 # Allowing api ingress traffic
 ---
 apiVersion: networking.k8s.io/v1
@@ -181,3 +209,23 @@ spec:
       ports:
         - protocol: TCP
           port: 8080
+
+# Allowing egress frontend to internet (required for CDN, can whitelist IPs, 
+# but then we need automation to update them since DigitalOcean changes them 
+# automatically all the time.
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-egress-internet
+  namespace: beehive
+spec:
+  podSelector:
+    matchLabels:
+      app: beehive-frontend
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0

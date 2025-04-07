@@ -8,12 +8,12 @@ resources:
   - cert_kustomization.yaml
   - network_policy.yaml
   - db_kust.yaml
-  - backend/backend.yaml
-  - backend/backend_hpa.yaml
-  - backend/backend_pdb.yaml
-  - backend/backend_svc.yaml
-  - frontend/frontend.yaml
-  - frontend/frontend_hpa.yaml
-  - frontend/frontend_pdb.yaml
-  - frontend/frontend_svc.yaml
+  - backend/deployment.yaml
+  - backend/hpa.yaml
+  - backend/pdb.yaml
+  - backend/service.yaml
+  - frontend/deployment.yaml
+  - frontend/hpa.yaml
+  - frontend/pdb.yaml
+  - frontend/service.yaml
   - tmp_postgres_client.yaml

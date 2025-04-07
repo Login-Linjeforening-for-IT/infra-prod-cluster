@@ -22,7 +22,7 @@ spec:
             path: /
             backend:
               service:
-                name: beehive-frontend-svc
+                name: beehive-frontend
                 port:
                   number: 3000
     - host: www.login.no
@@ -32,6 +32,6 @@ spec:
             path: /
             backend:
               service:
-                name: beehive-frontend-svc
+                name: beehive-frontend
                 port:
                   number: 3000

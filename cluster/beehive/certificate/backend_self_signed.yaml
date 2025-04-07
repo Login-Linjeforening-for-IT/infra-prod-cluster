@@ -16,7 +16,7 @@ metadata:
 spec:
   secretName: backend-self-signed
   dnsNames:
-    - beehive-backend-svc.beehive.svc.cluster.local
+    - beehive-backend.beehive.svc.cluster.local
   issuerRef:
     name: selfsigned-issuer
     kind: Issuer
