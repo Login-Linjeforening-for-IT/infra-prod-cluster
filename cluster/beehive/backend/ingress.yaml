@@ -4,8 +4,6 @@ kind: Ingress
 metadata:
   name: beehive-backend-ingress
   namespace: beehive
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx-external
   tls:
