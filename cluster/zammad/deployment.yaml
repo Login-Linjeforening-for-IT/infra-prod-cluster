@@ -66,4 +66,4 @@ spec:
         replicas: 3
         securityContext:
           readOnlyRootFilesystem: false
-          privileged: true
+          privileged: false
