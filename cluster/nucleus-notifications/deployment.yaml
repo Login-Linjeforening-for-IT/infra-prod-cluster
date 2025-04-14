@@ -26,7 +26,7 @@ spec:
         - name: nucleus-notifications-pull-secret
       containers:
         - name: nucleus-notifications
-          image: registry.login.no/tekkom/apps/nucleus-notifications:2.2.0@sha256:f31fe9c45c14392ccc150037bd473ea284a96e9c71891f7ecea74528144cd42a
+          image: registry.login.no/tekkom/apps/nucleus-notifications:2.2.1
           imagePullPolicy: Always
           env:
             - name: api_url
