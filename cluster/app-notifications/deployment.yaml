@@ -3,9 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: automated-notifications
-  name: automated-notifications
-  namespace: automated-notifications
+    app: nucleus-notifications
+  name: nucleus-notifications
+  namespace: nucleus-notifications
 spec:
   strategy:
     rollingUpdate:
@@ -16,24 +16,24 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: automated-notifications
+      app: nucleus-notifications
   template:
     metadata:
       labels:
-        app: automated-notifications
+        app: nucleus-notifications
     spec:
       imagePullSecrets:
-        - name: automated-notifications-pull-secret
+        - name: nucleus-notifications-pull-secret
       containers:
-        - name: automated-notifications
-          image: registry.login.no/tekkom/apps/automatednotifications:2.2.0@sha256:f31fe9c45c14392ccc150037bd473ea284a96e9c71891f7ecea74528144cd42a
+        - name: nucleus-notifications
+          image: registry.login.no/tekkom/apps/nucleus-notifications:2.2.0@sha256:f31fe9c45c14392ccc150037bd473ea284a96e9c71891f7ecea74528144cd42a
           imagePullPolicy: Always
           env:
             - name: api_url
               value: https://fcm.googleapis.com/fcm/send
           envFrom:
             - secretRef:
-                name: automated-notifications-api-token
+                name: nucleus-notifications-api-token
           volumeMounts:
             - name: firebase-secrets
               mountPath: /usr/src/app/secrets
@@ -62,4 +62,4 @@ spec:
       volumes:
         - name: firebase-secrets
           secret:
-            secretName: automated-notifications-firebase-secrets
+            secretName: nucleus-notifications-firebase-secrets

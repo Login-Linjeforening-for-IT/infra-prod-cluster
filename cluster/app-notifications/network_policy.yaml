@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: deny-all
-  namespace: automated-notifications
+  namespace: nucleus-notifications
 spec:
   podSelector: {}
   policyTypes:
@@ -15,11 +15,11 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-all-except-internal
-  namespace: automated-notifications
+  namespace: nucleus-notifications
 spec:
   podSelector:
     matchLabels:
-      app: automated-notifications
+      app: nucleus-notifications
   egress:
     - to:
         - ipBlock:
@@ -34,11 +34,11 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-kube-dns
-  namespace: automated-notifications
+  namespace: nucleus-notifications
 spec:
   podSelector:
     matchLabels:
-      app: automated-notifications
+      app: nucleus-notifications
   policyTypes:
     - Ingress
     - Egress
