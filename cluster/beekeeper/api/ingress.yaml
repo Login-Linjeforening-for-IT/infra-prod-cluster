@@ -15,7 +15,7 @@ spec:
         paths:
           - pathType: Prefix
             path: "/"
-            api:
+            backend:
               service:
                 name: beekeeper-api
                 port:
