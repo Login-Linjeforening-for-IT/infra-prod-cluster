@@ -23,7 +23,7 @@ spec:
       imagePullSecrets:
         - name: beekeeper-pull-token
       containers:
-        - image: registry.login.no/tekkom/web/beehive/beekeeper/frontend:1.0.0
+        - image: registry.login.no/tekkom/web/beehive/beekeeper/frontend:1.0.1
           imagePullPolicy: Always
           name: beekeeper-frontend
           env:
