@@ -2,12 +2,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: beekeeper-frontend-ingress
+  name: beekeeper-frontend
   namespace: beekeeper
-  annotations:
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      add_header Content-Security-Policy "img-src 'self' data: blob: https://cdn.login.no; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; font-src https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'self' https://beekeeper-api.login.no";
-
 spec:
   ingressClassName: nginx-ntnu
   tls:

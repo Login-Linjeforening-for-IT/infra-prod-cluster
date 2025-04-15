@@ -2,14 +2,18 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: 1pwdsecrets
+  name: beekeeper-frontend
   namespace: beekeeper
 spec:
   interval: 5m
-  path: "cluster/beekeeper/secrets"
+  path: "cluster/beekeeper/frontend"
   dependsOn:
-    - name: 1password-connect
-      namespace: 1pwd
+    - name: beekeeper-secrets
+      namespace: beekeeper
+    - name: beekeeper-api
+      namespace: beekeeper
+    - name: cert-manager
+      namespace: cert-manager
   prune: true
   sourceRef:
     kind: GitRepository
