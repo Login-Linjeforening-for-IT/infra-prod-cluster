@@ -23,7 +23,7 @@ spec:
       imagePullSecrets:
         - name: gitlab-api-pull-token
       containers:
-        - image: registry.login.no/tekkom/web/beehive/beekeeper/api:1.0.0
+        - image: registry.login.no/tekkom/web/beehive/beekeeper/api:1.0.1
           imagePullPolicy: Always
           name: beekeeper-api
           env:
