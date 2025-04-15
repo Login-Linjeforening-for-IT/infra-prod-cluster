@@ -1,0 +1,24 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: beekeeper-api-ingress
+  namespace: beekeeper
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx-ntnu
+  tls:
+    - hosts:
+        - beekeeper-api.login.no
+  rules:
+    - host: beekeeper-api.login.no
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: beekeeper-api
+                port:
+                  number: 8080

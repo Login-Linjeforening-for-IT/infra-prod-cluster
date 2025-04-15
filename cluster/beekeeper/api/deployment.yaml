@@ -1,0 +1,109 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: beekeeper-api
+  name: beekeeper-api
+  namespace: beekeeper
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: beekeeper-api
+  template:
+    metadata:
+      labels:
+        app: beekeeper-api
+    spec:
+      imagePullSecrets:
+        - name: gitlab-api-pull-token
+      containers:
+        - image: registry.login.no/tekkom/web/beehive/beekeeper/api:1.0.0
+          imagePullPolicy: Always
+          name: beekeeper-api
+          env:
+            - name: PORT
+              value: "8080"
+            - name: DB_HOST
+              value: beekeeper
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: beekeeper
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: public-api-db-credentials
+                  key: password
+            - name: DB_NAME
+              value: beekeeper
+          ports:
+            - containerPort: 8080
+              name: 8080tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+              scheme: HTTPS
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+              scheme: HTTPS
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: tls-certs
+              readOnly: true
+              mountPath: "/tls"
+        # - name: redis
+        #   image: redis:7.4.1-alpine3.20@sha256:c1e88455c85225310bbea54816e9c3f4b5295815e6dbf80c34d40afc6df28275
+        #   imagePullPolicy: IfNotPresent
+        #   ports:
+        #     - containerPort: 6379
+        #       name: 6379tcp
+        #       protocol: TCP
+        #   resources:
+        #     requests:
+        #       memory: 128Mi
+        #       cpu: 125m
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - beekeeper-api
+                topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: tls-certs
+          secret:
+            secretName: backend-self-signed
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key

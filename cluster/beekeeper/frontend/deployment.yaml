@@ -1,0 +1,66 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: beekeeper-frontend
+  name: beekeeper-frontend
+  namespace: beekeeper
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: beekeeper-frontend
+  template:
+    metadata:
+      labels:
+        app: beekeeper-frontend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-frontend-pull-token
+      containers:
+        - image: registry.login.no/tekkom/web/beehive/beekeeper:1.0.0
+          imagePullPolicy: Always
+          name: beekeeper-frontend
+          env:
+            - name: BASE_URL
+              value: https://beekeeper-api.login.no/v1
+          ports:
+            - containerPort: 4200
+              name: 4200tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 4200
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 4200
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - beekeeper-frontend
+                topologyKey: kubernetes.io/hostname

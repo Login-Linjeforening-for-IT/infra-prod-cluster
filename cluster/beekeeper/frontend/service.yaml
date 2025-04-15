@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: beekeeper-frontend
+  namespace: beekeeper
+  labels:
+    app: beekeeper-frontend
+spec:
+  type: ClusterIP
+  selector:
+    app: beekeeper-frontend
+  ports:
+    - protocol: TCP
+      port: 4200
+      targetPort: 4200
