@@ -4,8 +4,6 @@ kind: Ingress
 metadata:
   name: beekeeper-api-ingress
   namespace: beekeeper
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx-ntnu
   tls:
@@ -17,7 +15,7 @@ spec:
         paths:
           - pathType: Prefix
             path: "/"
-            backend:
+            api:
               service:
                 name: beekeeper-api
                 port:
