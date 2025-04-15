@@ -35,11 +35,11 @@ spec:
               value: "5432"
             - name: DB_USER
               value: beekeeper
-            - name: DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: public-api-db-credentials
-                  key: password
+            # - name: DB_PASS
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: public-api-db-credentials
+            #       key: password
             - name: DB_NAME
               value: beekeeper
           ports:
