@@ -14,7 +14,6 @@ spec:
       namespace: studentbee
     - name: cert-manager
       namespace: cert-manager
-    ## implement additional dependencies as flux-kustomizations are added
   prune: true
   sourceRef:
     kind: GitRepository
