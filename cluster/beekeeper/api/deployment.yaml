@@ -71,10 +71,6 @@ spec:
             runAsNonRoot: true
             runAsUser: 1000
             readOnlyRootFilesystem: true
-          volumeMounts:
-            - name: tls-certs
-              readOnly: true
-              mountPath: "/tls"
         # - name: redis
         #   image: redis:7.4.1-alpine3.20@sha256:c1e88455c85225310bbea54816e9c3f4b5295815e6dbf80c34d40afc6df28275
         #   imagePullPolicy: IfNotPresent
@@ -98,12 +94,3 @@ spec:
                       values:
                         - beekeeper-api
                 topologyKey: kubernetes.io/hostname
-      volumes:
-        - name: tls-certs
-          secret:
-            secretName: backend-self-signed
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key

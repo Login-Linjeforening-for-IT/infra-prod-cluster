@@ -21,7 +21,7 @@ spec:
         app: beekeeper-frontend
     spec:
       imagePullSecrets:
-        - name: gitlab-frontend-pull-token
+        - name: beekeeper-pull-token
       containers:
         - image: registry.login.no/tekkom/web/beehive/beekeeper:1.0.0
           imagePullPolicy: Always

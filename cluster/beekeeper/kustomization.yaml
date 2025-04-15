@@ -4,6 +4,5 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - api_kust.yaml
-  - cert_kust.yaml
   - secret_kust.yaml
   - frontend_kust.yaml
