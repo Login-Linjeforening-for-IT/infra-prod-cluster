@@ -4,7 +4,9 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - network_policy.yaml
+  - postgres_client.yaml
   - limitrange.yaml
   - kustomize/frontend.yaml
   - kustomize/secrets.yaml
   - kustomize/api.yaml
+  - kustomize/db.yaml
