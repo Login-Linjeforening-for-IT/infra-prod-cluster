@@ -128,11 +128,11 @@ spec:
               value: "tekkom-bot_database"
             - name: DB_USER
               value: "tekkom"
-            - name: DB_PASSWORD
+            - name: DB_PASS
               valueFrom:
                 secretKeyRef:
                   name: tekkom-bot-secrets
-                  key: DB_PASSWORD
+                  key: DB_PASS
 
           # No liveness and readiness probes - awaiting solution.
           resources:

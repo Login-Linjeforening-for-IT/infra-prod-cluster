@@ -1,4 +1,3 @@
-# General network policies for the beekeeper namespace
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -15,29 +14,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-all-egress-except-internal
-  namespace: beekeeper
-spec:
-  podSelector:
-    matchLabels:
-      app: beekeeper-api
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-            except:
-              - 10.0.0.0/8
-              - 172.16.0.0/12
-              - 192.168.0.0/16
-
-# Allowing frontend ingress traffic
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-frontend-ingress-traffic
+  name: allow-ingress-frontend
   namespace: beekeeper
 spec:
   podSelector:
@@ -52,20 +29,108 @@ spec:
             matchLabels:
               kubernetes.io/metadata.name: nginx-ingress-ntnu
       ports:
-        - protocol: TCP
-          port: 3000
+        - port: 3000
+          protocol: TCP
   egress:
     - to:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: nginx-ingress-ntnu
 
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api
+  namespace: beekeeper
+spec:
+  podSelector:
+    matchLabels:
+      app: beekeeper-api
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-ntnu
+      ports:
+        - port: 8080
+          protocol: TCP
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-ntnu
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-ntnu
+      ports:
+        - port: 8080
+          protocol: TCP
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: beekeeper
+          podSelector:
+            matchLabels:
+              cnpg.io/cluster: beekeeper-api-psql
+      ports:
+        - port: 5432
+          protocol: TCP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-psql
+  namespace: beekeeper
+spec:
+  policyTypes:
+    - Ingress
+    - Egress
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: beekeeper-api-psql
+  ingress:
+    - {}
+  egress:
+    - {}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-psql-client
+  namespace: beekeeper
+spec:
+  policyTypes:
+    - Ingress
+    - Egress
+  podSelector:
+    matchLabels:
+      app: postgres-client
+  ingress:
+    - {}
+  egress:
+    - {}
+
 # Allowing api to kube-dns traffic
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-frontend-and-api-to-kube-dns
+  name: allow-api-to-kube-dns
   namespace: beekeeper
 spec:
   podSelector:

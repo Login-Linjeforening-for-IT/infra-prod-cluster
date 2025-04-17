@@ -44,16 +44,16 @@ spec:
             - name: DB
               value: beekeeper
             - name: DB_HOST
-              value: postgres
+              value: beekeeper-api-psql-ro.beehive.svc.cluster.local
             - name: DB_PORT
               value: "5432"
             - name: DB_USER
               value: beekeeper
-            - name: DB_PASSWORD
+            - name: DB_PASS
               valueFrom:
                 secretKeyRef:
                   name: beekeeper-secrets
-                  key: DB_PASSWORD
+                  key: DB_PASS
             - name: API_URL
               value: https://beekeeper-api.login.no/api
             - name: BROWSER_API_URL
