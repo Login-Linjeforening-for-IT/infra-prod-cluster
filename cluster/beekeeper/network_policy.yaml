@@ -218,11 +218,11 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-api-egress-internet
-  namespace: beehive
+  namespace: beekeeper
 spec:
   podSelector:
     matchLabels:
-      app: beehive-api
+      app: beekeeper-api
   policyTypes:
     - Egress
   egress:
