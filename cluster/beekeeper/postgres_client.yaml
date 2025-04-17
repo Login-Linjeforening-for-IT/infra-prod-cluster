@@ -29,8 +29,8 @@ spec:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: beekeeper-api-db-credentials
-                  key: password
+                  name: beekeeper-secrets
+                  key: DB_PASS
           command: ["/bin/sh"]
           args:
             [
