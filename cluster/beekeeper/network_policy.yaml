@@ -209,3 +209,23 @@ spec:
       ports:
         - protocol: TCP
           port: 8080
+
+# Allowing egress api to internet (required for DigitalOcean API.
+# Can whitelist IPs, but then we need automation to update them since 
+# DigitalOcean changes them automatically all the time.
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-egress-internet
+  namespace: beehive
+spec:
+  podSelector:
+    matchLabels:
+      app: beehive-api
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
