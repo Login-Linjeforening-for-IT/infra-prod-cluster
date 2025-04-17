@@ -30,7 +30,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: beekeeper-secrets
-                  key: DB_PASS
+                  key: DB_PASSWORD
           command: ["/bin/sh"]
           args:
             [
