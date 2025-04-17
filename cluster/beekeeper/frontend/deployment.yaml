@@ -38,6 +38,10 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: BASE_URL
+              value: https://authentik.login.no
+            - name: API_URL
+              value: http://beekeeper-api.beekeeper.svc.cluster.local:8080/api
+            - name: BROWSER_API_URL
               value: https://beekeeper-api.login.no/api
             - name: CDN_URL
               value: https://cdn.login.no
