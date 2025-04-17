@@ -3,7 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   # - namespace.yaml
-  # - network_policy.yaml
+  - network_policy.yaml
   # - postgres_client.yaml
   # - limitrange.yaml
   # - kustomize/frontend.yaml
