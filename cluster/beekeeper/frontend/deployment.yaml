@@ -38,7 +38,9 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: BASE_URL
-              value: https://beekeeper-api.login.no/v1
+              value: https://beekeeper-api.login.no/api
+            - name: CDN_URL
+              value: https://cdn.login.no
           ports:
             - containerPort: 3000
               name: 3000tcp

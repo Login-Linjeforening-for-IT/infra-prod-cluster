@@ -41,19 +41,49 @@ spec:
           env:
             - name: PORT
               value: "8080"
-            - name: DB_HOST
+            - name: DB
               value: beekeeper
+            - name: DB_HOST
+              value: postgres
             - name: DB_PORT
               value: "5432"
             - name: DB_USER
               value: beekeeper
-            # - name: DB_PASS
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: public-api-db-credentials
-            #       key: password
-            - name: DB_NAME
-              value: beekeeper
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: DB_PASSWORD
+            - name: API_URL
+              value: https://beekeeper-api.login.no/api
+            - name: BROWSER_API_URL
+              value: https://beekeeper-api.login.no/api
+            - name: DOCTL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: DOCTL_TOKEN
+            - name: PRIVATE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: PRIVATE_TOKEN
+            - name: BASE_URL
+              value: https://authentik.login.no
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: CLIENT_ID
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: CLIENT_SECRET
+            - name: REDIRECT_URI
+              value: https://beekeeper-api.login.no/api/callback
+            - name: BEEKEEPER_URL
+              value: https://beekeeper.login.no
           ports:
             - containerPort: 8080
               name: 8080tcp
