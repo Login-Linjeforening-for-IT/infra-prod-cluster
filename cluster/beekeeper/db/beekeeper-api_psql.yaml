@@ -15,7 +15,6 @@ spec:
       timezone: "Europe/Oslo"
   superuserSecret:
     name: beekeeper-secrets
-    key: DB_PASSWORD
   bootstrap:
     recovery:
       source: clusterBackup
