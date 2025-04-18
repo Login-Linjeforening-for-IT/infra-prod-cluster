@@ -111,19 +111,23 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-psql-client
+  name: allow-api-to-postgres-port-5432
   namespace: beekeeper
 spec:
-  policyTypes:
-    - Ingress
-    - Egress
   podSelector:
     matchLabels:
-      app: postgres-client
-  ingress:
-    - {}
+      app: beekeeper-api
+  policyTypes:
+    - Egress
   egress:
-    - {}
+    - to:
+        - podSelector:
+            matchLabels:
+              app: postgres-client
+      ports:
+        - protocol: TCP
+          port: 5432
+
 
 # Allowing api to kube-dns traffic
 ---
