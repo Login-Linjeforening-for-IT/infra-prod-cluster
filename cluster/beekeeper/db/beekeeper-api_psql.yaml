@@ -17,12 +17,8 @@ spec:
     name: beekeeper-secrets
     key: DB_PASSWORD
   bootstrap:
-    # recovery:
-    #   source: clusterBackup
-    initdb:
-      encoding: UTF8
-      locale: en_US.UTF-8
-      dataChecksums: true
+    recovery:
+      source: clusterBackup
   externalClusters:
     - name: clusterBackup
       barmanObjectStore:
