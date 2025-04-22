@@ -37,7 +37,7 @@ spec:
           image: registry.login.no/tekkom/web/beehive/beekeeper/api:1.2.2
           imagePullPolicy: IfNotPresent
           command: ["sh", "-c"]
-          args: ["./init.sh"]
+          args: ["./scripts/init.sh"]
           env:
             - name: PORT
               value: "8080"
