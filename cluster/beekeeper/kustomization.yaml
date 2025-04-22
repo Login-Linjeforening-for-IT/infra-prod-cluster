@@ -10,3 +10,4 @@ resources:
   - kustomize/secrets.yaml
   - kustomize/api.yaml
   - kustomize/db.yaml
+  - ingress_kustomization.yaml
