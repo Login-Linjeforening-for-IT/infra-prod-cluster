@@ -6,9 +6,6 @@ metadata:
   namespace: beekeeper
 spec:
   ingressClassName: nginx-ntnu
-  tls:
-    - hosts:
-        - beekeeper.login.no
   rules:
     - host: beekeeper.login.no
       http:
