@@ -107,10 +107,10 @@ spec:
             periodSeconds: 5
           resources:
             requests:
-              memory: 128Mi
-              cpu: 125m
-            limits:
               memory: 512Mi
+              cpu: 512m
+            limits:
+              memory: 1024Mi
               cpu: 1000m
       affinity:
         podAntiAffinity:
