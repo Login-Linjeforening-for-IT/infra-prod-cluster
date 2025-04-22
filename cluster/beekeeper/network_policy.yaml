@@ -210,27 +210,6 @@ spec:
         - protocol: TCP
           port: 8080
 
-# Allowing external frontend to api traffic
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-frontend-egress-api-login
-  namespace: beekeeper
-spec:
-  podSelector:
-    matchLabels:
-      app: beekeeper-frontend
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-        - ipBlock:
-            cidr: 24.144.78.128/32
-      ports:
-        - protocol: TCP
-          port: 443
-
 # Allowing egress api to internet (required for DigitalOcean API.
 # Can whitelist IPs, but then we need automation to update them since 
 # DigitalOcean changes them automatically all the time.
