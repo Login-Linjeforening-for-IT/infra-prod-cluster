@@ -112,17 +112,6 @@ spec:
             limits:
               memory: 512Mi
               cpu: 1000m
-        # - name: redis
-        #   image: redis:7.4.1-alpine3.20@sha256:c1e88455c85225310bbea54816e9c3f4b5295815e6dbf80c34d40afc6df28275
-        #   imagePullPolicy: IfNotPresent
-        #   ports:
-        #     - containerPort: 6379
-        #       name: 6379tcp
-        #       protocol: TCP
-        #   resources:
-        #     requests:
-        #       memory: 128Mi
-        #       cpu: 125m
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
