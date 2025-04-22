@@ -9,5 +9,4 @@ resources:
   - kustomize/frontend.yaml
   - kustomize/secrets.yaml
   - kustomize/api.yaml
-  - kustomize/ingress.yaml
   - kustomize/db.yaml
