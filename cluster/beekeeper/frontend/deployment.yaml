@@ -63,8 +63,8 @@ spec:
             periodSeconds: 5
           resources:
             requests:
-              memory: 128Mi
-              cpu: 125m
+              memory: 256Mi
+              cpu: 250m
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
