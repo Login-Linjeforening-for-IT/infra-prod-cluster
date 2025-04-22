@@ -210,7 +210,7 @@ spec:
         - protocol: TCP
           port: 8080
 
-# Allowing egress api to internet (required for DigitalOcean API.
+# Allowing egress api to internet (required for DigitalOcean API)
 # Can whitelist IPs, but then we need automation to update them since 
 # DigitalOcean changes them automatically all the time.
 ---
@@ -223,6 +223,26 @@ spec:
   podSelector:
     matchLabels:
       app: beekeeper-api
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+
+# Allowing egress frontend to internet (required for fetching status of domains)
+# Can whitelist IPs, but then we need automation to update them since 
+# DigitalOcean changes them automatically all the time.
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-egress-internet
+  namespace: beekeeper
+spec:
+  podSelector:
+    matchLabels:
+      app: beekeeper-frontend
   policyTypes:
     - Egress
   egress:
