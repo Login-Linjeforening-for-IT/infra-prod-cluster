@@ -169,16 +169,8 @@ spec:
     - Egress
   ingress:
     - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-ntnu
-      ports:
-        - protocol: TCP
-          port: 8080
-    - from:
-        - podSelector:
-            matchLabels:
-              app: beekeeper-frontend
+        - ipBlock:
+            cidr: 0.0.0.0/0
       ports:
         - protocol: TCP
           port: 8080
