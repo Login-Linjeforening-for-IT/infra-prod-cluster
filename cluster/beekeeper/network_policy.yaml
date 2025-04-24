@@ -248,3 +248,8 @@ spec:
     - to:
         - ipBlock:
             cidr: 0.0.0.0/0
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: beekeeper
+          podSelector: {}
