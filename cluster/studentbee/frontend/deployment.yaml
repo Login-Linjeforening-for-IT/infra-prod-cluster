@@ -34,7 +34,7 @@ spec:
         - name: gitlab-deploy-key-studentbee
       containers:
         - name: webserver
-          image: registry.login.no/tekkom/web/beehive/exam.login.no/frontend:2.3.2@sha256:86df245c3ead6841931f4ed7eb1cc6061adbba411a975ff2e8df51f4c3c60a7d
+          image: registry.login.no/tekkom/web/beehive/exam.login.no/frontend:2.3.3@sha256:a7b2b60845ee5a867dd6553c7a40411be85d86ddfdbcb6c0028d96e88e300c06
           imagePullPolicy: IfNotPresent
           env:
             - name: API_URL
