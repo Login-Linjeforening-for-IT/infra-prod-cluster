@@ -39,7 +39,7 @@ spec:
           env:
             - name: API_URL
               value: http://studentbee-api.studentbee.svc.cluster.local:8080/api
-            - name: BROWSER_API_URL
+            - name: NEXT_PUBLIC_BROWSER_API_URL
               value: https://exam-api.login.no/api
           ports:
             - containerPort: 3000
