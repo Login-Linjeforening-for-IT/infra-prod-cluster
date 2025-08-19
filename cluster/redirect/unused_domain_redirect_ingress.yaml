@@ -24,7 +24,6 @@ spec:
         - loginntnu.no
         - logintnu.no
         - logntnu.com
-        - logout.no
         - ntnulogin.no
       secretName: redirect-old-domains-cert
   rules:
@@ -42,5 +41,4 @@ spec:
     - host: loginntnu.no
     - host: logintnu.no
     - host: logntnu.com
-    - host: logout.no
     - host: ntnulogin.no
