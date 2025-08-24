@@ -83,6 +83,8 @@ spec:
               value: "483330385829167117"
             - name: DISCORD_SAKER_TIL_STYREMOTER_CHANNEL_ID
               value: "1062469035104677958"
+            - name: DISCORD_SERVICE_MONITORING_CHANNEL_ID
+              value: "1246801546394603610"
             - name: TEKKOM_MEETINGS_URL
               value: /tekkom/meetings/
             - name: STYRET_MEETINGS_URL
