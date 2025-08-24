@@ -85,6 +85,8 @@ spec:
               value: "1062469035104677958"
             - name: DISCORD_SERVICE_MONITORING_CHANNEL_ID
               value: "1246801546394603610"
+            - name: DISCORD_BEEKEEPER_ROLE_ID
+              value: "1409143828002115675"
             - name: TEKKOM_MEETINGS_URL
               value: /tekkom/meetings/
             - name: STYRET_MEETINGS_URL
