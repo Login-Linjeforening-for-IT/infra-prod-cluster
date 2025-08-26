@@ -23,4 +23,4 @@ spec:
               service:
                 name: queenbee-frontend
                 port:
-                  number: 4200
+                  number: 3000
