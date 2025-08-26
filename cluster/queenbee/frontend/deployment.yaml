@@ -23,7 +23,7 @@ spec:
       imagePullSecrets:
         - name: gitlab-frontend-pull-token
       containers:
-        - image: registry.login.no/tekkom/web/beehive/queenbee:2.0.15@sha256:4d34fb85cd0428b33a5ab8bc8753c789782dd40ff5f96402131db4ceae3029f5
+        - image: registry.login.no/tekkom/web/beehive/queenbee:2.0.16@sha256:b4f75de5a9695c7305838311dd6be3ba374371df1a26807c4778ec1a446711ce
           imagePullPolicy: Always
           name: queenbee-frontend
           env:
