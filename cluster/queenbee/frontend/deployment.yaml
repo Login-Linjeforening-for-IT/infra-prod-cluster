@@ -27,8 +27,36 @@ spec:
           imagePullPolicy: Always
           name: queenbee-frontend
           env:
-            - name: BASE_URL
-              value: https://queenbee-api.login.no/v1
+            - name: API_URL
+              value: "https://queenbee-api.login.no/v1"
+            - name: TYPE
+              value: "service_account"
+            - name: PROJECT_ID
+              value: "login-da744"
+            - name: PRIVATE_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: queenbee-secrets
+                  key: PRIVATE_KEY_ID
+            - name: PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: queenbee-secrets
+                  key: PRIVATE_KEY
+            - name: CLIENT_EMAIL
+              value: "firebase-adminsdk-r1t6m@login-da744.iam.gserviceaccount.com"
+            - name: CLIENT_ID
+              value: "113046709848261622902"
+            - name: AUTH_URI
+              value: "https://accounts.google.com/o/oauth2/auth"
+            - name: TOKEN_URI
+              value: "https://oauth2.googleapis.com/token"
+            - name: AUTH_CERT_URL
+              value: "https://www.googleapis.com/oauth2/v1/certs"
+            - name: CLIENT_CERT_URL
+              value: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-r1t6m%40login-da744.iam.gserviceaccount.com"
+            - name: UNIVERSE_DOMAIN
+              value: "googleapis.com"
           ports:
             - containerPort: 3000
               name: 3000tcp
