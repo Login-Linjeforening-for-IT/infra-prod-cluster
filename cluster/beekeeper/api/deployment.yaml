@@ -60,9 +60,9 @@ spec:
                   name: beekeeper-secrets
                   key: AUTHENTIK_TOKEN
             - name: API_URL
-              value: https://beekeeper-api.login.no/api
+              value: https://api.beekeeper.login.no/api
             - name: BROWSER_API_URL
-              value: https://beekeeper-api.login.no/api
+              value: https://api.beekeeper.login.no/api
             - name: DOCTL_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -86,7 +86,7 @@ spec:
                   name: beekeeper-secrets
                   key: CLIENT_SECRET
             - name: REDIRECT_URI
-              value: https://beekeeper-api.login.no/api/callback
+              value: https://api.beekeeper.login.no/api/callback
             - name: BEEKEEPER_URL
               value: https://beekeeper.login.no
           ports:

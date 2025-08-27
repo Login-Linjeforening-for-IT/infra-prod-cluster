@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx-ntnu
   rules:
-    - host: beekeeper-api.login.no
+    - host: api.beekeeper.login.no
       http:
         paths:
           - pathType: Prefix
