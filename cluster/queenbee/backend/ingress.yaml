@@ -4,8 +4,6 @@ kind: Ingress
 metadata:
   name: queenbee-backend-ingress
   namespace: queenbee
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx-ntnu
   tls:
