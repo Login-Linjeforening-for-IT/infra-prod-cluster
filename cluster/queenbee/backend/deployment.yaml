@@ -95,14 +95,12 @@ spec:
             httpGet:
               path: /ping
               port: 8080
-              scheme: HTTPS
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /ping
               port: 8080
-              scheme: HTTPS
             initialDelaySeconds: 5
             periodSeconds: 5
           resources:
