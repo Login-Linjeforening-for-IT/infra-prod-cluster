@@ -87,7 +87,7 @@ spec:
             - name: BASE_URL
               value: https://authentik.login.no
             - name: REDIRECT_URI
-              value: https://exam-api.login.no/api/callback
+              value: https://api.exam.login.no/api/callback
             - name: EXAM_URL
               value: https://exam.login.no
             - name: CLIENT_ID

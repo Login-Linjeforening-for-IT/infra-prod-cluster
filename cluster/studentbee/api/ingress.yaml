@@ -8,9 +8,9 @@ spec:
   ingressClassName: nginx-external
   tls:
     - hosts:
-        - exam-api.login.no
+        - api.exam.login.no
   rules:
-    - host: exam-api.login.no
+    - host: api.exam.login.no
       http:
         paths:
           - pathType: Prefix
