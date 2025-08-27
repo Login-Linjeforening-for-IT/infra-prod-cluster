@@ -18,3 +18,5 @@ spec:
   dnsNames:
     - "*.login.no"
     - "login.no"
+    - "*.exam.login.no"
+    - "*.api.exam.login.no"
