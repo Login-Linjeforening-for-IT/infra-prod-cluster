@@ -22,3 +22,5 @@ spec:
     - "*.api.exam.login.no"
     - "*.queenbee.login.no"
     - "*.api.queenbee.login.no"
+    - "*.beekeeper.login.no"
+    - "*.api.beekeeper.login.no"
