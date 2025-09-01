@@ -45,7 +45,7 @@ spec:
             - name: BASE_URL
               value: https://authentik.login.no
             - name: NEXT_PUBLIC_API_URL
-              value: http://api.beekeeper.beekeeper.svc.cluster.local:8080/api
+              value: http://beekeeper-api.beekeeper.svc.cluster.local:8080/api
             - name: NEXT_PUBLIC_BROWSER_API
               value: https://api.beekeeper.login.no/api
             - name: CDN_URL
