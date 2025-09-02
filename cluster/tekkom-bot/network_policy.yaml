@@ -125,22 +125,117 @@ spec:
             app: beekeeper-api
 
 ---
-# allows psql api to kubernetes api
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-psql-api
+  name: allow-api
   namespace: tekkom-bot
 spec:
   podSelector:
     matchLabels:
-      cnpg.io/cluster: tekkom-bot-api-psql
+      app: tekkom-bot-api
   policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-external
+      ports:
+        - port: 8080
+          protocol: TCP
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-ntnu
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-ntnu
+      ports:
+        - port: 8080
+          protocol: TCP
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: tekkom-bot
+          podSelector:
+            matchLabels:
+              cnpg.io/cluster: tekkom-bot-api-psql
+      ports:
+        - port: 5432
+          protocol: TCP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-psql
+  namespace: beekeeper
+spec:
+  policyTypes:
+    - Ingress
+    - Egress
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: beekeeper-api-psql
+  ingress:
+    - {}
+  egress:
+    - {}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-psql-client
+  namespace: tekkom-bot
+spec:
+  policyTypes:
+    - Ingress
+    - Egress
+  podSelector:
+    matchLabels:
+      app: postgres-client
+  ingress:
+    - {}
+  egress:
+    - {}
+
+# Allowing api to kube-dns traffic
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-to-kube-dns
+  namespace: tekkom-bot
+spec:
+  podSelector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - tekkom-bot-api
+          - tekkom-bot
+  policyTypes:
+    - Ingress
     - Egress
   egress:
     - to:
-        - ipBlock:
-            cidr: 10.245.0.1/32
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
       ports:
-        - protocol: TCP
-          port: 443
+        - protocol: UDP
+          port: 53
