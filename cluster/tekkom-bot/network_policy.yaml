@@ -142,3 +142,24 @@ spec:
       - podSelector:
           matchLabels:
             app: beekeeper-api
+
+---
+# allows psql api to kubernetes api
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-psql-api
+  namespace: tekkom-bot
+spec:
+  podSelector:
+    matchLabels:
+      app: tekkom-bot-api
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 10.245.0.1/32
+      ports:
+        - protocol: TCP
+          port: 443
