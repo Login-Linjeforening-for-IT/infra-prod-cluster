@@ -80,6 +80,30 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  name: allow-ingress
+  namespace: tekkom-bot
+spec:
+  podSelector:
+    matchLabels:
+      app: tekkom-bot-api
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-external
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: nginx-ingress-external
+      ports:
+        - protocol: TCP
+          port: 8080
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
   name: allow-egress-to-dizambee
   namespace: tekkom-bot
 spec:
