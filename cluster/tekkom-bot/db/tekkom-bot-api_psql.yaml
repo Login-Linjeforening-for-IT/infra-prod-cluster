@@ -1,0 +1,76 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: tekkom-bot-api-psql
+  namespace: tekkom-bot
+spec:
+  description: Postgres for TekKom Bot API
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 32Gi
+  postgresql:
+    parameters:
+      timezone: "Europe/Oslo"
+  superuserSecret:
+    name: tekkom-bot-secrets
+  bootstrap:
+    # recovery:
+    #   source: clusterBackup
+    initdb:
+      encoding: UTF8
+      locale: en_US.UTF-8
+      dataChecksums: true
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:
+        destinationPath: s3://login-external-prod-psql-backups/tekkom-bot-api
+        serverName: tekkom-bot-api-psql
+        s3Credentials:
+          accessKeyId:
+            name: tekkom-bot-api-pg-backup
+            key: access
+          secretAccessKey:
+            name: tekkom-bot-api-pg-backup
+            key: secret
+        wal:
+          maxParallel: 8
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://login-infra-prod-psql-backups/tekkom-bot-api
+      s3Credentials:
+        accessKeyId:
+          name: tekkom-bot-api-pg-backup
+          key: access
+        secretAccessKey:
+          name: tekkom-bot-api-pg-backup
+          key: secret
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: tekkom-bot-api-psql-backup
+  namespace: tekkom-bot
+spec:
+  immediate: true
+  schedule: "0 0 0 * * *"
+  cluster:
+    name: tekkom-bot-api-psql
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: tekkom-bot-api-psql
+  namespace: tekkom-bot
+  labels:
+    release: prometheus
+spec:
+  podMetricsEndpoints:
+    - port: metrics
+  selector:
+    matchLabels:
+      cnpg.io/cluster: tekkom-bot-api-psql
