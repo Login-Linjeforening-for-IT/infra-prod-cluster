@@ -6,9 +6,7 @@ resources:
   - network_policy.yaml
   - postgres_client.yaml
   - secret_kustomization.yaml
-  - kustomize/bot.yaml
   - kustomize/secrets.yaml
+  - kustomize/bot.yaml
   - kustomize/api.yaml
   - kustomize/db.yaml
-  - pdb.yaml
-  - ingress.yaml
