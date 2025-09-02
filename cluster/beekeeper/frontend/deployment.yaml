@@ -39,7 +39,7 @@ spec:
         - name: beekeeper-pull-token
       containers:
         - name: webserver
-          image: registry.login.no/tekkom/web/beehive/beekeeper/frontend:1.4.1
+          image: registry.login.no/tekkom/web/beehive/beekeeper/frontend:1.4.2
           imagePullPolicy: IfNotPresent
           env:
             - name: BASE_URL
