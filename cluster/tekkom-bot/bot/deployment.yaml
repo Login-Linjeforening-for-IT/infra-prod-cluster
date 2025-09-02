@@ -30,8 +30,6 @@ spec:
           ports:
             - containerPort: 6969
               protocol: TCP
-            - containerPort: 8080
-              protocol: TCP
           env:
             - name: API
               value: http://dizambee-api.dizambee.svc.cluster.local:8080/api
