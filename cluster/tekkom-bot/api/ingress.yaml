@@ -1,9 +1,8 @@
 ---
-# tekkom-api
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: web-app
+  name: tekkom-bot-api
   namespace: tekkom-bot
 spec:
   ingressClassName: nginx-external
