@@ -153,7 +153,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: tekkom-bot-api
+      cnpg.io/cluster: tekkom-bot-api-psql
   policyTypes:
     - Egress
   egress:
