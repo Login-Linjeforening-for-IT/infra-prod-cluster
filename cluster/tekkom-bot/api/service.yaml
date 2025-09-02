@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tekkom-bot-api
+  namespace: tekkom-bot
+  labels:
+    app: tekkom-bot-api
+spec:
+  type: ClusterIP
+  selector:
+    app: tekkom-bot-api
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

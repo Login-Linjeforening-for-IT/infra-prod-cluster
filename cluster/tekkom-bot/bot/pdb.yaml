@@ -1,0 +1,11 @@
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: tekkom-bot-pdb
+  namespace: tekkom-bot
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: tekkom-bot-api

@@ -22,27 +22,3 @@ spec:
                 name: tekkom-bot
                 port:
                   number: 6969
-
----
-# tekkom-api
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: web-app
-  namespace: tekkom-bot
-spec:
-  ingressClassName: nginx-external
-  tls:
-    - hosts:
-        - api.tekkom-bot.login.no
-  rules:
-    - host: api.tekkom-bot.login.no
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: tekkom-bot-api
-                port:
-                  number: 8080
