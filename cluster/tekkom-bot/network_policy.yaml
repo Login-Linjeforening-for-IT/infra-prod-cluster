@@ -88,6 +88,7 @@ spec:
       app: tekkom-bot-api
   policyTypes:
     - Ingress
+    - Egress
   ingress:
     - from:
         - namespaceSelector:
