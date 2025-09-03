@@ -189,7 +189,7 @@ spec:
         - protocol: UDP
           port: 53
 
-# Allows tekkom-bot-api to authentik traffic
+# Allows api to authentik traffic
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
