@@ -268,3 +268,25 @@ spec:
           port: 53
         - protocol: TCP
           port: 53
+
+# Allows ingress from tekkom-bot-api for authentication
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-from-tekkom-bot
+  namespace: tekkom-bot
+spec:
+  podSelector:
+    matchLabels:
+      app: tekkom-bot-api
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: tekkom-bot
+        - podSelector:
+            matchLabels:
+              app: tekkom-bot-api
