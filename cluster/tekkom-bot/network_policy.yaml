@@ -199,9 +199,8 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: tekkom-bot
+      app: tekkom-bot-api
   policyTypes:
-    - Ingress
     - Egress
   egress:
     - to:
