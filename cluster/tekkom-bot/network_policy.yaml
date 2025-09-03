@@ -201,6 +201,7 @@ spec:
     matchLabels:
       app: tekkom-bot
   policyTypes:
+    - Ingress
     - Egress
   egress:
     - to:
