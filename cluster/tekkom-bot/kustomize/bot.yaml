@@ -6,7 +6,7 @@ metadata:
   namespace: tekkom-bot
 spec:
   interval: 5m
-  path: "cluster/tekkom-bot/bot"
+  path: "cluster/tekkom-bot"
   dependsOn:
     - name: tekkom-bot-secrets
       namespace: tekkom-bot
