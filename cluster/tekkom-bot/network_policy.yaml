@@ -204,9 +204,9 @@ spec:
     - Egress
   egress:
     - to:
-      - namespaceSelector:
-          matchLabels:
-            kubernetes.io/metadata.name: authentik
-      - podSelector:
-          matchLabels:
-            app: authentik-server
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: authentik
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/component: server
