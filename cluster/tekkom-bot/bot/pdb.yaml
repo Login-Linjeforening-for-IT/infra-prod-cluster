@@ -5,7 +5,7 @@ metadata:
   name: tekkom-bot-pdb
   namespace: tekkom-bot
 spec:
-  minAvailable: 2
+  minAvailable: 1
   selector:
     matchLabels:
       app: tekkom-bot
