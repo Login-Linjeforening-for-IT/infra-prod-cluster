@@ -8,4 +8,4 @@ spec:
   minAvailable: 2
   selector:
     matchLabels:
-      app: tekkom-bot-api
+      app: tekkom-bot
