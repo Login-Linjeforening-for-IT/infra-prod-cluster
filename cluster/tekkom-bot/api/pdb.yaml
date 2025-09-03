@@ -3,7 +3,7 @@ apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: tekkom-bot-api-pdb
-  namespace: tekkom-bot-api
+  namespace: tekkom-bot
 spec:
   minAvailable: 2
   selector:
