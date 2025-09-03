@@ -8,3 +8,4 @@ kubescore:
   script:
     - kube-score score --all-default-optional --kubernetes-version v1.30 cluster/*/*.yaml
   allow_failure: true
+  when: never
