@@ -51,7 +51,7 @@ spec:
               value: https://queenbee.login.no
             - name: REDIRECT_URI
               value: https://api.tekkom-bot.login.no/api/callback
-            - name: AUTHENTIK_CLIENT_ID
+            - name: CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: tekkom-bot-secrets
