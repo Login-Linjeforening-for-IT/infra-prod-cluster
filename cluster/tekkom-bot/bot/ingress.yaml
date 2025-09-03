@@ -5,7 +5,7 @@ metadata:
   name: minecraft
   namespace: tekkom-bot
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: "51.222.254.125/32"
+    nginx.ingress.kubernetes.io/whitelist-source-range: "51.222.254.125/32, 24.144.78.128/32"
 spec:
   ingressClassName: nginx-external
   tls:
