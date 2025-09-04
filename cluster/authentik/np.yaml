@@ -279,7 +279,8 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: authentik-server
+      app.kubernetes.io/name: authentik
+      app.kubernetes.io/component: server
   policyTypes:
     - Ingress
   ingress:
@@ -287,6 +288,6 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: tekkom-bot
-        - podSelector:
-            matchLabels:
-              app: tekkom-bot-api
+      ports:
+        - protocol: TCP
+          port: 443
