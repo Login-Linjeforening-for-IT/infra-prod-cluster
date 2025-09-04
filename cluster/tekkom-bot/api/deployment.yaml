@@ -32,11 +32,11 @@ spec:
               protocol: TCP
           env:
             - name: DB
-              value: "tekkom"
+              value: tekkom-bot
             - name: DB_HOST
               value: tekkom-bot-api-psql-rw.tekkom-bot.svc.cluster.local
             - name: DB_USER
-              value: "tekkom"
+              value: tekkom-bot
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
