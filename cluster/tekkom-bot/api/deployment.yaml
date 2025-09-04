@@ -4,6 +4,11 @@ kind: Deployment
 metadata:
   labels:
     app: tekkom-bot-api
+    component: api
+    part-of: tekkom-bot
+    project: tekkom-bot
+    confidentiality: not-defined
+    compliance: not-defined
   name: tekkom-bot-api
   namespace: tekkom-bot
 spec:
@@ -65,11 +70,38 @@ spec:
                   key: CLIENT_SECRET
             - name: AUTHENTIK_API_URL
               value: https://authentik.login.no
-          # No liveness and readiness probes - awaiting solution.
+          ports:
+            - containerPort: 8080
+              name: 8080tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/
+              port: 8080
+            initialDelaySeconds: 180
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /api/
+              port: 8080
+            initialDelaySeconds: 180
+            periodSeconds: 5
           resources:
             requests:
-              memory: "50Mi"
-              cpu: "10m"
+              memory: 512Mi
+              cpu: 512m
             limits:
-              memory: "100Mi"
-              cpu: "250m"
+              memory: 1024Mi
+              cpu: 1000m
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - beekeeper-api
+                topologyKey: kubernetes.io/hostname
