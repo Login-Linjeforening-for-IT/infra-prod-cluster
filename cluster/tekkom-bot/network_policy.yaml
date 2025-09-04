@@ -1,3 +1,4 @@
+# Denies everything except policies
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -10,6 +11,7 @@ spec:
     - Ingress
     - Egress
 
+# Allows Kube DNS traffic
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -33,6 +35,7 @@ spec:
         - protocol: UDP
           port: 53
 
+# Allows incoming traffic on port 6969 for mc-bot.login.no
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -57,6 +60,7 @@ spec:
         - protocol: TCP
           port: 6969
 
+# Allows incoming and outgoing traffic on port 8080 for the API
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -82,6 +86,7 @@ spec:
         - protocol: TCP
           port: 8080
 
+# Adds outgoing traffic towards dizambee (zammad)
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -125,6 +130,7 @@ spec:
           matchLabels:
             app: beekeeper-api
 
+# Allows api to psql traffic
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -143,6 +149,7 @@ spec:
   egress:
     - {}
 
+# Allows psql client traffic
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -210,3 +217,21 @@ spec:
           podSelector:
             matchLabels:
               app.kubernetes.io/component: server
+
+# Allowing egress bot to internet (required for talking to Discords servers)
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-bot-egress-internet
+  namespace: tekkom-bot
+spec:
+  podSelector:
+    matchLabels:
+      app: tekkom-bot
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
