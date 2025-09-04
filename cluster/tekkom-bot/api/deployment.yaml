@@ -34,7 +34,7 @@ spec:
             - name: DB
               value: "tekkom"
             - name: DB_HOST
-              value: "tekkom-bot_database"
+              value: tekkom-bot-api-psql-rw.tekkom-bot.svc.cluster.local
             - name: DB_USER
               value: "tekkom"
             - name: DB_PASSWORD
