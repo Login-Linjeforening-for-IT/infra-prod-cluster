@@ -1,143 +1,143 @@
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   labels:
-#     app: tekkom-bot
-#   name: tekkom-bot
-#   namespace: tekkom-bot
-# spec:
-#   replicas: 1
-#   strategy:
-#     rollingUpdate:
-#       maxSurge: 25%
-#       maxUnavailable: 25%
-#     type: RollingUpdate
-#   selector:
-#     matchLabels:
-#       app: tekkom-bot
-#   template:
-#     metadata:
-#       labels:
-#         app: tekkom-bot
-#     spec:
-#       imagePullSecrets:
-#         - name: tekkom-bot-pull-secret
-#       containers:
-#         - name: tekkom-bot
-#           image: registry.login.no/tekkom/playground/tekkom-bot/bot:2.5.3
-#           imagePullPolicy: Always
-#           ports:
-#             - containerPort: 6969
-#               protocol: TCP
-#           env:
-#             - name: API
-#               value: http://dizambee-api.dizambee.svc.cluster.local:8080/api
-#             - name: TYPE
-#               value: service_account
-#             - name: PROJECT_ID
-#               value: login-da744
-#             - name: PRIVATE_KEY_ID
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: tekkom-bot-secrets
-#                   key: PRIVATE_KEY_ID
-#             - name: PRIVATE_KEY
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: tekkom-bot-secrets
-#                   key: PRIVATE_KEY
-#             - name: CLIENT_EMAIL
-#               value: firebase-adminsdk-r1t6m@login-da744.iam.gserviceaccount.com
-#             - name: CLIENT_ID
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: tekkom-bot-secrets
-#                   key: CLIENT_ID
-#             - name: AUTH_URI
-#               value: "https://accounts.google.com/o/oauth2/auth"
-#             - name: TOKEN_URI
-#               value: "https://oauth2.googleapis.com/token"
-#             - name: AUTH_CERT_URL
-#               value: "https://www.googleapis.com/oauth2/v1/certs"
-#             - name: CLIENT_CERT_URL
-#               value: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-r1t6m%40login-da744.iam.gserviceaccount.com"
-#             - name: UNIVERSE_DOMAIN
-#               value: "googleapis.com"
-#             - name: DISCORD_CLIENT_ID
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: tekkom-bot-secrets
-#                   key: DISCORD_CLIENT_ID
-#             - name: DISCORD_GUILD_ID
-#               value: "284789429539700736"
-#             - name: DISCORD_STYRET_ROLE_ID
-#               value: "293403388119482369"
-#             - name: DISCORD_TEKKOM_ROLE_ID
-#               value: "940879337383673866"
-#             - name: DISCORD_MINECRAFT_LOG_CHANNEL_ID
-#               value: "1162108306412802210"
-#             - name: DISCORD_TEKKOM_VERV_CHANNEL_ID
-#               value: "1032029092448575498"
-#             - name: DISCORD_STYRET_INNKALLING_CHANNEL_ID
-#               value: "483330385829167117"
-#             - name: DISCORD_SAKER_TIL_STYREMOTER_CHANNEL_ID
-#               value: "1062469035104677958"
-#             - name: DISCORD_SERVICE_MONITORING_CHANNEL_ID
-#               value: "1246801546394603610"
-#             - name: DISCORD_BEEKEEPER_ROLE_ID
-#               value: "1409143828002115675"
-#             - name: TEKKOM_MEETINGS_URL
-#               value: /tekkom/meetings/
-#             - name: STYRET_MEETINGS_URL
-#               value: /public/docs/minutes/styremoter/
-#             - name: GRAPHQL_URL
-#               value: https://wiki.login.no/graphql
-#             - name: WIKI_URL
-#               value: "https://wiki.login.no"
-#             - name: WIKIJS_TOKEN
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: tekkom-bot-secrets
-#                   key: WIKIJS_TOKEN
-#             - name: DISCORD_TOKEN
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: tekkom-bot-secrets
-#                   key: DISCORD_TOKEN
-#             - name: MINECRAFT_URL
-#               value: "http://51.222.254.125"
-#             - name: MINECRAFT_PORT
-#               value: "6969"
-#             - name: MINECRAFT_SURVIVAL_PORT
-#               value: "6677"
-#             - name: MINECRAFT_CREATIVE_PORT
-#               value: "6688"
-#             - name: MINECRAFT_SURVIVAL
-#               value: "survival"
-#             - name: MINECRAFT_CREATIVE
-#               value: "creative"
-#             - name: PRIVATE_TOKEN
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: tekkom-bot-secrets
-#                   key: PRIVATE_TOKEN
-#             - name: WIKI_STYRET_TEMPLATE_ID
-#               value: "830"
-#             - name: WIKI_TEKKOM_TEMPLATE_ID
-#               value: "835"
-#             - name: TEKKOM_BOT_API_URL
-#               value: https://api.tekkom-bot.login.no/api
-#             - name: TEKKOM_BOT_API_TOKEN
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: tekkom-bot-secrets
-#                   key: TEKKOM_BOT_API_TOKEN
-#           # No liveness and readiness probes - awaiting solution.
-#           resources:
-#             requests:
-#               memory: "50Mi"
-#               cpu: "10m"
-#             limits:
-#               memory: "100Mi"
-#               cpu: "250m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tekkom-bot
+  name: tekkom-bot
+  namespace: tekkom-bot
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: tekkom-bot
+  template:
+    metadata:
+      labels:
+        app: tekkom-bot
+    spec:
+      imagePullSecrets:
+        - name: tekkom-bot-pull-secret
+      containers:
+        - name: tekkom-bot
+          image: registry.login.no/tekkom/playground/tekkom-bot/bot:2.5.3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6969
+              protocol: TCP
+          env:
+            - name: API
+              value: http://dizambee-api.dizambee.svc.cluster.local:8080/api
+            - name: TYPE
+              value: service_account
+            - name: PROJECT_ID
+              value: login-da744
+            - name: PRIVATE_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: PRIVATE_KEY_ID
+            - name: PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: PRIVATE_KEY
+            - name: CLIENT_EMAIL
+              value: firebase-adminsdk-r1t6m@login-da744.iam.gserviceaccount.com
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: CLIENT_ID
+            - name: AUTH_URI
+              value: "https://accounts.google.com/o/oauth2/auth"
+            - name: TOKEN_URI
+              value: "https://oauth2.googleapis.com/token"
+            - name: AUTH_CERT_URL
+              value: "https://www.googleapis.com/oauth2/v1/certs"
+            - name: CLIENT_CERT_URL
+              value: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-r1t6m%40login-da744.iam.gserviceaccount.com"
+            - name: UNIVERSE_DOMAIN
+              value: "googleapis.com"
+            - name: DISCORD_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: DISCORD_CLIENT_ID
+            - name: DISCORD_GUILD_ID
+              value: "284789429539700736"
+            - name: DISCORD_STYRET_ROLE_ID
+              value: "293403388119482369"
+            - name: DISCORD_TEKKOM_ROLE_ID
+              value: "940879337383673866"
+            - name: DISCORD_MINECRAFT_LOG_CHANNEL_ID
+              value: "1162108306412802210"
+            - name: DISCORD_TEKKOM_VERV_CHANNEL_ID
+              value: "1032029092448575498"
+            - name: DISCORD_STYRET_INNKALLING_CHANNEL_ID
+              value: "483330385829167117"
+            - name: DISCORD_SAKER_TIL_STYREMOTER_CHANNEL_ID
+              value: "1062469035104677958"
+            - name: DISCORD_SERVICE_MONITORING_CHANNEL_ID
+              value: "1246801546394603610"
+            - name: DISCORD_BEEKEEPER_ROLE_ID
+              value: "1409143828002115675"
+            - name: TEKKOM_MEETINGS_URL
+              value: /tekkom/meetings/
+            - name: STYRET_MEETINGS_URL
+              value: /public/docs/minutes/styremoter/
+            - name: GRAPHQL_URL
+              value: https://wiki.login.no/graphql
+            - name: WIKI_URL
+              value: "https://wiki.login.no"
+            - name: WIKIJS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: WIKIJS_TOKEN
+            - name: DISCORD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: DISCORD_TOKEN
+            - name: MINECRAFT_URL
+              value: "http://51.222.254.125"
+            - name: MINECRAFT_PORT
+              value: "6969"
+            - name: MINECRAFT_SURVIVAL_PORT
+              value: "6677"
+            - name: MINECRAFT_CREATIVE_PORT
+              value: "6688"
+            - name: MINECRAFT_SURVIVAL
+              value: "survival"
+            - name: MINECRAFT_CREATIVE
+              value: "creative"
+            - name: PRIVATE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: PRIVATE_TOKEN
+            - name: WIKI_STYRET_TEMPLATE_ID
+              value: "830"
+            - name: WIKI_TEKKOM_TEMPLATE_ID
+              value: "835"
+            - name: TEKKOM_BOT_API_URL
+              value: https://api.tekkom-bot.login.no/api
+            - name: TEKKOM_BOT_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: TEKKOM_BOT_API_TOKEN
+          # No liveness and readiness probes - awaiting solution.
+          resources:
+            requests:
+              memory: "50Mi"
+              cpu: "10m"
+            limits:
+              memory: "100Mi"
+              cpu: "250m"
