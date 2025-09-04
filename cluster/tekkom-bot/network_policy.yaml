@@ -174,28 +174,6 @@ spec:
         - protocol: UDP
           port: 53
 
-# Allows api to authentik traffic
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-egress-to-authentik
-  namespace: tekkom-bot
-spec:
-  podSelector:
-    matchLabels:
-      app: tekkom-bot-api
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: authentik
-          podSelector:
-            matchLabels:
-              app.kubernetes.io/component: server
-
 # Allowing egress bot to internet (required for talking to Discords servers)
 ---
 apiVersion: networking.k8s.io/v1
@@ -205,8 +183,12 @@ metadata:
   namespace: tekkom-bot
 spec:
   podSelector:
-    matchLabels:
-      app: tekkom-bot
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - tekkom-bot
+          - tekkom-bot-api
   policyTypes:
     - Egress
   egress:
