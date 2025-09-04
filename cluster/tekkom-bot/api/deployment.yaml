@@ -37,6 +37,8 @@ spec:
               value: tekkom-bot-api-psql-rw.tekkom-bot.svc.cluster.local
             - name: DB_USER
               value: tekkom-bot
+            - name: DB_PORT
+              value: "5432"
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
