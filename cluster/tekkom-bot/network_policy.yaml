@@ -86,7 +86,7 @@ spec:
         - protocol: TCP
           port: 8080
 
-# Adds outgoing traffic towards dizambee (zammad)
+# Allows outgoing traffic towards dizambee (zammad)
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -107,28 +107,6 @@ spec:
       - podSelector:
           matchLabels:
             app: dizambee-api
-
-# Allows tekkom-bot to beekeeper traffic (liveness check)
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-egress-to-beekeeper
-  namespace: tekkom-bot
-spec:
-  podSelector:
-    matchLabels:
-      app: tekkom-bot
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-      - namespaceSelector:
-          matchLabels:
-            kubernetes.io/metadata.name: beekeeper
-      - podSelector:
-          matchLabels:
-            app: beekeeper-api
 
 # Allows api to psql traffic
 ---
