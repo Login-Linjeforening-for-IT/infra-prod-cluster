@@ -9,4 +9,4 @@ resources:
   - kustomize/secrets.yaml
   # - kustomize/bot.yaml
   # - kustomize/api.yaml
-  # - kustomize/db.yaml
+  - kustomize/db.yaml
