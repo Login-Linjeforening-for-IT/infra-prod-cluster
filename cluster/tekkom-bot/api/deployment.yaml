@@ -103,5 +103,5 @@ spec:
                     - key: app
                       operator: In
                       values:
-                        - beekeeper-api
+                        - tekkom-bot-api
                 topologyKey: kubernetes.io/hostname
