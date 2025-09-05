@@ -70,10 +70,6 @@ spec:
                   key: CLIENT_SECRET
             - name: AUTHENTIK_API_URL
               value: https://authentik.login.no
-          ports:
-            - containerPort: 8080
-              name: 8080tcp
-              protocol: TCP
           livenessProbe:
             httpGet:
               path: /api/
