@@ -14,7 +14,7 @@ spec:
     parameters:
       timezone: "Europe/Oslo"
   superuserSecret:
-    name: beehive-public-api-db-pass
+    name: beehive-public-api-db-credentials
   bootstrap:
     recovery:
       source: clusterBackup
