@@ -48,7 +48,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: tekkom-bot-secrets
-                  key: DB_PASSWORD
+                  key: password
             - name: TEKKOM_BOT_API_TOKEN
               valueFrom:
                 secretKeyRef:

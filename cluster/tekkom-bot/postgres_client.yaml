@@ -30,7 +30,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: tekkom-bot-secrets
-                  key: DB_PASSWORD
+                  key: password
           command: ["/bin/sh"]
           args:
             [
