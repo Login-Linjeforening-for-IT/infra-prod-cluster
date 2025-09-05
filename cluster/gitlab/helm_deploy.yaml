@@ -134,8 +134,7 @@ spec:
           allowBypassTwoFactor: ["openid_connect"]
           providers:
             - secret: gitlab-oidc
-    certmanager:
-      install: false
+    installCertmanager: false
     nginx-ingress:
       enabled: false
     gitlab-runner:
