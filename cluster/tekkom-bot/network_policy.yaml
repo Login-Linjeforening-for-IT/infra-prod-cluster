@@ -174,7 +174,7 @@ spec:
         - protocol: UDP
           port: 53
 
-# Allowing egress bot to internet (required for talking to Discords servers)
+# Allowing egress bot and bot api to internet (required for talking to Discords servers)
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -195,3 +195,25 @@ spec:
     - to:
         - ipBlock:
             cidr: 0.0.0.0/0
+
+# Allowing egress api to psql traffic
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-to-psql
+  namespace: tekkom-bot
+spec:
+  podSelector:
+    matchLabels:
+      app: tekkom-bot-api
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              cnpg.io/cluster: tekkom-bot-api-psql
+      ports:
+        - protocol: TCP
+          port: 5432
