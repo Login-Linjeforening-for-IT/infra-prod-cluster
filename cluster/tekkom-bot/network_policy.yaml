@@ -242,3 +242,28 @@ spec:
       ports:
         - protocol: TCP
           port: 3001
+
+# Allowing egress bot to BeeKeeper API traffic
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-bot-to-beekeeper-api
+  namespace: tekkom-bot
+spec:
+  podSelector:
+    matchLabels:
+      app: tekkom-bot
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: beekeeper
+          podSelector:
+            matchLabels:
+              app: beekeeper-api
+      ports:
+        - protocol: TCP
+          port: 8080
