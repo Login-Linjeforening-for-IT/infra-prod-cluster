@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: scouterbee
+  name: scouterbee
+  namespace: scouterbee
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: scouterbee
+  template:
+    metadata:
+      labels:
+        app: scouterbee
+    spec:
+      imagePullSecrets:
+        - name: scouterbee-pull-secret
+      containers:
+        - name: scouterbee
+          image: registry.login.no/tekkom/playground/scouterbee:1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: GITLAB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: scouterbee-secrets
+                  key: password
+            - name: ONEPASSWORD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: scouterbee-secrets
+                  key: ONEPASSWORD_TOKEN
+            - name: WEBHOOK_URL
+              value: https://discord.com/api/webhooks/1414051998244016138/oKfzmiyzsvExFqm7WEqQuub2fE3e9CPewOBFWfnmHj9csrJB-gHwlLE2cWPxG8OUQiVp
+            - name: HEARTBEAT_URL
+              value: https://status.login.no/api/push/DKvXlh9rcu?status=up&msg=OK&ping=
+            - name: CRITICAL_ROLE
+              value: "1414062914792456344"
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 512m
+            limits:
+              memory: 1024Mi
+              cpu: 1000m
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - scouterbee
+                topologyKey: kubernetes.io/hostname
