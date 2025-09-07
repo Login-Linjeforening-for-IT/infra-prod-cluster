@@ -39,11 +39,11 @@ spec:
                   name: scouterbee-secrets
                   key: ONEPASSWORD_TOKEN
             - name: WEBHOOK_URL
-              value: https://discord.com/api/webhooks/1414051998244016138/oKfzmiyzsvExFqm7WEqQuub2fE3e9CPewOBFWfnmHj9csrJB-gHwlLE2cWPxG8OUQiVp
+              value: https://discord.com/api/webhooks/1412821204498386984/zwAZbaIo7talBNTXwZWEnvY0jIzRO0Kr97efOORTzDNF_ksZBetA5jJmT_Je6tkJhnyq
             - name: HEARTBEAT_URL
-              value: https://status.login.no/api/push/DKvXlh9rcu?status=up&msg=OK&ping=
+              value: http://uptime-kuma-svc.uptime-kuma.svc.cluster.local:3001/api/push/DKvXlh9rcu?status=up&msg=OK&ping=
             - name: CRITICAL_ROLE
-              value: "1414062914792456344"
+              value: "1278447313240592520"
           resources:
             requests:
               memory: 512Mi
