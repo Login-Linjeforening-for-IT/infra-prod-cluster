@@ -6,4 +6,4 @@ resources:
   - network_policy.yaml
   - secret_kustomization.yaml
   - kustomize/secrets.yaml
-  - kustomize/scouterbee.yaml
+  - kustomize/service.yaml
