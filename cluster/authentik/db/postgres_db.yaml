@@ -22,7 +22,7 @@ spec:
       backup:
         name: authentik-psql-backup-20250909000000
       recoveryTarget:
-        targetTime: "2025-09-09 15:00:00.00000+02"
+        targetTime: "2025-09-09 15:15:00.00000+02"
 
   backup:
     retentionPolicy: "30d"
