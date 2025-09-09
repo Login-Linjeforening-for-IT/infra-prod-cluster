@@ -41,6 +41,13 @@ spec:
     runners:
       secret: runner-token
       executor: kubernetes
+      resources:
+        requests:
+          cpu: "2000m"
+          memory: "2Gi"
+        limits:
+          cpu: "4"
+          memory: "4Gi"
       config: |
         [[runners]]
           [runners.kubernetes]
