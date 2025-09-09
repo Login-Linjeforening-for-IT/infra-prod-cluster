@@ -20,9 +20,7 @@ spec:
   bootstrap:
     recovery:
       backup:
-        name: authentik-psql-backup-20240905000000
-      recoveryTarget:
-        targetTime: "2024-09-05 08:00:00.00000+02"
+        name: authentik-psql-backup-20250909000000
   backup:
     retentionPolicy: "30d"
     barmanObjectStore:
