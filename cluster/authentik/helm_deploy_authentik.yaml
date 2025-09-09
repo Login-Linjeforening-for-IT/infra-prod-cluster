@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: authentik-repo
         namespace: authentik
-      interval: 5m
+      interval: 4m
   values:
     global:
       addPrometheusAnnotations: true
