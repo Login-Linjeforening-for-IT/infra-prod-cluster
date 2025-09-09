@@ -49,7 +49,10 @@ spec:
             retry_limit = 5
             privileged = false
             allow_privilege_escalation = false
-            resources = { requests = { cpu = "2000m", memory = "2Gi" }, limits = { cpu = "4000m", memory = "4Gi" } }
+            cpu_requests = "1000m"
+            cpu_limits = "4000m"
+            memory_requests = "1Gi"
+            memory_limits = "4Gi"
 
             [runners.kubernetes.retry_limits]
               "TLS handshake timeout" = 10
