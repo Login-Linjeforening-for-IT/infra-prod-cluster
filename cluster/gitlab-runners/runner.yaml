@@ -41,13 +41,6 @@ spec:
     runners:
       secret: runner-token
       executor: kubernetes
-      resources:
-        requests:
-          cpu: "2000m"
-          memory: "2Gi"
-        limits:
-          cpu: "4"
-          memory: "4Gi"
       config: |
         [[runners]]
           [runners.kubernetes]
@@ -56,6 +49,7 @@ spec:
             retry_limit = 5
             privileged = false
             allow_privilege_escalation = false
+            resources = { requests = { cpu = "2000m", memory = "2Gi" }, limits = { cpu = "4", memory = "4Gi" } }
 
             [runners.kubernetes.retry_limits]
               "TLS handshake timeout" = 10
