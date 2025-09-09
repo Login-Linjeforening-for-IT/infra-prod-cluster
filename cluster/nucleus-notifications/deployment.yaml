@@ -28,6 +28,9 @@ spec:
         - name: nucleus-notifications
           image: registry.login.no/tekkom/apps/nucleus-notifications:2.3.1
           imagePullPolicy: Always
+          command:
+            - npm
+            - start
           env:
             - name: api_url
               value: https://fcm.googleapis.com/fcm/send
