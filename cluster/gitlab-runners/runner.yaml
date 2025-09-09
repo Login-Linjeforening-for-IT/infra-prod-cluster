@@ -52,7 +52,7 @@ spec:
             cpu_request = "500m"
             memory_request = "500Mi"
             cpu_limit = "1000"
-            memory_limit = "1000Mi"
+            memory_limit = "3000Mi"
 
             [runners.kubernetes.retry_limits]
               "TLS handshake timeout" = 10
