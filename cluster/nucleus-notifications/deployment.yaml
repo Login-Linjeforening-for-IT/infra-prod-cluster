@@ -32,20 +32,11 @@ spec:
             - npm
             - start
           env:
-            - name: api_url
-              value: https://fcm.googleapis.com/fcm/send
             - name: FIREBASE_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: nucleus-notifications-firebase-secrets
+                  name: nucleus-secrets
                   key: FIREBASE_SECRET
-          envFrom:
-            - secretRef:
-                name: nucleus-notifications-api-token
-          volumeMounts:
-            - name: firebase-secrets
-              mountPath: /usr/src/app/secrets
-              readOnly: true
           livenessProbe:
             exec:
               command:
@@ -67,7 +58,3 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "250m"
-      volumes:
-        - name: firebase-secrets
-          secret:
-            secretName: nucleus-notifications-firebase-secrets
