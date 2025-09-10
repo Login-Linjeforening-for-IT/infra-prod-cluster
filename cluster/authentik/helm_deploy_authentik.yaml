@@ -40,7 +40,7 @@ spec:
         - name: AUTHENTIK_STORAGE__MEDIA__S3__CUSTOM_DOMAIN
           value: login-authentik-media.ams3.digitaloceanspaces.com/login-authentik-media
         - name: AUTHENTIK_POSTGRESQL__READ_REPLICAS__0__HOST
-          value: authentik-restore-psql-ro.authentik.svc.cluster.local
+          value: authentik-restore-psql-v2-ro.authentik.svc.cluster.local
         - name: AUTHENTIK_POSTGRESQL__READ_REPLICAS__0__NAME
           value: authentik
         - name: AUTHENTIK_POSTGRESQL__READ_REPLICAS__0__PORT
@@ -104,7 +104,7 @@ spec:
         enabled: false
         send_pii: false
       postgresql:
-        host: authentik-restore-psql-rw.authentik.svc.cluster.local
+        host: authentik-restore-psql-v2-rw.authentik.svc.cluster.local
         name: authentik
         port: 5432
         user: file:///postgres-creds/username
@@ -114,8 +114,6 @@ spec:
     redis:
       enabled: true
     server:
-      nodeSelector:
-        memory: high
       metrics:
         enabled: true
         serviceMonitor:
@@ -131,9 +129,7 @@ spec:
           cpu: "1"
       autoscaling:
         enabled: false
-        minReplicas: 1
-        maxReplicas: 1
-        targetCPUUtilizationPercentage: 80
+      replicas: 3
       ingress:
         ingressClassName: nginx-external
         annotations:
@@ -155,11 +151,9 @@ spec:
         minAvailable: 1
     worker:
       autoscaling:
-        enabled: true
-        minReplicas: 1
-        maxReplicas: 2
-        targetCPUUtilizationPercentage: 80
+        enabled: false
+      replicas: 3
       resources:
         requests:
-          memory: "3Gi"
-          cpu: "5"
+          memory: "500Mi"
+          cpu: "1"

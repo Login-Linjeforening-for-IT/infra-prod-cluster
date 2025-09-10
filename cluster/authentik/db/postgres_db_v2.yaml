@@ -9,7 +9,7 @@ spec:
   monitoring:
     enablePodMonitor: true
   description: Postgres for Authentik
-  instances: 1
+  instances: 3
   primaryUpdateStrategy: unsupervised
   storage:
     size: 10Gi
