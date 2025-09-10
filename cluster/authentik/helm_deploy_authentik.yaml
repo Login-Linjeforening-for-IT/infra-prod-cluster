@@ -159,4 +159,4 @@ spec:
       resources:
         requests:
           memory: "2Gi"
-          cpu: "4"
+          cpu: "5"
