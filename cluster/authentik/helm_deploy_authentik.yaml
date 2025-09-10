@@ -114,6 +114,8 @@ spec:
     redis:
       enabled: true
     server:
+      nodeSelector:
+        memory: high
       metrics:
         enabled: true
         serviceMonitor:
@@ -125,11 +127,11 @@ spec:
           value: 10.0.0.0/8
       resources:
         requests:
-          memory: "1Gi"
-          cpu: "100m"
-        limits:
           memory: "4Gi"
-          cpu: "2"
+          cpu: "4"
+        limits:
+          memory: "8Gi"
+          cpu: "8"
       autoscaling:
         enabled: true
         minReplicas: 1
@@ -155,13 +157,15 @@ spec:
         enabled: true
         minAvailable: 1
     worker:
+      nodeSelector:
+        memory: high
       resources:
         requests:
-          memory: "1Gi"
-          cpu: "100m"
-        limits:
           memory: "4Gi"
-          cpu: "2"
+          cpu: "4"
+        limits:
+          memory: "8Gi"
+          cpu: "8"
       autoscaling:
         enabled: true
         minReplicas: 1
