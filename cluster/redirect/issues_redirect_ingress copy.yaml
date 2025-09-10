@@ -10,7 +10,9 @@ spec:
   ingressClassName: nginx-external
   tls:
     - hosts:
-        - issues.login.no
+      - issues.login.no
+      - scrum.login.no
   rules:
     - host: issues.login.no
+    - host: scrum.login.no
 
