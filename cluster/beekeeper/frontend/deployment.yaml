@@ -50,6 +50,21 @@ spec:
               value: https://api.beekeeper.login.no/api
             - name: CDN_URL
               value: https://cdn.login.no
+            - name: BTG_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: BTG_TOKEN
+            - name: WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: WEBHOOK_URL
+            - name: CRITICAL_ROLE
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: CRITICAL_ROLE
           ports:
             - containerPort: 3000
               name: 3000tcp
