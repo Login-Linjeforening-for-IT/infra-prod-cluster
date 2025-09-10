@@ -1,0 +1,16 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://gitlab.login.no
+  name: issues-redirect-ingress
+  namespace: redirect-namespace
+spec:
+  ingressClassName: nginx-external
+  tls:
+    - hosts:
+        - issues.login.no
+  rules:
+    - host: issues.login.no
+
