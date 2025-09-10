@@ -125,15 +125,15 @@ spec:
           value: 10.0.0.0/8
       resources:
         requests:
-          memory: "512Mi"
+          memory: "1Gi"
           cpu: "100m"
         limits:
-          memory: "2Gi"
+          memory: "4Gi"
           cpu: "2"
       autoscaling:
         enabled: true
-        minReplicas: 3
-        maxReplicas: 5
+        minReplicas: 1
+        maxReplicas: 1
         targetCPUUtilizationPercentage: 80
       ingress:
         ingressClassName: nginx-external
@@ -157,15 +157,15 @@ spec:
     worker:
       resources:
         requests:
-          memory: "512Mi"
+          memory: "1Gi"
           cpu: "100m"
         limits:
-          memory: "2Gi"
+          memory: "4Gi"
           cpu: "2"
       autoscaling:
         enabled: true
-        minReplicas: 3
-        maxReplicas: 5
+        minReplicas: 1
+        maxReplicas: 1
         targetCPUUtilizationPercentage: 80
       pdb:
         enabled: true
