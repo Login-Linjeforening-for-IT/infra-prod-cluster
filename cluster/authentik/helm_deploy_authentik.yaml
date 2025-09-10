@@ -130,7 +130,7 @@ spec:
           memory: "500Mi"
           cpu: "1"
       autoscaling:
-        enabled: true
+        enabled: false
         minReplicas: 1
         maxReplicas: 1
         targetCPUUtilizationPercentage: 80
@@ -158,16 +158,5 @@ spec:
         memory: high
       resources:
         requests:
-          memory: "5Gi"
-          cpu: "5"
-        limits:
-          memory: "6Gi"
-          cpu: "6"
-      autoscaling:
-        enabled: true
-        minReplicas: 1
-        maxReplicas: 1
-        targetCPUUtilizationPercentage: 80
-      pdb:
-        enabled: true
-        minAvailable: 1
+          memory: "2Gi"
+          cpu: "4"
