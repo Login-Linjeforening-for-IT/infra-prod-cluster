@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/permanent-redirect: https://gitlab.login.no
+    nginx.ingress.kubernetes.io/permanent-redirect: https://gitlab.login.no/tekkom/development/-/boards/
   name: issues-redirect-ingress
   namespace: redirect-namespace
 spec:
