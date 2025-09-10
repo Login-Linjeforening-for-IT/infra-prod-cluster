@@ -130,8 +130,8 @@ spec:
           memory: "4Gi"
           cpu: "4"
         limits:
-          memory: "8Gi"
-          cpu: "8"
+          memory: "4Gi"
+          cpu: "4"
       autoscaling:
         enabled: true
         minReplicas: 1
