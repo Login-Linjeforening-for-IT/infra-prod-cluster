@@ -164,7 +164,7 @@ spec:
           memory: "8Gi"
           cpu: "8"
         limits:
-          memory: "8Gi"
+          memory: "9Gi"
           cpu: "8"
       autoscaling:
         enabled: true
