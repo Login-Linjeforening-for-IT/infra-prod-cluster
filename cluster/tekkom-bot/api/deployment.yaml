@@ -68,6 +68,26 @@ spec:
                 secretKeyRef:
                   name: tekkom-bot-secrets
                   key: CLIENT_SECRET
+            - name: TEKKOM_BOT_BTG_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: TEKKOM_BOT_BTG_TOKEN
+            - name: QUEENBEE_BTG_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: QUEENBEE_BTG_TOKEN
+            - name: CRITICAL_ROLE
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: CRITICAL_ROLE
+            - name: WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: WEBHOOK_URL
             - name: AUTHENTIK_API_URL
               value: https://authentik.login.no
           livenessProbe:
