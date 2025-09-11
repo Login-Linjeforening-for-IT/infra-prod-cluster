@@ -5,6 +5,6 @@ resources:
   - namespace.yaml
   - network-policy.yaml
   - limitrange.yaml
-  - kustomize/frontend.yaml
+  # - kustomize/frontend.yaml
   - kustomize/secrets.yaml
-  - kustomize/api.yaml
+  # - kustomize/api.yaml
