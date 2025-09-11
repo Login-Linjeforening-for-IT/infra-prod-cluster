@@ -34,7 +34,7 @@ spec:
         - name: gitlab-deploy-key-studentbee
       containers:
         - name: api
-          image: registry.login.no/tekkom/web/beehive/studentbee/api:2.4.2
+          image: registry.login.no/tekkom/web/beehive/studentbee/api:2.4.3
           imagePullPolicy: IfNotPresent
           command:
             - npm
