@@ -6,7 +6,7 @@ metadata:
     app: studentbee-frontend
     component: frontend
     part-of: beehive
-    project: exam.login.no
+    project: studentbee
     confidentiality: not-defined
     compliance: not-defined
   name: studentbee-frontend
@@ -26,7 +26,7 @@ spec:
         app: studentbee-frontend
         component: frontend
         part-of: beehive
-        project: exam.login.no
+        project: studentbee
         confidentiality: not-defined
         compliance: not-defined
     spec:
@@ -34,7 +34,7 @@ spec:
         - name: gitlab-deploy-key-studentbee
       containers:
         - name: webserver
-          image: registry.login.no/tekkom/web/beehive/exam.login.no/frontend:2.4.2
+          image: registry.login.no/tekkom/web/beehive/studentbee/frontend:2.4.2
           imagePullPolicy: IfNotPresent
           env:
             - name: API_URL
