@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dizambee-api
+  namespace: dizambee
+spec:
+  ingressClassName: nginx-external
+  tls:
+    - hosts:
+        - api.dizambee.login.no
+  rules:
+    - host: api.dizambee.login.no
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: dizambee-api
+                port:
+                  number: 8080
