@@ -59,6 +59,8 @@ spec:
               value: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-r1t6m%40login-da744.iam.gserviceaccount.com"
             - name: UNIVERSE_DOMAIN
               value: "googleapis.com"
+            - name: NEXT_PUBLIC_TEKKOM_BOT_API_URL
+              value: "https://api.tekkom-bot.login.no/api"
           ports:
             - containerPort: 3000
               name: 3000tcp
