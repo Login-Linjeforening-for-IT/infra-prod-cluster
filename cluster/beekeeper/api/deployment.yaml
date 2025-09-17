@@ -89,6 +89,16 @@ spec:
               value: https://api.beekeeper.login.no/api/callback
             - name: BEEKEEPER_URL
               value: https://beekeeper.login.no
+            - name: BTG_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: BTG_TOKEN
+            - name: WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: WEBHOOK_URL
           ports:
             - containerPort: 8080
               name: 8080tcp
