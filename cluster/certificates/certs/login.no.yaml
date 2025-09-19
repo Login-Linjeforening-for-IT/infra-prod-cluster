@@ -19,6 +19,8 @@ spec:
     - "*.login.no"
     - "login.no"
     - "*.workerbee.login.no"
+    - "*.test.login.no"
+    - "*.api.test.login.no"
     - "*.dizambee.login.no"
     - "*.api.dizambee.login.no"
     - "*.exam.login.no"
