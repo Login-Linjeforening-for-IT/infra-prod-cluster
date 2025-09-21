@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/permanent-redirect: https://github.com/orgs/Login-Linjeforening-for-IT/projects/3/views/1
-  name: issues-redirect-ingress
+  name: issues-infra-redirect-ingress
   namespace: redirect-namespace
 spec:
   ingressClassName: nginx-external
