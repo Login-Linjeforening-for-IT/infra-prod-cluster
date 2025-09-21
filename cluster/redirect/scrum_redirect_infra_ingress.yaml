@@ -13,4 +13,3 @@ spec:
       - infra.login.no
   rules:
     - host: infra.login.no
-

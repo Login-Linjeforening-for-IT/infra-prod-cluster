@@ -15,4 +15,3 @@ spec:
   rules:
     - host: issues.login.no
     - host: scrum.login.no
-
