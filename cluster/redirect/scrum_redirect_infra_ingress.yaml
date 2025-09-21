@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/permanent-redirect: https://github.com/orgs/Login-Linjeforening-for-IT/projects/3/views/1
+    nginx.ingress.kubernetes.io/permanent-redirect: https://github.com/orgs/Login-Linjeforening-for-IT/projects/4/views/1
   name: issues-infra-redirect-ingress
   namespace: redirect-namespace
 spec:
