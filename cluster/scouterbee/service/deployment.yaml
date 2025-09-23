@@ -25,7 +25,7 @@ spec:
         - name: scouterbee-pull-secret
       containers:
         - name: scouterbee
-          image: registry.login.no/tekkom/playground/scouterbee:1.0.1
+          image: registry.login.no/tekkom/playground/scouterbee:1.1.0
           imagePullPolicy: Always
           env:
             - name: GITLAB_TOKEN
