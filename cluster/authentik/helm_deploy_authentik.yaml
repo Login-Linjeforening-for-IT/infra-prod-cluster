@@ -129,7 +129,7 @@ spec:
           cpu: "1"
       autoscaling:
         enabled: false
-      replicas: 3
+      replicas: 2
       ingress:
         ingressClassName: nginx-external
         annotations:
@@ -152,7 +152,7 @@ spec:
     worker:
       autoscaling:
         enabled: false
-      replicas: 3
+      replicas: 2
       resources:
         requests:
           memory: "500Mi"
