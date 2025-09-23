@@ -42,8 +42,10 @@ spec:
               value: https://discord.com/api/webhooks/1412821204498386984/zwAZbaIo7talBNTXwZWEnvY0jIzRO0Kr97efOORTzDNF_ksZBetA5jJmT_Je6tkJhnyq
             - name: HEARTBEAT_URL
               value: http://uptime-kuma-svc.uptime-kuma.svc.cluster.local:3001/api/push/DKvXlh9rcu?status=up&msg=OK&ping=
-            - name: CRITICAL_ROLE
+            - name: CRITICAL_ROLE_DEV
               value: "1278447313240592520"
+            - name: CRITICAL_ROLE_INFRA
+              value: "1115261264499847189"
           resources:
             requests:
               memory: 1024Mi
