@@ -90,6 +90,16 @@ spec:
                   key: WEBHOOK_URL
             - name: AUTHENTIK_API_URL
               value: https://authentik.login.no
+            - name: SPOTIFY_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: SPOTIFY_CLIENT_ID
+            - name: SPOTIFY_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: SPOTIFY_CLIENT_SECRET
           livenessProbe:
             httpGet:
               path: /api/
