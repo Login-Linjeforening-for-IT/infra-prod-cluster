@@ -6,7 +6,7 @@ metadata:
   namespace: beekeeper
 spec:
   description: Postgres for BeeKeeper API
-  instances: 3
+  instances: 1
   primaryUpdateStrategy: unsupervised
   storage:
     size: 32Gi
