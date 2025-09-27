@@ -1,3 +1,0 @@
-resources:
-  - postgres_db_v2.yaml
-  - postgres_db.yaml
