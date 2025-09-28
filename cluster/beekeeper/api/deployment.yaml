@@ -99,6 +99,10 @@ spec:
                 secretKeyRef:
                   name: beekeeper-secrets
                   key: WEBHOOK_URL
+            - name: CRITICAL_ROLE
+              value: "940879337383673866"
+            - name: CRITICAL_SQL_ROLE
+              value: "1278447313240592520"
           ports:
             - containerPort: 8080
               name: 8080tcp
