@@ -34,7 +34,7 @@ spec:
         - name: beekeeper-pull-token
       containers:
         - name: api
-          image: registry.login.no/tekkom/web/beehive/beekeeper/api:1.5.8
+          image: registry.login.no/tekkom/web/beehive/beekeeper/api:1.5.9
           imagePullPolicy: IfNotPresent
           command: ["sh", "-c"]
           args: ["./scripts/init.sh"]
