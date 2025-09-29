@@ -29,5 +29,6 @@ spec:
     - "*.api.queenbee.login.no"
     - "*.beekeeper.login.no"
     - "*.api.beekeeper.login.no"
+    - "*.beeformed.login.no"
     - "logout.no"
     - "api.tekkom-bot.login.no"
