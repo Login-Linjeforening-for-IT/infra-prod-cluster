@@ -16,8 +16,6 @@ spec:
         name: helm-repo
         namespace: zammad
       interval: 5m
-  upgrade:
-    force: true
   values:
     secrets:
       postgresql:
