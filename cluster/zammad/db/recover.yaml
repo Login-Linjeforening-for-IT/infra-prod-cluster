@@ -16,6 +16,10 @@ spec:
   postgresql:
     parameters:
       timezone: "Europe/Oslo"
+      max_connections: "250"
+      superuser_reserved_connections: "10"
+      max_wal_senders: "20"
+      max_replication_slots: "10"
   superuserSecret:
     name: zammad-db-credentials
   bootstrap:
