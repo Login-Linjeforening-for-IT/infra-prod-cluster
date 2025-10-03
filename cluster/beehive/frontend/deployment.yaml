@@ -33,26 +33,20 @@ spec:
               value: http://beehive-backend.beehive.svc.cluster.local:8080/api
             - name: CDN_URL
               value: https://cdn.login.no
-            - name: NEXT_PUBLIC_AUTHENTIK_CLIENT_ID
+            - name: BASE_URL
+              value: https://login.no
+            - name: AUTHENTIK_CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: beehive-secrets
-                  key: NEXT_PUBLIC_AUTHENTIK_CLIENT_ID
+                  key: AUTHENTIK_CLIENT_ID
             - name: AUTHENTIK_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: beehive-secrets
                   key: AUTHENTIK_CLIENT_SECRET
-            - name: NEXT_PUBLIC_AUTHENTIK_URI
-              valueFrom:
-                secretKeyRef:
-                  name: beehive-secrets
-                  key: NEXT_PUBLIC_AUTHENTIK_URI
-            - name: NEXT_PUBLIC_URI
-              valueFrom:
-                secretKeyRef:
-                  name: beehive-secrets
-                  key: NEXT_PUBLIC_URI
+            - name: AUTHENTIK_URL
+              value: https://authentik.login.no
           ports:
             - containerPort: 3000
               name: 3000tcp
