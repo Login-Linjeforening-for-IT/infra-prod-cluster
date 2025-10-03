@@ -35,6 +35,8 @@ spec:
               value: https://cdn.login.no
             - name: BASE_URL
               value: https://login.no
+            - name: AUTHENTIK_URL
+              value: https://authentik.login.no
             - name: AUTHENTIK_CLIENT_ID
               valueFrom:
                 secretKeyRef:
@@ -45,8 +47,6 @@ spec:
                 secretKeyRef:
                   name: beehive-secrets
                   key: AUTHENTIK_CLIENT_SECRET
-            - name: AUTHENTIK_URL
-              value: https://authentik.login.no
           ports:
             - containerPort: 3000
               name: 3000tcp
