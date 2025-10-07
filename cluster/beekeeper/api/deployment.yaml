@@ -12,6 +12,7 @@ metadata:
   name: beekeeper-api
   namespace: beekeeper
 spec:
+  replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 25%
