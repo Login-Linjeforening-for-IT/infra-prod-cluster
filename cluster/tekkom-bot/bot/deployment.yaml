@@ -152,6 +152,11 @@ spec:
                 secretKeyRef:
                   name: tekkom-bot-secrets
                   key: CRITICAL_ROLE
+            - name: CRITICAL_ROLE_DEV
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: CRITICAL_ROLE_DEV
             - name: WEBHOOK_URL
               valueFrom:
                 secretKeyRef:
