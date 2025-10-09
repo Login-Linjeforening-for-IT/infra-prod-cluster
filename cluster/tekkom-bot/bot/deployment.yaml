@@ -122,6 +122,11 @@ spec:
                 secretKeyRef:
                   name: tekkom-bot-secrets
                   key: PRIVATE_TOKEN
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: GITHUB_TOKEN
             - name: WIKI_STYRET_TEMPLATE_ID
               value: "830"
             - name: WIKI_TEKKOM_TEMPLATE_ID
