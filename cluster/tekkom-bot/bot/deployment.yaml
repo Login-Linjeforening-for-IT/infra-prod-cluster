@@ -132,6 +132,11 @@ spec:
                 secretKeyRef:
                   name: tekkom-bot-secrets
                   key: GITHUB_WEBHOOK_SECRET
+            - name: WEBHOOK_URL_ISSUE
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: WEBHOOK_URL_ISSUE
             - name: WIKI_STYRET_TEMPLATE_ID
               value: "830"
             - name: WIKI_TEKKOM_TEMPLATE_ID
