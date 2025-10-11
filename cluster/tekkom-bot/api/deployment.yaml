@@ -58,6 +58,21 @@ spec:
               value: https://queenbee.login.no
             - name: REDIRECT_URI
               value: https://api.tekkom-bot.login.no/api/callback
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: GITHUB_TOKEN
+            - name: GITHUB_WEBHOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: GITHUB_WEBHOOK_SECRET
+            - name: WEBHOOK_URL_ISSUE
+              valueFrom:
+                secretKeyRef:
+                  name: tekkom-bot-secrets
+                  key: WEBHOOK_URL_ISSUE
             - name: CLIENT_ID
               valueFrom:
                 secretKeyRef:
