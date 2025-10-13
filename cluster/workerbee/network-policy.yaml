@@ -1,0 +1,118 @@
+# General network policies for the workerbee namespace
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all
+  namespace: workerbee
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+
+# Allowing ingress traffic
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-traffic
+  namespace: workerbee
+spec:
+  podSelector:
+    matchLabels:
+      app: workerbee
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: beehive
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: queenbee
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-ntnu
+      ports:
+        - protocol: TCP
+          port: 8080
+
+# Allowing egress traffic
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-traffic
+  namespace: workerbee
+spec:
+  podSelector:
+    matchLabels:
+      app: workerbee
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: beehive
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: queenbee
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: nginx-ingress-ntnu
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: workerbee
+          podSelector:
+            matchLabels:
+              cnpg.io/cluster: workerbee-psql
+      ports:
+        - protocol: TCP
+          port: 5432
+
+# Allowing api to kube-dns traffic
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-to-kube-dns
+  namespace: workerbee
+spec:
+  podSelector:
+    matchLabels:
+      app: workerbee
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-psql
+  namespace: workerbee
+spec:
+  policyTypes:
+    - Ingress
+    - Egress
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: workerbee-psql
+  ingress:
+    - {}
+  egress:
+    - {}
+
+

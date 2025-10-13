@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: workerbee
+    part-of: dev
+    project: workerbee
+    confidentiality: not-defined
+    compliance: not-defined
+  name: workerbee
+  namespace: workerbee
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: workerbee
+  template:
+    metadata:
+      labels:
+        app: workerbee
+        component: workerbee
+        part-of: dev
+        project: workerbee
+        confidentiality: not-defined
+        compliance: not-defined
+    spec:
+      imagePullSecrets:
+        - name: gitlab-deploy-key-workerbee
+      containers:
+        - name: webserver
+          image: registry.login.no/tekkom/dev/workerbee:1.0.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "8080"
+            - name: POSTGRES_HOST
+              value: workerbee-psql-rw.workerbee.svc.cluster.local
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: database
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+          ports:
+            - containerPort: 8080
+              name: 8080tcp
+              protocol: TCP
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 125m
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - nginx
+              topologyKey: kubernetes.io/hostname

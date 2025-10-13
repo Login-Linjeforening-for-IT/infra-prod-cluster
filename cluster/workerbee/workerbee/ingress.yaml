@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: workerbee
+  namespace: workerbee
+spec:
+  ingressClassName: nginx-ntnu
+  tls:
+    - hosts:
+        - workerbee-v2.login.no
+  rules:
+    - host: workerbee-v2.login.no
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: workerbee
+                port:
+                  number: 8080

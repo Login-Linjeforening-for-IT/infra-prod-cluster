@@ -1,0 +1,44 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: workerbee-psql
+  namespace: workerbee
+spec:
+  monitoring:
+    enablePodMonitor: true
+  description: Postgres for workerbee
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 2Gi
+  postgresql:
+    parameters:
+      timezone: "Europe/Oslo"
+  superuserSecret:
+    name: db-credentials
+  bootstrap:
+    initdb: {}
+  backup:
+    retentionPolicy: "30d"
+    barmanObjectStore:
+      destinationPath: s3://login-external-prod-psql-backups/workerbee
+      s3Credentials:
+        accessKeyId:
+          name: workerbee-api-pg-backup
+          key: access
+        secretAccessKey:
+          name: workerbee-api-pg-backup
+          key: secret
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: workerbee-backups
+  namespace: workerbee
+spec:
+  immediate: true
+  schedule: "0 0 0 * * *"
+  cluster:
+    name: workerbee-psql
