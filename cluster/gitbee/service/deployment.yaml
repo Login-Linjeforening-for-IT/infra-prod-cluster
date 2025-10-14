@@ -38,6 +38,11 @@ spec:
                 secretKeyRef:
                   name: gitbee-secrets
                   key: GITLAB_API_TOKEN
+            - name: WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: gitbee-secrets
+                  key: WEBHOOK_URL
           resources:
             requests:
               memory: 256Mi
