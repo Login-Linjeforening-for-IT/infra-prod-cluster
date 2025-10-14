@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gitbee
+  name: gitbee
+  namespace: gitbee
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: gitbee
+  template:
+    metadata:
+      labels:
+        app: gitbee
+    spec:
+      imagePullSecrets:
+        - name: gitbee-pull-secret
+      containers:
+        - name: gitbee
+          image: registry.login.no/tekkom/dev/gitbee:1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: GITHUB_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: gitbee-secrets
+                  key: GITHUB_API_TOKEN
+            - name: GITLAB_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: gitbee-secrets
+                  key: GITLAB_API_TOKEN
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 768Mi
+              cpu: 750m
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - gitbee
+                topologyKey: kubernetes.io/hostname
