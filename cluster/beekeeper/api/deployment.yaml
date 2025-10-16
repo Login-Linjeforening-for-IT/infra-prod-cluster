@@ -108,7 +108,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: beekeeper-secrets
-                  key: HEARTBEAT_REFERENCE
+                  key: HEARTBEAT_REFERENCE_API
             - name: HEARTBEAT_URL
               value: http://uptime-kuma-svc.uptime-kuma.svc.cluster.local:3001/api/push/{reference}?status=up&msg=OK&ping={ping}
           ports:
