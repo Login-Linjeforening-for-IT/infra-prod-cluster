@@ -23,7 +23,7 @@ spec:
       imagePullSecrets:
         - name: gitlab-token-app-api
       containers:
-        - image: registry.login.no/tekkom/apps/app-api:1.0.3@sha256:3be65fb783113e77ab074b4eb9386bb095818421c17583006e8635ffd80b54f9
+        - image: registry.login.no/tekkom/apps/app-api:1.0.3
           imagePullPolicy: Always
           name: app-api
           ports:

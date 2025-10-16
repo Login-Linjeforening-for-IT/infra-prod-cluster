@@ -6,4 +6,4 @@ resources:
   - deploy.yaml
   - np.yaml
   - scaling.yaml
-  - secrets_kust.yaml
+  # - secrets_kust.yaml
