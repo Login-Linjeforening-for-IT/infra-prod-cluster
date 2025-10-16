@@ -146,3 +146,34 @@ spec:
       ports:
         - protocol: TCP
           port: 3001
+
+# Allows ingress from beekeeper to uptime-kuma
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-scouterbee-ingress
+  namespace: uptime-kuma
+spec:
+  podSelector:
+    matchLabels:
+      app: uptime-kuma
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: beekeeper
+          podSelector:
+            matchLabels:
+              app: beekeeper-frontend
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: beekeeper
+          podSelector:
+            matchLabels:
+              app: beekeeper-api
+      ports:
+        - protocol: TCP
+          port: 3001

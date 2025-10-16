@@ -65,6 +65,13 @@ spec:
                 secretKeyRef:
                   name: beekeeper-secrets
                   key: CRITICAL_ROLE
+            - name: HEARTBEAT_REFERENCE
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: HEARTBEAT_REFERENCE
+            - name: HEARTBEAT_URL
+              value: http://uptime-kuma-svc.uptime-kuma.svc.cluster.local:3001/api/push/{reference}?status=up&msg=OK&ping={ping}
           ports:
             - containerPort: 3000
               name: 3000tcp

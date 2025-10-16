@@ -104,6 +104,13 @@ spec:
               value: "940879337383673866"
             - name: CRITICAL_DEVELOPMENT_ROLE
               value: "1278447313240592520"
+            - name: HEARTBEAT_REFERENCE
+              valueFrom:
+                secretKeyRef:
+                  name: beekeeper-secrets
+                  key: HEARTBEAT_REFERENCE
+            - name: HEARTBEAT_URL
+              value: http://uptime-kuma-svc.uptime-kuma.svc.cluster.local:3001/api/push/{reference}?status=up&msg=OK&ping={ping}
           ports:
             - containerPort: 8080
               name: 8080tcp
