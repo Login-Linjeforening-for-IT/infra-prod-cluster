@@ -16,7 +16,7 @@ spec:
         namespace: gitlab-runners
       interval: 5m
   values:
-    replicas: 3
+    replicas: 2
     imagePullPolicy: IfNotPresent
     gitlabUrl: http://gitlab-prod-webservice-default.gitlab.svc.cluster.local:8181/
     terminationGracePeriodSeconds: 3600

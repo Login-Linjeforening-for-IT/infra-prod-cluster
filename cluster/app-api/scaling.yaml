@@ -24,8 +24,8 @@ spec:
     kind: Deployment
     name: app-api
     namespace: app-api
-  minReplicas: 3
-  maxReplicas: 6
+  minReplicas: 1
+  maxReplicas: 1
   metrics:
     - type: Resource
       resource:

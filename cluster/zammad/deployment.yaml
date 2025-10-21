@@ -61,9 +61,9 @@ spec:
       minio:
         enabled: false
       nginx:
-        replicas: 3
+        replicas: 2
       railsserver:
-        replicas: 3
+        replicas: 2
         securityContext:
           readOnlyRootFilesystem: false
           privileged: false
