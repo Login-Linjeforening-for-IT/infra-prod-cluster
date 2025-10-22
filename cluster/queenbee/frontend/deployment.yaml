@@ -34,7 +34,7 @@ spec:
             - name: CDN_URL
               value: "https://cdn.login.no"
             - name: BASE_URL
-              value: "https://dev.queenbee.login.no"
+              value: "https://queenbee.login.no"
             - name: AUTHENTIK_CLIENT_ID
               valueFrom:
                 secretKeyRef:
