@@ -146,3 +146,28 @@ spec:
       ports:
         - protocol: TCP
           port: 3001
+
+# Allows ingress from workerbee to uptime-kuma
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-workerbee-ingress
+  namespace: uptime-kuma
+spec:
+  podSelector:
+    matchLabels:
+      app: uptime-kuma
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: workerbee
+          podSelector:
+            matchLabels:
+              app: workerbee
+      ports:
+        - protocol: TCP
+          port: 3001
