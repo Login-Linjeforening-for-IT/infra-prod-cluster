@@ -125,3 +125,27 @@ spec:
     - {}
 
 
+# Allowing egress workerbee to uptime-kuma traffic
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-workerbee-to-uptime-kuma
+  namespace: workerbee
+spec:
+  podSelector:
+    matchLabels:
+      app: workerbee
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: uptime-kuma
+          podSelector:
+            matchLabels:
+              app: uptime-kuma
+      ports:
+        - protocol: TCP
+          port: 3001
