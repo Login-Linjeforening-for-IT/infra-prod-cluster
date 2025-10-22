@@ -12,13 +12,28 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     size: 2Gi
-  postgresql:
-    parameters:
-      timezone: "Europe/Oslo"
+  # postgresql:
+    # parameters:
+      # timezone: "Europe/Oslo"
   superuserSecret:
     name: db-credentials
   bootstrap:
-    initdb: {}
+    recovery:
+      source: clusterBackup
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:
+        destinationPath: s3://login-external-prod-psql-backups/workerbee
+        serverName: workerbee-psql
+        s3Credentials:
+          accessKeyId:
+            name: workerbee-api-pg-backup
+            key: access
+          secretAccessKey:
+            name: workerbee-api-pg-backup
+            key: secret
+        wal:
+          maxParallel: 8
   backup:
     retentionPolicy: "30d"
     barmanObjectStore:
@@ -42,3 +57,18 @@ spec:
   schedule: "0 0 0 * * *"
   cluster:
     name: workerbee-psql
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: workerbee-psql
+  namespace: workerbee
+  labels:
+    release: prometheus
+spec:
+  podMetricsEndpoints:
+    - port: metrics
+  selector:
+    matchLabels:
+      cnpg.io/cluster: workerbee-psql
