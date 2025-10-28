@@ -1,0 +1,23 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: authentik-restore-psql-v3
+  namespace: authentik
+spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.5
+  description: Postgres for Authentik v3
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 10Gi
+  postgresql:
+    parameters:
+      timezone: "Europe/Oslo"
+  superuserSecret:
+    name: authentik-db-credentials
+  bootstrap:
+    recovery:
+      backup:
+        name: authentik-psql-backup-20251028000000
+      recoveryTarget:
+        targetTime: "2025-10-28 15:15:00.00000+02"
