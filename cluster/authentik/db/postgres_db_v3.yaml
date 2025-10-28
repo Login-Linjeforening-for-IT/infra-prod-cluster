@@ -4,7 +4,7 @@ metadata:
   name: authentik-restore-psql-v3
   namespace: authentik
 spec:
-  imageName: ghcr.io/cloudnative-pg/postgresql:17.6
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4
   description: Postgres for Authentik v3
   instances: 1
   primaryUpdateStrategy: unsupervised
