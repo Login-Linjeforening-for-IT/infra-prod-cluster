@@ -18,6 +18,6 @@ spec:
   bootstrap:
     recovery:
       backup:
-        name: authentik-psql-v2-backup-20251028000000
+        name: authentik-restore-psql-v2-backup-20251028000000
       recoveryTarget:
         targetTime: "2025-10-28 15:15:00.00000+02"
