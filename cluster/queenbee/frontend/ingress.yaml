@@ -7,7 +7,6 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       add_header Content-Security-Policy "default-src 'self' https://api.mazemap.com; img-src 'self' data: blob: https://cdn.login.no; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.mazemap.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.mazemap.com https://www.google-analytics.com; font-src https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'self' https://api.queenbee.login.no";
-    external-dns.alpha.kubernetes.io/exclude: "true"
 
 spec:
   ingressClassName: nginx-ntnu
