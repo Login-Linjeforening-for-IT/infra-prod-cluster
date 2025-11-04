@@ -25,7 +25,6 @@ spec:
             - --source=service
             - --domain-filter=login.no
             - --provider=digitalocean
-            - --ingress-class=nginx-external
             - --txt-owner-id=inf
           env:
             - name: DO_TOKEN
