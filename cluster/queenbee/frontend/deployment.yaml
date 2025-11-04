@@ -23,7 +23,7 @@ spec:
       imagePullSecrets:
         - name: gitlab-frontend-pull-token
       containers:
-        - image: registry.login.no/tekkom/dev/queenbee:3.3.0
+        - image: registry.login.no/tekkom/dev/queenbee:3.3.3
           imagePullPolicy: Always
           name: queenbee-frontend
           env:
@@ -32,7 +32,7 @@ spec:
             - name: NEXT_PUBLIC_API_URL
               value: "https://workerbee-v2.login.no/api/v2"
             - name: TEKKOM_BOT_API_URL
-              value: "http://tekkom-bot-api.tekkom-bot.svc.cluster.local:8080/api"
+              value: "https://api.tekkom-bot.login.no/api"
             - name: NEXT_PUBLIC_TEKKOM_BOT_API_URL
               value: "https://api.tekkom-bot.login.no/api"
             - name: CDN_URL
