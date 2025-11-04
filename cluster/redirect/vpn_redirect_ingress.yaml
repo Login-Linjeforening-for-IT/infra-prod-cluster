@@ -4,13 +4,13 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/permanent-redirect: https://login.no/vpn
-    external-dns.alpha.kubernetes.io/hostname: queenbee.login.no
+    external-dns.alpha.kubernetes.io/hostname: dev.queenbee.login.no
   name: vpn-redirect-ingress
   namespace: redirect-namespace
 spec:
   ingressClassName: nginx-external
   tls:
     - hosts:
-      - queenbee.login.no
+      - dev.queenbee.login.no
   rules:
-    - host: queenbee.login.no
+    - host: dev.queenbee.login.no
