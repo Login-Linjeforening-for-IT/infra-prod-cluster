@@ -37,94 +37,6 @@ spec:
             matchLabels:
               kubernetes.io/metadata.name: nginx-ingress-external
 
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-backend
-  namespace: beehive
-spec:
-  podSelector:
-    matchLabels:
-      app: beehive-backend
-  policyTypes:
-    - Ingress
-    - Egress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-external
-      ports:
-        - port: 8080
-          protocol: TCP
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-external
-    - to:
-        - namespaceSelector: {}
-          podSelector:
-            matchLabels:
-              k8s-app: kube-dns
-      ports:
-        - protocol: UDP
-          port: 53
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-external
-      ports:
-        - port: 8080
-          protocol: TCP
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: beehive
-          podSelector:
-            matchLabels:
-              cnpg.io/cluster: public-api-psql
-      ports:
-        - port: 5432
-          protocol: TCP
-
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-psql
-  namespace: beehive
-spec:
-  policyTypes:
-    - Ingress
-    - Egress
-  podSelector:
-    matchLabels:
-      cnpg.io/cluster: public-api-psql
-  ingress:
-    - {}
-  egress:
-    - {}
-
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-psql-client
-  namespace: beehive
-spec:
-  policyTypes:
-    - Ingress
-    - Egress
-  podSelector:
-    matchLabels:
-      app: postgres-client
-  ingress:
-    - {}
-  egress:
-    - {}
-
 # Allowing api to kube-dns traffic
 ---
 apiVersion: networking.k8s.io/v1
@@ -138,7 +50,6 @@ spec:
       - key: app
         operator: In
         values:
-          - beehive-backend
           - beehive-frontend
   policyTypes:
     - Ingress
@@ -152,41 +63,6 @@ spec:
       ports:
         - protocol: UDP
           port: 53
-
-# Allowing api ingress traffic
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-api-ingress-traffic
-  namespace: beehive
-spec:
-  podSelector:
-    matchLabels:
-      app: beehive-backend
-  policyTypes:
-    - Ingress
-    - Egress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-external
-      ports:
-        - protocol: TCP
-          port: 8080
-    - from:
-        - podSelector:
-            matchLabels:
-              app: beehive-frontend
-      ports:
-        - protocol: TCP
-          port: 8080
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-external
 
 # Allowing frontend to api traffic
 ---

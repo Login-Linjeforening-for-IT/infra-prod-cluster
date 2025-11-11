@@ -6,7 +6,7 @@ metadata:
   namespace: beehive
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      add_header Content-Security-Policy "default-src 'self'; img-src 'self' data: cdn.login.no login.no; style-src 'self' fonts.googleapis.com; style-src-attr 'self' 'unsafe-inline'; style-src-elem 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; script-src 'self' 'unsafe-eval' https://login.no/_next/static/ https://api.mapbox.com; script-src-elem 'self' https://api.mapbox.com 'unsafe-inline'; connect-src 'self' http://beehive-backend.beehive.svc.cluster.local:8080/api/ workerbee.login.no events.mapbox.com https://*.mazemap.com https://api.mapbox.com; worker-src 'self' blob:; frame-src 'self' use.mazemap.com https://open.spotify.com;";
+      add_header Content-Security-Policy "default-src 'self'; img-src 'self' data: cdn.login.no login.no; style-src 'self' fonts.googleapis.com; style-src-attr 'self' 'unsafe-inline'; style-src-elem 'self' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; script-src 'self' 'unsafe-eval' https://login.no/_next/static/ https://api.mapbox.com; script-src-elem 'self' https://api.mapbox.com 'unsafe-inline'; connect-src 'self' workerbee.login.no events.mapbox.com https://*.mazemap.com https://api.mapbox.com; worker-src 'self' blob:; frame-src 'self' use.mazemap.com https://open.spotify.com;";
       more_clear_headers "X-Robots-Tag";
 spec:
   ingressClassName: nginx-external
