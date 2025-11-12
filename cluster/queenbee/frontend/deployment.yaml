@@ -65,6 +65,11 @@ spec:
                 secretKeyRef:
                   name: queenbee-secrets
                   key: PRIVATE_KEY
+            - name: AUTHENTIK_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: queenbee-secrets
+                  key: AUTHENTIK_API_TOKEN
             - name: CLIENT_EMAIL
               value: "firebase-adminsdk-r1t6m@login-da744.iam.gserviceaccount.com"
             - name: CLIENT_ID
