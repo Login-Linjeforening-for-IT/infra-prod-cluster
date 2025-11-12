@@ -70,6 +70,11 @@ spec:
                 secretKeyRef:
                   name: workerbee-secrets
                   key: DO_SECRET_ACCESS_KEY
+            - name: AUTHENTIK_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: workerbee-secrets
+                  key: AUTHENTIK_API_TOKEN
           ports:
             - containerPort: 8080
               name: 8080tcp
