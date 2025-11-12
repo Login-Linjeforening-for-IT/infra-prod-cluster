@@ -18,6 +18,7 @@ spec:
     name: db-credentials
   bootstrap:
     recovery:
+      source: clusterBackup
       recoveryTarget:
         backupID: "20251111000000"
         targetImmediate: true
