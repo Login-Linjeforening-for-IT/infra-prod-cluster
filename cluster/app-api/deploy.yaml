@@ -27,19 +27,19 @@ spec:
           imagePullPolicy: Always
           name: app-api
           ports:
-            - containerPort: 3000
-              name: 3000tcp
+            - containerPort: 8080
+              name: 8080tcp
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: 3000
+              port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
-              port: 3000
+              port: 8080
             initialDelaySeconds: 5
             periodSeconds: 5
           resources:
@@ -80,8 +80,8 @@ spec:
     app: app-api
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 8080
+      targetPort: 8080
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -104,4 +104,4 @@ spec:
               service:
                 name: app-api
                 port:
-                  number: 3000
+                  number: 8080
