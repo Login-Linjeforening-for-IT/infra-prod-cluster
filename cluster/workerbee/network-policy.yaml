@@ -34,7 +34,7 @@ spec:
               kubernetes.io/metadata.name: queenbee
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-ntnu
+              kubernetes.io/metadata.name: nginx-ingress-external
       ports:
         - protocol: TCP
           port: 8080
@@ -68,7 +68,7 @@ spec:
               kubernetes.io/metadata.name: queenbee
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-ntnu
+              kubernetes.io/metadata.name: nginx-ingress-external
     - to:
         - namespaceSelector:
             matchLabels:

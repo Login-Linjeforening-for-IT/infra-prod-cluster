@@ -5,7 +5,7 @@ metadata:
   name: workerbee
   namespace: workerbee
 spec:
-  ingressClassName: nginx-ntnu
+  ingressClassName: nginx-external
   tls:
     - hosts:
         - workerbee.login.no
