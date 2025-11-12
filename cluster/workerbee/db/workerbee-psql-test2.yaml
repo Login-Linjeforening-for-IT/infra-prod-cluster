@@ -20,7 +20,7 @@ spec:
     recovery:
       source: clusterBackup
       recoveryTarget:
-        backupID: "20251111000000"
+        backupID: "workerbee-backups-20251111000000"
         targetImmediate: true
   backup:
     retentionPolicy: "30d"
