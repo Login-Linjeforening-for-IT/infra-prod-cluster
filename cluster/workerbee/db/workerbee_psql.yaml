@@ -18,8 +18,10 @@ spec:
   superuserSecret:
     name: db-credentials
   bootstrap:
-    recovery:
-      source: clusterBackup
+    initdb:
+      encoding: UTF8
+      locale: en_US.UTF-8
+      dataChecksums: true
   externalClusters:
     - name: clusterBackup
       barmanObjectStore:
