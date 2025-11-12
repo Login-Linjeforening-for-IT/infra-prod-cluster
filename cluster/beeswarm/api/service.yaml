@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: beeswarm-api
+  namespace: beeswarm
+  labels:
+    app: beeswarm-api
+spec:
+  type: ClusterIP
+  selector:
+    app: beeswarm-api
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

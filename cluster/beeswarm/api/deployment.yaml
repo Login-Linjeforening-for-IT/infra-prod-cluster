@@ -1,0 +1,116 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ai-api
+    component: api
+    part-of: beehive
+    project: beeswarm
+    confidentiality: not-defined
+    compliance: not-defined
+  name: beeswarm-api
+  namespace: beeswarm
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: beeswarm-api
+  template:
+    metadata:
+      labels:
+        app: beeswarm-api
+        component: api
+        part-of: beehive
+        project: beeswarm
+        confidentiality: not-defined
+        compliance: not-defined
+    spec:
+      imagePullSecrets:
+        - name: gitlab-deploy-key-beeswarm
+      containers:
+        - name: api
+          image: registry.login.no/tekkom/web/beehive/beeswarm/api:2.4.5
+          imagePullPolicy: IfNotPresent
+          command:
+            - npm
+            - start
+          env:
+            # Shared environment variables
+            - name: BACKEND_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: 1pwd-secrets-beeswarm
+                  key: BACKEND_SECRET
+            - name: TYPE
+              value: service_account
+            - name: AUTH_URI
+              value: https://accounts.google.com/o/oauth2/auth
+            - name: TOKEN_URI
+              value: https://oauth2.googleapis.com/token
+            - name: AUTH_CERT_URL
+              value: https://www.googleapis.com/oauth2/v1/certs
+            - name: UNIVERSE_DOMAIN
+              value: googleapis.com
+            - name: REDIS_HOST
+              value: localhost
+            - name: REDIS_PORT
+              value: "6379"
+            # Prod environment variables
+            - name: PRODUCTION
+              value: "true"
+            - name: PROD_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: 1pwd-secrets-beeswarm
+                  key: PROD_PRIVATE_KEY
+          ports:
+            - containerPort: 8080
+              name: 8080tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 125m
+            limits:
+              memory: 1Gi
+              cpu: 1000m
+        - name: redis
+          image: redis:7.4.1-alpine3.20@sha256:c1e88455c85225310bbea54816e9c3f4b5295815e6dbf80c34d40afc6df28275
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6379
+              name: 6379tcp
+              protocol: TCP
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 125m
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - beeswarm-api
+                topologyKey: kubernetes.io/hostname

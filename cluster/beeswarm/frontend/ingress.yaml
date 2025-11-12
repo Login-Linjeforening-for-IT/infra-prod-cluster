@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: beeswarm-frontend
+  namespace: beeswarm
+spec:
+  ingressClassName: nginx-external
+  tls:
+    - hosts:
+        - ai.login.no
+  rules:
+    - host: ai.login.no
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: beeswarm-frontend
+                port:
+                  number: 3000

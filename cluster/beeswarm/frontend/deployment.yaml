@@ -1,0 +1,75 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: beeswarm-frontend
+    component: frontend
+    part-of: beehive
+    project: beeswarm
+    confidentiality: not-defined
+    compliance: not-defined
+  name: beeswarm-frontend
+  namespace: beeswarm
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: beeswarm-frontend
+  template:
+    metadata:
+      labels:
+        app: beeswarm-frontend
+        component: frontend
+        part-of: beehive
+        project: beeswarm
+        confidentiality: not-defined
+        compliance: not-defined
+    spec:
+      imagePullSecrets:
+        - name: gitlab-deploy-key-beeswarm
+      containers:
+        - name: webserver
+          image: registry.login.no/tekkom/web/beehive/beeswarm/frontend:2.4.5
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: API_URL
+              value: http://beeswarm-api.beeswarm.svc.cluster.local:8080/api
+            - name: NEXT_PUBLIC_BROWSER_API_URL
+              value: https://api.ai.login.no/api
+          ports:
+            - containerPort: 3000
+              name: 3000tcp
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 125m
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - beeswarm-frontend
+                topologyKey: kubernetes.io/hostname
