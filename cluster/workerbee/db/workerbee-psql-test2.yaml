@@ -18,9 +18,10 @@ spec:
     name: db-credentials
   bootstrap:
     recovery:
+      source: origin
       backup:
-        name: workerbee-backups-20251111000000
       recoveryTarget:
+        backupID: 20251111000000
         targetImmediate: true
   backup:
     retentionPolicy: "30d"
