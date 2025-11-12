@@ -12,9 +12,6 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     size: 2Gi
-  # postgresql:
-    # parameters:
-      # timezone: "Europe/Oslo"
   superuserSecret:
     name: db-credentials
   bootstrap:
