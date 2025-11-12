@@ -27,6 +27,9 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: nginx-ingress-external
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: nginx-ingress-external
       ports:
-        - port: 8080
-          protocol: TCP
+        - protocol: TCP
+          port: 8080
