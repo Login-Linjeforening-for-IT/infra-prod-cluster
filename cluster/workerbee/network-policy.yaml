@@ -28,22 +28,15 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: beehive
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: queenbee
+              kubernetes.io/metadata.name: nginx-ingress-external
+      ports:
+        - port: 8080
+          protocol: TCP
+  egress:
+    - to:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: nginx-ingress-external
-      ports:
-        - protocol: TCP
-          port: 8080
-    - from:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-      ports:
-        - protocol: TCP
-          port: 8080
 
 # Allowing egress traffic
 ---
