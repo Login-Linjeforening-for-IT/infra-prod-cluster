@@ -23,13 +23,6 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-external
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/instance: nginx-ingress-external
-      ports:
+    - ports:
         - protocol: TCP
           port: 8080
