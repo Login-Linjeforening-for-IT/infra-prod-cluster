@@ -32,3 +32,15 @@ spec:
         secretAccessKey:
           name: workerbee-api-pg-backup
           key: secret
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:
+        destinationPath: s3://login-external-prod-psql-backups/workerbee
+        serverName: workerbee-psql
+        s3Credentials:
+          accessKeyId:
+            name: workerbee-api-pg-backup
+            key: access
+          secretAccessKey:
+            name: workerbee-api-pg-backup
+            key: secret
