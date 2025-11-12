@@ -20,8 +20,6 @@ spec:
   bootstrap:
     recovery:
       source: clusterBackup
-      wal:
-        skip: true
   externalClusters:
     - name: clusterBackup
       barmanObjectStore:
