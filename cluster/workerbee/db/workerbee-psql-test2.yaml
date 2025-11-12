@@ -19,9 +19,8 @@ spec:
   bootstrap:
     recovery:
       source: origin
-      backup:
       recoveryTarget:
-        backupID: 20251111000000
+        backupID: "20251111000000"
         targetImmediate: true
   backup:
     retentionPolicy: "30d"
