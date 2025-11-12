@@ -86,5 +86,5 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - nginx
+                      - workerbee
               topologyKey: kubernetes.io/hostname
