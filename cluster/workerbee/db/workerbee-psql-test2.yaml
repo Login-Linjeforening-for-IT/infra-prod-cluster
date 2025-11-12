@@ -21,7 +21,7 @@ spec:
       backup:
         name: workerbee-backups-20251111000000
       recoveryTarget:
-        targetTime: "immediate"
+        targetImmediate: true
   backup:
     retentionPolicy: "30d"
     barmanObjectStore:
