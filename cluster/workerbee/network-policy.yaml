@@ -25,23 +25,7 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: beehive
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: queenbee
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-ntnu
-      ports:
-        - protocol: TCP
-          port: 8080
-    - from:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-      ports:
+    - ports:
         - protocol: TCP
           port: 8080
 
@@ -68,7 +52,7 @@ spec:
               kubernetes.io/metadata.name: queenbee
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-ntnu
+              kubernetes.io/metadata.name: nginx-ingress-external
     - to:
         - namespaceSelector:
             matchLabels:
@@ -83,12 +67,12 @@ spec:
         - ipBlock:
             cidr: 0.0.0.0/0
 
-# Allowing api to kube-dns traffic
+# Allowing workerbee to kube-dns traffic
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-api-to-kube-dns
+  name: allow-workerbee-to-kube-dns
   namespace: workerbee
 spec:
   podSelector:
