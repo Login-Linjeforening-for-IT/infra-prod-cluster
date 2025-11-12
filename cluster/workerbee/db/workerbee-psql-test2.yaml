@@ -4,6 +4,7 @@ metadata:
   name: workerbee-psql-test2
   namespace: workerbee
 spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.2
   monitoring:
     enablePodMonitor: true
   description: Postgres for workerbee test2
