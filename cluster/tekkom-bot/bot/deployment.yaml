@@ -175,8 +175,8 @@ spec:
           # No liveness and readiness probes - awaiting solution.
           resources:
             requests:
-              memory: "50Mi"
+              memory: "128Mi"
               cpu: "10m"
             limits:
-              memory: "100Mi"
+              memory: "256Mi"
               cpu: "250m"
