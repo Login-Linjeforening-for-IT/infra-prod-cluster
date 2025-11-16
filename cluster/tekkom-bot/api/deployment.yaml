@@ -30,7 +30,7 @@ spec:
         - name: tekkom-bot-pull-secret
       containers:
         - name: tekkom-bot-api
-          image: registry.login.no/tekkom/dev/tekkom-bot/api:2.16.1
+          image: registry.login.no/tekkom/dev/tekkom-bot/api:2.16.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
