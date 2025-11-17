@@ -4,8 +4,6 @@ kind: Ingress
 metadata:
   name: workerbee
   namespace: workerbee
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
 spec:
   ingressClassName: nginx-external
   tls:
