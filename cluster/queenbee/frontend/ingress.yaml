@@ -21,7 +21,6 @@ metadata:
         2001:700:1d00::/48 1;
         2001:700:300::/44 1;
       }
-    nginx.ingress.kubernetes.io/configuration-snippet: |
       access_by_lua_block {
         if ngx.var.internal == "1" then
           ngx.redirect("https://login.no", 302)
