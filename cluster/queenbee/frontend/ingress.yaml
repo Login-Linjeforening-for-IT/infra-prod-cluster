@@ -21,8 +21,9 @@ metadata:
         2001:700:1d00::/48 1;
         2001:700:300::/44 1;
       }
+    nginx.ingress.kubernetes.io/configuration-snippet: |
       if ($internal) {
-        return 302 https://login.no;
+        rewrite ^ https://login.no redirect;
       }
   # annotations:
     # nginx.ingress.kubernetes.io/configuration-snippet: |
