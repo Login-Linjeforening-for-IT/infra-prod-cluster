@@ -4,28 +4,6 @@ kind: Ingress
 metadata:
   name: queenbee-frontend-ingress
   namespace: queenbee
-  annotations:
-    nginx.ingress.kubernetes.io/server-snippet: |
-      geo $internal {
-        default 0;
-        129.241.0.0/16 1;
-        78.91.0.0/18 1;
-        78.91.64.0/20 1;
-        78.91.80.0/22 1;
-        128.39.0.0/16 1;
-        158.38.0.0/16 1;
-        10.133.0.0/16 1;
-        2001:700:300::/46 1;
-        2001:700:b00::/48 1;
-        2001:700:1200::/48 1;
-        2001:700:1d00::/48 1;
-        2001:700:300::/44 1;
-      }
-      access_by_lua_block {
-        if ngx.var.internal == "1" then
-          ngx.redirect("https://login.no", 302)
-        end
-      }
   # annotations:
     # nginx.ingress.kubernetes.io/configuration-snippet: |
       # add_header Content-Security-Policy "default-src 'self' https://api.mazemap.com; img-src 'self' data: blob: https://cdn.login.no; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.mazemap.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.mazemap.com https://www.google-analytics.com; font-src https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'self' https://api.queenbee.login.no";
