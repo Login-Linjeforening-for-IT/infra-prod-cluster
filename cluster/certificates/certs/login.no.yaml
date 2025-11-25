@@ -23,8 +23,6 @@ spec:
     - "*.api.dizambee.login.no"
     - "*.exam.login.no"
     - "*.api.exam.login.no"
-    - "*.queenbee.login.no"
-    - "*.api.queenbee.login.no"
     - "*.beeformed.login.no"
     - "logout.no"
     - "api.tekkom-bot.login.no"

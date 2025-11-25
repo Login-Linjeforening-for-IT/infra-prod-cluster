@@ -49,9 +49,6 @@ spec:
               kubernetes.io/metadata.name: beehive
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: queenbee
-        - namespaceSelector:
-            matchLabels:
               kubernetes.io/metadata.name: nginx-ingress-external
     - to:
         - namespaceSelector:

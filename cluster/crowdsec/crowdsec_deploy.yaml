@@ -175,19 +175,3 @@ spec:
                     %{WORD:method} %{URIPATHPARAM:request}
                     HTTP/%{NUMBER:http_version}
                   apply_on: full_request
-        s02-enrich:
-          whitelist-queenbee-api.yaml: |
-            name: login/whitelist-queenbee-api
-            description: >
-              Whitelists requests to gitlab.login.no where 'queenbee-api' is in the
-              URL
-            whitelist:
-              reason: >
-                Requests involving 'queenbee-api' are legitimate, and should not be
-                blocked.
-              expression:
-                - >
-                  evt.Parsed.request contains 'queenbee-api'
-                  && evt.Meta.target_fqdn == 'gitlab.login.no'
-                  && evt.Meta.status == '404'
-                  && evt.Meta.method == 'HEAD'
