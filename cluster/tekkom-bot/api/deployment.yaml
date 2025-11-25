@@ -107,7 +107,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: tekkom-bot-secrets
-                  key: WEBHOOK_URL
+                  key: WEBHOOK_URL_TEMP_TO_SUPPRESS_DISCORD_SPAM____THE_REAL_ONE_IS_JUST___WEBHOOK_URL
             - name: AUTHENTIK_API_URL
               value: https://authentik.login.no
             - name: SPOTIFY_CLIENT_ID
