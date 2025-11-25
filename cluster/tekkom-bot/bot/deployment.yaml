@@ -151,7 +151,7 @@ spec:
             - name: HEARTBEAT_URL
               value: http://uptime-kuma-svc.uptime-kuma.svc.cluster.local:3001/api/push/uzA7ya2YkA?status=up&msg=OK&ping=
             - name: BEEKEEPER_API_URL
-              value: http://beekeeper-api.beekeeper.svc.cluster.local:8080/api
+              value: https://api.beekeeper.login.no/api
             - name: TEKKOM_BOT_BTG_TOKEN
               valueFrom:
                 secretKeyRef:
