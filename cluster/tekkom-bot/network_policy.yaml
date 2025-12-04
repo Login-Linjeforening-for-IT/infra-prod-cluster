@@ -35,31 +35,6 @@ spec:
         - protocol: UDP
           port: 53
 
-# Allows incoming traffic on port 6969 for mc-bot.login.no
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-ingress-api
-  namespace: tekkom-bot
-spec:
-  podSelector:
-    matchLabels:
-      app: tekkom-bot
-  policyTypes:
-    - Ingress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: nginx-ingress-external
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/instance: nginx-ingress-external
-      ports:
-        - protocol: TCP
-          port: 6969
-
 # Allows incoming and outgoing traffic on port 8080 for the API
 ---
 apiVersion: networking.k8s.io/v1
@@ -85,28 +60,6 @@ spec:
       ports:
         - protocol: TCP
           port: 8080
-
-# Allows outgoing traffic towards dizambee (zammad)
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-egress-to-dizambee
-  namespace: tekkom-bot
-spec:
-  podSelector:
-    matchLabels:
-      app: tekkom-bot
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-      - namespaceSelector:
-          matchLabels:
-            kubernetes.io/metadata.name: dizambee
-      - podSelector:
-          matchLabels:
-            app: dizambee-api
 
 # Allows api to psql traffic
 ---
@@ -160,7 +113,6 @@ spec:
         operator: In
         values:
           - tekkom-bot-api
-          - tekkom-bot
   policyTypes:
     - Ingress
     - Egress
@@ -187,7 +139,6 @@ spec:
       - key: app
         operator: In
         values:
-          - tekkom-bot
           - tekkom-bot-api
   policyTypes:
     - Egress
@@ -217,28 +168,3 @@ spec:
       ports:
         - protocol: TCP
           port: 5432
-
-# Allowing egress bot to uptime-kuma traffic
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-bot-to-uptime-kuma
-  namespace: tekkom-bot
-spec:
-  podSelector:
-    matchLabels:
-      app: tekkom-bot
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: uptime-kuma
-          podSelector:
-            matchLabels:
-              app: uptime-kuma
-      ports:
-        - protocol: TCP
-          port: 3001
