@@ -14,21 +14,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-all-except-internal
-  namespace: uptime-kuma
-spec:
-  podSelector:
-    matchLabels:
-      app: uptime-kuma
-  egress:
-    - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
   name: allow-ingress
   namespace: uptime-kuma
 spec:
