@@ -15,12 +15,3 @@ spec:
     kind: Issuer
     name: do-issuer-prod
   commonName: "*.login.no"
-  dnsNames:
-    - "*.login.no"
-    - "login.no"
-    - "*.workerbee.login.no"
-    - "*.exam.login.no"
-    - "*.api.exam.login.no"
-    - "*.beeformed.login.no"
-    - "logout.no"
-    - "api.tekkom-bot.login.no"
