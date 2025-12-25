@@ -140,10 +140,6 @@ spec:
           url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Ffluxlogs%2Ejson/raw?ref=main"
           gitlabToken: "$token"
           datasource: prometheus-infra
-        uptime-kuma:
-          url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Fuptime%2Ejson/raw?ref=main"
-          gitlabToken: "$token"
-          datasource: prometheus-infra
         loki-1:
           url: "https://gitlab.login.no/api/v4/projects/173/repository/files/infra%2Floki%2Ejson/raw?ref=main"
           gitlabToken: "$token"
